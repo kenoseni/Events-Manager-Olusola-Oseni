@@ -13,3 +13,7 @@ header,
     -o-background-size: cover;
     background-size: cover;
 }
+
+#centerlogin {
+    margin-top: 7%;
+}

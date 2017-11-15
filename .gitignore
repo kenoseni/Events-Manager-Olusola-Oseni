@@ -1,4 +1,7 @@
-template/css
+template/css/bootstrap.css
+template/css/bootstrap.min.css
+template/css/mdb.min.css
+template/css/mdb.css
 template/font
 template/js
 template/sass

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Events Manager</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <!--Main Navigation-->
+    <header>
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-md navbar-dark indigo smooth-scroll fixed-top">
+        <div class="container">
+          <!-- Navbar brand -->
+          <a class="navbar-brand" href="#"><i class="" aria-hidden="true"></i> <i>Encore </i></h5></i></a>
+          <!-- Collapse button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Event Centers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Events</a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="">My Events</a>
+                </li>
+            </ul>
+            <!-- Links -->
+            <!-- Search form -->
+            <form class="form-inline">
+              <i class="fa fa-search fa-lg "></i>
+              <input class="form-control mr-sm-2" type="text" placeholder="Search for event centers" aria-label="Search">
+            </form>
+          </div>
+          <!-- Collapsible content -->
+        </div>
+      </nav>
+      <!--/.Navbar-->
+    </header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-2"></div>
+            <div class="col-xs-12 col-md-8">
+              <div class="card" id="event">
+                <div class="card-header indigo lighten-1 text-center white-text">
+                  <h4>Wedding</h4>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-text">Location: Emerald Enclave</h5>
+                  <h5 class="card-text">Date: 12/25/2017</h5>
+                  <h5 class="card-text">Time: 1:00pm</h5>
+                </div>
+                <div class="card-footer bg-transparent">
+                  <ul class="nav">
+                    <li><a href=""  data-toggle="modal" data-target="#modal"><i class="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i></a> </h5></li>
+                    <li><a href="" data-toggle="modal" data-target="#modal2" id="alert-target" ><i class="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-2"></div>
+        </div>
+        <div class="row" id="info">
+          <div class="col-xs-12 col-md-2"></div>
+            <div class="col-xs-12 col-md-8">
+              <div class="card">
+                <div class="card-header indigo lighten-1 text-center white-text">
+                  <h4>Birthday</h4>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-text">Location: Baltic Center</h5>
+                  <h5 class="card-text">Date: 11/30/2017</h5>
+                  <h5 class="card-text">Time: 4:00pm</h5>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="card-data">
+                        <ul class="nav">
+                          <li><a href=""  data-toggle="modal" data-target="#modal"><i class="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i></a> </h5></li>
+                          <li><a href="" data-toggle="modal" data-target="#modal2" id="alert-target" ><i class="fa fa-trash-o fa-lg nav-link" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-2"></div>
+            <div class="col-xs-12 col-md-10"></div>
+          </div>
+        </div>
+      </div>
+      <div class="container">            
+        <!-- Add Events Modal -->
+        <div class="modal fade" id="addEvent" role="dialog">
+          <div class="modal-dialog modal-lg">      
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title text-center font-weight-bold">Add Event</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>   
+                </div>
+                <div class="modal-body">
+                  <form action="" method="POST" role="form">       
+                  <div class="card">
+                    <div class="card-header text-center">
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-addon" id="sizing-addon1">Event Name</span>
+                          <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-xs-12 col-md-4">
+                            <div class="input-group input-group-sm">
+                              <span class="input-group-addon" id="sizing-addon1">Location</span>
+                              <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-md-4">
+                            <div class="input-group input-group-sm">
+                              <span class="input-group-addon" id="sizing-addon1">Date</span>
+                              <input type="date" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-md-4">
+                            <div class="input-group input-group-sm">
+                              <span class="input-group-addon" id="sizing-addon1">Time</span>
+                              <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-success">Add Event</button>
+                  </form>            
+                </div>
+              </div> 
+            </div>
+          </div>
+
+          <a href="#" class="float" data-toggle="modal" data-target="#addEvent">
+            <i class="fa fa-plus my-float"></i>
+            </a>
+    </main>
+    <footer>
+
+    </footer>
+    
+
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/js/mdb.min.js"></script>
+    <script type="text/javascript" src=""></script>
+  </body>
+</html>

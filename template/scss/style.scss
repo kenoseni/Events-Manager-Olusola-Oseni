@@ -1,0 +1,22 @@
+$landing-height: 100%;
+$top-margin: 7%;
+html {
+	height: $landing-height;
+}
+body {
+	height: $landing-height;
+}
+header {
+	height: $landing-height;
+}
+#intro {
+	height: $landing-height;
+	background: url("../img/img1.jpg")no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#centerlogin {
+	margin-top: $top-margin;
+}

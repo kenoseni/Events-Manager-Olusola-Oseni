@@ -1,5 +1,9 @@
 /* Your custom styles */
 #centers {
-    margin-top: 8%;}
+    margin-top: 10%;}
 img:hover {
     opacity: 0.8;}
+@media screen and (max-width: 768px) {
+    #centers {
+        margin-top: 25%;}
+}

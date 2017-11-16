@@ -1,4 +1,5 @@
 /* Your custom styles */
 #centers {
-    margin-top: 8%;
-}
+    margin-top: 8%;}
+img:hover {
+    opacity: 0.8;}

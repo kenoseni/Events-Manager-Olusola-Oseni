@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+template/css/bootstrap.css
+template/css/bootstrap.min.css
+template/css/mdb.css
+template/css/mdb.min.css
+template/font
+template/js
+=======
 
 template/css/mdb.css
 template/css/mdb.min.css
@@ -8,4 +16,5 @@ template/js/mdb.js
 template/js/mdb.min.js
 template/js/popper.min.js
 template/js/jquery-3.2.1.min.js
+>>>>>>> gh-pages
 template/sass

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Your custom styles */
 #event {
     margin-top: 15%; }
@@ -35,3 +36,40 @@
   
   /*# sourceMappingURL=style3.css.map */
   
+=======
+#event {
+  margin-top: 15%; }
+
+#info {
+  margin-top: 5%; }
+
+.fa-trash-o {
+  color: #CC0000; }
+
+.modal-dialog {
+  margin-top: 8%; }
+
+a:hover {
+  opacity: 0.5; }
+
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #0C9;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999; }
+
+.my-float {
+  margin-top: 22px; }
+
+@media screen and (max-width: 768px) {
+  #event {
+    margin-top: 30%; } }
+
+/*# sourceMappingURL=style3.css.map */
+>>>>>>> gh-pages

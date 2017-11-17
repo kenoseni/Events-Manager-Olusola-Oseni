@@ -4,7 +4,7 @@
 .modal-dialog {
   margin-top: 8%; }
 img:hover {
-  opacity: 0.8;}
+    opacity: 0.8;}
 @media screen and (max-width: 768px) {
   #centers {
     margin-top: 25%;}
@@ -20,6 +20,6 @@ img:hover {
   border-radius: 50px;
   text-align: center;
   box-shadow: 2px 2px 3px #999; }
-    
+  
 .my-float {
-  margin-top: 22px; }
+    margin-top: 22px; }

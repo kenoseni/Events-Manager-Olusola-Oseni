@@ -73,7 +73,11 @@
                 </div>
                 <div class="card-footer bg-transparent">
                   <ul class="nav">
-                    <li><a href=""  data-toggle="modal" data-target="#modal"><i class="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i></a> </h5></li>
+
+                    <li><a href=""  data-toggle="modal" data-target="#modifyEvent1"><i class="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i></a> </h5></li>
+
+                    
+
                     <li><a href="" data-toggle="modal" data-target="#modal2" id="alert-target" ><i class="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i></a></li>
                   </ul>
                 </div>
@@ -96,7 +100,9 @@
                 <div class="card-footer bg-transparent">
                     <div class="card-data">
                         <ul class="nav">
-                          <li><a href=""  data-toggle="modal" data-target="#modal"><i class="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i></a> </h5></li>
+
+                          <li><a href=""  data-toggle="modal" data-target="#modifyEvent2"><i class="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i></a> </h5></li>
+
                           <li><a href="" data-toggle="modal" data-target="#modal2" id="alert-target" ><i class="fa fa-trash-o fa-lg nav-link" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
@@ -164,44 +170,147 @@
 
           <a href="#" class="float" data-toggle="modal" data-target="#addEvent">
             <i class="fa fa-plus my-float"></i>
-            </a>
-    </main>
-    <footer class="page-footer indigo center-on-small-only pt-0">
-        <!--Footer Links-->
-        <div class="container">
-          <!--First row-->
-          <div class="row">
-            <!--First column-->
-            <div class="col-md-12">
-              <div class="footer-socials mb-5 flex-center">
-                <!--Facebook-->
-                <a class="icons-sm fb-ic"><i class="fa fa-facebook fa-lg white-text mr-md-4"> </i></a>
-                <!--Twitter-->
-                <a class="icons-sm tw-ic"><i class="fa fa-twitter fa-lg white-text mr-md-4"> </i></a>
-                <!--Google +-->
-                <a class="icons-sm gplus-ic"><i class="fa fa-google-plus fa-lg white-text mr-md-4"> </i></a>
-                <!--Linkedin-->
-                <a class="icons-sm li-ic"><i class="fa fa-linkedin fa-lg white-text mr-md-4"> </i></a>
-                <!--Instagram-->
-                <a class="icons-sm ins-ic"><i class="fa fa-instagram fa-lg white-text mr-md-4"> </i></a>
-                <!--Pinterest-->
-                <a class=""><i></i></a>
+          </a>
+          <div class="container">            
+            <!-- Add Events Modal -->
+            <div class="modal fade" id="modifyEvent1" role="dialog">
+              <div class="modal-dialog modal-lg">      
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title text-center font-weight-bold">Modify Event</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>   
+                    </div>
+                    <div class="modal-body">
+                      <form action="" method="POST" role="form">       
+                        <div class="card">
+                          <div class="card-header text-center">
+                              <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon1">Event Name</span>
+                                <input type="text" class="form-control" placeholder="Wedding" aria-describedby="sizing-addon1">
+                              </div>
+                            </div>
+                          <div class="card-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                  <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">Location</span>
+                                    <input type="text" class="form-control" placeholder="Emerald Enclave" aria-describedby="sizing-addon1">
+                                  </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                  <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">Date</span>
+                                    <input type="date" class="form-control" placeholder="12/25/2017" aria-describedby="sizing-addon1">
+                                  </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                  <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">Time</span>
+                                    <input type="text" class="form-control" placeholder="1.00pm" aria-describedby="sizing-addon1">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <button type="submit" class="btn btn-success">Modify Event</button>
+                    </form>            
+                  </div>
+                </div> 
               </div>
             </div>
-            <!--/First column-->
+              <div class="container">            
+                <!-- Add Events Modal -->
+                <div class="modal fade" id="modifyEvent2" role="dialog">
+                  <div class="modal-dialog modal-lg">      
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title text-center font-weight-bold">Modify Event</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>   
+                      </div>
+                      <div class="modal-body">
+                        <form action="" method="POST" role="form">       
+                          <div class="card">
+                            <div class="card-header text-center">
+                              <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon1">Event Name</span>
+                                <input type="text" class="form-control" placeholder="Birthday" aria-describedby="sizing-addon1">
+                              </div>
+                            </div>
+                          <div class="card-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                  <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">Location</span>
+                                    <input type="text" class="form-control" placeholder="Baltic Center" aria-describedby="sizing-addon1">
+                                  </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                  <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">Date</span>
+                                    <input type="date" class="form-control" placeholder="11/30/2017" aria-describedby="sizing-addon1">
+                                  </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                  <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">Time</span>
+                                    <input type="text" class="form-control" placeholder="4.00pm" aria-describedby="sizing-addon1">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <button type="submit" class="btn btn-success">Modify Event</button>
+                    </form>            
+                  </div>
+                </div> 
+              </div>
+            </div>
+    </main>
+    <footer class="page-footer indigo center-on-small-only pt-0">
+      <!--Footer Links-->
+      <div class="container">
+        <!--First row-->
+        <div class="row">
+          <!--First column-->
+          <div class="col-md-12">
+            <div class="footer-socials mb-5 flex-center">
+              <!--Facebook-->
+              <a class="icons-sm fb-ic"><i class="fa fa-facebook fa-lg white-text mr-md-4"> </i></a>
+              <!--Twitter-->
+              <a class="icons-sm tw-ic"><i class="fa fa-twitter fa-lg white-text mr-md-4"> </i></a>
+              <!--Google +-->
+              <a class="icons-sm gplus-ic"><i class="fa fa-google-plus fa-lg white-text mr-md-4"> </i></a>
+              <!--Linkedin-->
+              <a class="icons-sm li-ic"><i class="fa fa-linkedin fa-lg white-text mr-md-4"> </i></a>
+              <!--Instagram-->
+              <a class="icons-sm ins-ic"><i class="fa fa-instagram fa-lg white-text mr-md-4"> </i></a>
+              <!--Pinterest-->
+              <a class=""><i></i></a>
+            </div>
           </div>
-          <!--/First row-->
+          <!--/First column-->
         </div>
-        <!--/Footer Links-->
-        <!--Copyright-->
-        <div class="footer-copyright">
-          <div class="container-fluid">
-            © 2017 Copyright: <a href="index.html"> encoregroup.com </a>
-          </div>
+        <!--/First row-->
+      </div>
+      <!--/Footer Links-->
+      <!--Copyright-->
+      <div class="footer-copyright">
+        <div class="container-fluid">
+          © 2017 Copyright: <a href="index.html"> encoregroup.com </a>
         </div>
-        <!--/Copyright-->
-      </footer>
-      <!--/Footer-->
+      </div>
+      <!--/Copyright-->
+    </footer>
+    <!--/Footer-->
+
+          
+
     
 
 

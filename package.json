@@ -10,5 +10,10 @@
     "API"
   ],
   "author": "Olusola Oseni",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "volleyball": "^1.4.1"
+  }
 }

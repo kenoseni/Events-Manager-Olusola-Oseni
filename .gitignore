@@ -14,4 +14,3 @@ template/sass
 /node_modules
 .sequelizerc
 .env
-

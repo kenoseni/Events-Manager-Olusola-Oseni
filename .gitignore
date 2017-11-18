@@ -12,3 +12,6 @@ template/js/popper.min.js
 template/js/jquery-3.2.1.min.js
 template/sass
 /node_modules
+.sequelizerc
+.env
+

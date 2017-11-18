@@ -3,6 +3,7 @@ import volleyball from 'volleyball';
 import bodyParser from 'body-parser';
 // Set up the express app
 const app = express();
+require('dotenv').config();
 
 // Log requests to the console.
 app.use(volleyball);

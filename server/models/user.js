@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstname: {
@@ -66,6 +68,12 @@ export default (sequelize, DataTypes) => {
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    }
+  }, {
+    hooks: {
+      afterValidate: (user) => {
+        user.password = bcrypt.hashSync(user.password, 10);
+      }
     }
   });
   // associate the models

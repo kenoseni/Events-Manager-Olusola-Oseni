@@ -19,6 +19,6 @@ app.listen(app.get('port'));
 
 // Setup a default catch-all route that sends back a welcome message.
 app.get('*', (req, res) => res.status(200).send({
-    message: 'Welcome to my API.'
+  message: 'Welcome to my API.'
 }));
 export default app;

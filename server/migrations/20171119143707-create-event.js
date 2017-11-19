@@ -25,6 +25,24 @@ module.exports = {
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'userId',
+      }
+    },
+    centerId: {
+      type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Centers',
+        key: 'id',
+        as: 'centerId',
+      }
     }
   }),
   down: queryInterface => queryInterface.dropTable('Events')

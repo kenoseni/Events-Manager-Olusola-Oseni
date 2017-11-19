@@ -60,12 +60,12 @@ export default (sequelize, DataTypes) => {
   });
   // associate the models
   Center.associate = (models) => {
-    Center.belongsTo(models.User, {
-      foreignKey: 'userId'
-    });
     Center.hasMany(models.Event, {
       foreignKey: 'centerId',
       as: 'events'
+    });
+    Center.belongsTo(models.User, {
+      foreignKey: 'userId'
     });
   };
   return Center;

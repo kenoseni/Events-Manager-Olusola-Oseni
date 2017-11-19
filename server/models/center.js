@@ -58,5 +58,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+  // associate the models
+  Center.associate = (models) => {
+    Center.belongsTo(models.User, {
+      foreignKey: 'userId'
+    });
+  };
   return Center;
 };

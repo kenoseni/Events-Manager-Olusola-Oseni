@@ -68,5 +68,16 @@ export default (sequelize, DataTypes) => {
       defaultValue: false
     }
   });
+  // associate the models
+  User.associate = (models) => {
+    User.hasMany(models.Event, {
+      foreignKey: 'userId',
+      as: 'events'
+    });
+    User.hasMany(models.Center, {
+      foreignKey: 'userId',
+      as: 'centers'
+    });
+  };
   return User;
 };

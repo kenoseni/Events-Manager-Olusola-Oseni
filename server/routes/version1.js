@@ -7,5 +7,9 @@ const router = express.Router();
 router.post('/users', controller.userController.signup);
 // Signin a user on the platform
 router.post('/users/login', controller.userController.login);
-router.put('/admins', auth.tokenController.confirmToken, controller.userController.createAdmin);
+router.put(
+'/admins',
+  auth.tokenController.confirmToken,
+  controller.userController.createAdmin
+);
 export default router;

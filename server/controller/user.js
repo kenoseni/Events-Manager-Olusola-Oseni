@@ -22,7 +22,6 @@ class userController {
         lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
-        isAdmin: req.body.isAdmin
       })
       .then(user => res.status(201).json({
         status: 'success',

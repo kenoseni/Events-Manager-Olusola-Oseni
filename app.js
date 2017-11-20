@@ -1,6 +1,7 @@
 import express from 'express';
 import volleyball from 'volleyball';
 import bodyParser from 'body-parser';
+import route from './server/routes';
 // Set up the express app
 const app = express();
 require('dotenv').config();
@@ -12,6 +13,7 @@ app.use(volleyball);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+route(app);
 // Set the app entry port
 app.set('port', 8000);
 

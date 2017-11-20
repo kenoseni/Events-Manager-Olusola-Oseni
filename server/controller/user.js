@@ -26,7 +26,7 @@ class userController {
         password: req.body.password,
       })
       .then(user => res.status(201).json({
-        status: 'success',
+        status: 'Success',
         message: `User with userId: ${user.id} was successfully signed up`,
 
       }))
@@ -75,9 +75,9 @@ class userController {
       })
       .then((user) => {
         if (!user) {
-          return res.status(404).send({
-            status: 'fail',
-            message: 'user not found'
+          return res.status(401).send({
+            status: 'Fail',
+            message: 'Email or password incorrect'
           });
         }
         const encrypted = user.password;
@@ -86,14 +86,23 @@ class userController {
             if (!correct) {
               res.status(401).send({
                 status: 'fail',
-                message: 'Incorrect password'
+                message: 'Email or password incorrect'
               });
             }
             const token = auth.tokenController.createToken(user);
-            return res.status(200).json({ token });
+            return res.status(200).json({
+              status: 'Success',
+              message: 'User logged in',
+              data: {
+                token
+              }
+            });
           });
       })
-      .catch(error => res.status(500).send(error));
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message
+      }));
   }
 }
 export default userController;

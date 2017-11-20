@@ -75,7 +75,7 @@ class userController {
       })
       .then((user) => {
         if (!user) {
-          return res.status(401).send({
+          return res.status(401).json({
             status: 'Fail',
             message: 'Email or password incorrect'
           });
@@ -84,7 +84,7 @@ class userController {
         bcrypt.compare(req.body.password, encrypted)
           .then((correct) => {
             if (!correct) {
-              res.status(401).send({
+              res.status(401).json({
                 status: 'fail',
                 message: 'Email or password incorrect'
               });
@@ -99,7 +99,36 @@ class userController {
             });
           });
       })
-      .catch(error => res.status(500).send({
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
+  }
+  /**
+     * Create Admin
+     *
+     * @static
+     * @param {object} req - The request object
+     * @param {object} res - The response object
+     * @return {object} Object representing the user modified
+     * @memberof userController
+     */
+  static createAdmin(req, res) {
+    return db.User
+      .find({
+        where: {
+          id: req.decoded.userid
+        },
+      })
+      .then(user => user
+        .update({
+          isAdmin: true
+        }))
+      .then(() => res.status(200).json({
+        status: 'Success',
+        message: 'Admin created successfully'
+      }))
+      .catch(error => res.status(500).json({
         status: 'Error',
         message: error.message
       }));

@@ -1,4 +1,6 @@
+import bcrypt from 'bcrypt';
 import db from '../models';
+import auth from '../middleware';
 
 /**
 * Class representing controller
@@ -54,6 +56,44 @@ class userController {
           }
         }
       });
+  }
+  /**
+   * Signin a user on the platform
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} Success message with the user created or error message
+   * @memberof userController
+   */
+  static signin(req, res) {
+    return db.User
+      .findOne({
+        where: {
+          email: req.body.email,
+        }
+      })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            status: 'fail',
+            message: 'user not found'
+          });
+        }
+        const encrypted = user.password;
+        bcrypt.compare(req.body.password, encrypted)
+          .then((correct) => {
+            if (!correct) {
+              res.status(401).send({
+                status: 'fail',
+                message: 'Incorrect password'
+              });
+            }
+            const token = auth.tokenController.createToken(user);
+            return res.status(200).json({ token });
+          });
+      })
+      .catch(error => res.status(500).send(error));
   }
 }
 export default userController;

@@ -4,7 +4,7 @@
 [Event Management](https://github.com/kenoseni/Events-Manager-Olusola-Oseni)
 
 ## Introduction
-Encore Group Event Management App is an application that helps to manage events and centers. It is a very usefull application helps you manage your events in a stress-free style.
+Encore Group Event Management App is an application that helps to manage events and centers. It is a very usefull application that helps you manage your events in a stress-free style.
 
 ## Getting Started
 Clone the repo from Github to your Desktop, run it on your browser or on node js server
@@ -17,10 +17,10 @@ You need node js installed on your Desktop
 - Add Event 
 - Modify Event 
 - Add new Center 
-- Views all Center
+- View all Centers
 - View a Center with details and its upcoming Events
 - Modify Center 
-- Search Centers
+- Search for Centers
 
 ## Types of Centers
 - Mult-purpose Centers

@@ -63,10 +63,10 @@ class userController {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @return {object} Success message with the user created or error message
+   * @return {object} token or error message
    * @memberof userController
    */
-  static signin(req, res) {
+  static login(req, res) {
     return db.User
       .findOne({
         where: {

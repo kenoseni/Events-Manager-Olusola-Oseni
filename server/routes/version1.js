@@ -8,7 +8,7 @@ router.post('/users', controller.userController.signup);
 // Signin a user on the platform
 router.post('/users/login', controller.userController.login);
 router.put(
-'/admins',
+  '/admins',
   auth.tokenController.confirmToken,
   controller.userController.createAdmin
 );

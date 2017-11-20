@@ -37,6 +37,7 @@ export default (sequelize, DataTypes) => {
     date: {
       type: DataTypes.DATEONLY,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: {
           args: true,

@@ -7,7 +7,8 @@
     "node": "7.7.4"
   },
   "scripts": {
-    "start:dev": "nodemon ./app --exec babel-node"
+    "start:dev": "nodemon ./app --exec babel-node",
+    "test": "nyc mocha --timeout 250000 --compilers js:babel-core/register tests/test.js"
   },
   "keywords": [
     "API"

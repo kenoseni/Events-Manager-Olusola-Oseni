@@ -27,31 +27,13 @@ class centerController {
       })
       .then(center => res.status(201).json({
         status: 'Success',
-        message: `Center with centerId: ${center.id} was successfully created by ${center.userId}`,
-
+        message: `Center with centerId: ${center.id}
+         was successfully created by ${center.userId}`,
       }))
-      .catch((error) => {
-        for (let i = 0; i < error.errors.length; i += 1) {
-          const errorHandler = error.errors[i].message;
-          switch (errorHandler) {
-            case 'Center name cannot be empty':
-              return res.status(406).json({ message: errorHandler });
-            case 'Allows only alphanumeric characters':
-              return res.status(406)
-                .json({ message: 'Invalid character in center name field' });
-            case 'Please provide a description for this center':
-              return res.status(406).json({ message: errorHandler });
-            case 'Please provide the location for this center':
-              return res.status(406).json({ message: errorHandler });
-            case 'Please provide the address for this center':
-              return res.status(406).json({ message: errorHandler });
-            case 'Please provide the capacity for this center':
-              return res.status(406).json({ message: errorHandler });
-            default:
-              return res.send('Invalid entry');
-          }
-        }
-      });
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
   }
 }
 export default centerController;

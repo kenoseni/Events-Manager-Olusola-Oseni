@@ -44,7 +44,7 @@ const validSignupSeed = [{
   }];
 
 
-describe('More Recipes', () => {
+describe('Event Manager', () => {
   describe('Test Server Connection', () => {
     it('should respond with welcome message and status code 200', (done) => {
       request
@@ -86,6 +86,18 @@ describe('signup API', () => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.status).to.equal('Success');
         expect(typeof res.body.message).to.equal('string');
+        done();
+      });
+  });
+  it('should return 500 for empty first', (done) => {
+    request
+      .post('/api/v1/users')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidSignupSeed[0])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(500);
         done();
       });
   });

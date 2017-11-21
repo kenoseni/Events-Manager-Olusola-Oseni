@@ -14,9 +14,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 route(app);
 // Set the app entry port
-app.set('port', 8000);
+const port = process.env.PORT || 8000;
+// app.set('port', 8000);
 
-app.listen(app.get('port'));
+app.listen(port);
 
 // Setup a default catch-all route that sends back a welcome message.
 app.get('*', (req, res) => res.status(200).send({

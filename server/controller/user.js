@@ -28,34 +28,11 @@ class userController {
       .then(user => res.status(201).json({
         status: 'Success',
         message: `User with userId: ${user.id} was successfully signed up`,
-
       }))
-      .catch((error) => {
-        for (let i = 0; i < error.errors.length; i += 1) {
-          const errorHandler = error.errors[i].message;
-          switch (errorHandler) {
-            case 'Firstname field cannot be empty':
-              return res.status(406).json({ message: errorHandler });
-            case 'Lastname field cannot be empty':
-              return res.status(406).json({ message: errorHandler });
-            case 'Allows only alphanumeric characters':
-              return res.status(406)
-                .json({ message: 'Invalid character in name field' });
-            case 'Email field cannot be empty':
-              return res.status(406).json({ message: errorHandler });
-            case 'Please supply the right email format':
-              return res.status(406).json({ message: errorHandler });
-            case 'Password field cannot be empty':
-              return res.status(406).json({ message: errorHandler });
-            case 'Password must contain a minimum of 8 characters':
-              return res.status(406).json({ message: errorHandler });
-            case 'email must be unique':
-              return res.status(406).json({ message: 'Email already exist' });
-            default:
-              return res.send('Invalid entry');
-          }
-        }
-      });
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
   }
   /**
    * Signin a user on the platform

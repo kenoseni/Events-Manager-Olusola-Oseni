@@ -6,12 +6,8 @@ export default (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: 'Name field cannot be empty'
+          msg: 'Center name cannot be empty'
         },
-        isAlphanumeric: {
-          args: true,
-          msg: 'Allows only alphanumeric characters'
-        }
       },
       set(value) {
         this.setDataValue('name', value.toString().toLowerCase().trim());

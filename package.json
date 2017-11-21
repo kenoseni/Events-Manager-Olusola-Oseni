@@ -7,7 +7,8 @@
     "node": "7.7.4"
   },
   "scripts": {
-    "start:dev": "nodemon ./app --exec babel-node"
+    "start:dev": "nodemon ./app --exec babel-node",
+    "test": "nyc mocha --timeout 250000 --compilers js:babel-core/register tests/test.js"
   },
   "keywords": [
     "API"
@@ -31,11 +32,15 @@
     "volleyball": "^1.4.1"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.5.0"
+    "eslint-plugin-react": "^7.5.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "supertest": "^3.0.0"
   }
 }

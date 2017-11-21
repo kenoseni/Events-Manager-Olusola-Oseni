@@ -16,7 +16,8 @@ class tokenController {
    */
   static createToken(user) {
     const token = jwt.sign({
-      userid: user.id
+      userid: user.id,
+      isadmin: user.isAdmin
     }, process.env.SECRET, {
       expiresIn: 48 * 60 * 60
     });
@@ -36,9 +37,9 @@ class tokenController {
   static confirmToken(req, res, next) {
     const token = req.headers['x-access-token'];
     if (!token) {
-      return res.status(403).send({
-        status: 'fail',
-        message: 'access denied, no token provided'
+      return res.status(401).send({
+        status: 'Fail',
+        message: 'Access denied, no token provided'
       });
     } else if (token) {
       jwt.verify(token, process.env.SECRET, (err, decoded) => {

@@ -1,0 +1,39 @@
+import db from '../models';
+
+/**
+* Class representing controller
+*
+* @class centerController
+*/
+class centerController {
+  /**
+  * Create new center on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the user created or error message
+  * @memberof centerController
+  */
+  static addCenter(req, res) {
+    return db.Center
+      .create({
+        userId: req.decoded.userid,
+        name: req.body.name,
+        description: req.body.description,
+        location: req.body.location,
+        address: req.body.address,
+        capacity: req.body.capacity
+      })
+      .then(center => res.status(201).json({
+        status: 'Success',
+        message: `Center with centerId: ${center.id}
+         was successfully created by ${center.userId}`,
+      }))
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
+  }
+}
+export default centerController;

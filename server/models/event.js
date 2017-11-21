@@ -8,10 +8,6 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Event name cannot be empty'
         },
-        isAlphanumeric: {
-          args: true,
-          msg: 'Allows only alphanumeric characters'
-        }
       },
       set(value) {
         this.setDataValue('name', value.toString().toLowerCase().trim());
@@ -25,10 +21,6 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Event venue cannot be empty'
         },
-        isAlphanumeric: {
-          args: true,
-          msg: 'Allows only alphanumeric characters'
-        }
       },
       set(value) {
         this.setDataValue('venue', value.toString().toLowerCase().trim());

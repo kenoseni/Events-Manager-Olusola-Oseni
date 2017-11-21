@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import route from './server/routes';
 // Set up the express app
 const app = express();
-require('dotenv').config();
 
 // Log requests to the console.
 app.use(volleyball);

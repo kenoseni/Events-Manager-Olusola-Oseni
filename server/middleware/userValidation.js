@@ -2,7 +2,7 @@ import helpers from '../helpers';
 import db from '../models';
 
 const {
- isEmpty,
+  isEmpty,
   isAlphaNumeric,
   isEmail,
 } = helpers;

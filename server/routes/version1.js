@@ -40,4 +40,12 @@ router.post(
   controller.centerController.addCenter
 );
 
+// Create Event Center
+router.post(
+  '/events',
+  middleware.tokenController.confirmToken,
+  middleware.eventValidation.eventInputs,
+  controller.eventController.addevent
+);
+
 export default router;

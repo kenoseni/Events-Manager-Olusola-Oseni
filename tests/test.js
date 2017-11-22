@@ -67,7 +67,12 @@ describe('signup API', () => {
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(validSignupSeed[0])
+      .send({
+        firstname: 'Olusola',
+        lastname: 'Oseni',
+        email: 'kenolusola@gmail.com',
+        password: 'thisisapassword'
+      })
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.status).to.equal('Success');

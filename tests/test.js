@@ -8,39 +8,39 @@ const { expect } = chai;
 const validSignupSeed = [{
     firstname: 'Olusola',
     lastname: 'Oseni',
-    password: 'thisisapassword',
-    email: 'kenolusola@gmail.com'
+    email: 'kenolusola@gmail.com',
+    password: 'thisisapassword'
   }, {
     firstname: 'Efosa',
     lastname: 'Okpugie',
-    password: 'iloveandela',
     email: 'efosaokpugie@gmail.com',
+    password: 'iloveandela'
   }, {
     firstname: 'Idris',
     lastname: 'Ibrahim',
-    password: 'iamawesome',
     email: 'kenolusola@gmail.com',
+    password: 'iamawesome'
   }],
   invalidSignupSeed = [{
     firstname: '   ',
     lastname: 'Smith',
+    email: 'paulsmith@gmail.com',
     password: 'thisisapassword',
-    email: 'paulsmith@gmail.com'
   }, {
     firstname: 'Paul',
     lastname: '   ',
+    email: 'paulsmith@gmail.com',
     password: 'thisisapassword',
-    email: 'paulsmith@gmail.com'
   }, {
     firstname: 'Paul',
     lastname: 'Smith',
-    password: '   ',
-    email: 'paulsmith@gmail.com'
+    email: 'paulsmith@gmail.com',
+    password: '   '
   }, {
     firstname: 'Paul',
     lastname: 'Smith',
+    email: '  ',
     password: 'thisisapassword',
-    email: '  '
   }];
 
 

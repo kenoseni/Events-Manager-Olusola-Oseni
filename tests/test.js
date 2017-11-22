@@ -5,46 +5,31 @@ import app from '../app';
 const request = supertest.agent(app);
 const { expect } = chai;
 
-const validSignupSeed = [{
-    firstname: 'Olusola',
-    lastname: 'Oseni',
-    password: 'thisisapassword',
-    email: 'kenolusola@gmail.com'
-  }, {
-    firstname: 'Efosa',
-    lastname: 'Okpugie',
-    password: 'iloveandela',
-    email: 'efosaokpugie@gmail.com',
-  }, {
-    firstname: 'Idris',
-    lastname: 'Ibrahim',
-    password: 'iamawesome',
-    email: 'idrisibrahim@gmail.com',
-  }],
-  invalidSignupSeed = [{
+const invalidSignupSeed = [
+  {
     firstname: '   ',
     lastname: 'Smith',
+    email: 'paulsmith@gmail.com',
     password: 'thisisapassword',
-    email: 'paulsmith@gmail.com'
   }, {
     firstname: 'Paul',
     lastname: '   ',
+    email: 'paulsmith@gmail.com',
     password: 'thisisapassword',
-    email: 'paulsmith@gmail.com'
   }, {
     firstname: 'Paul',
     lastname: 'Smith',
-    password: '   ',
-    email: 'paulsmith@gmail.com'
+    email: 'paulsmith@gmail.com',
+    password: '   '
   }, {
     firstname: 'Paul',
     lastname: 'Smith',
+    email: '  ',
     password: 'thisisapassword',
-    email: '  '
   }];
 
 
-describe('More Recipes', () => {
+describe('Event Manager', () => {
   describe('Test Server Connection', () => {
     it('should respond with welcome message and status code 200', (done) => {
       request
@@ -61,31 +46,54 @@ describe('More Recipes', () => {
   });
 });
 describe('signup API', () => {
-  it('should allow user to create an account', (done) => {
+  it('should return 400 for empty firstname', (done) => {
     request
       .post('/api/v1/users')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(validSignupSeed[0])
+      .send(invalidSignupSeed[0])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('Success');
-        expect(typeof res.body.message).to.equal('string');
+        expect(res.statusCode).to.equal(400);
         done();
       });
   });
-  it('should allow another user to create an account', (done) => {
+  it('should return 400 for empty lastname', (done) => {
     request
       .post('/api/v1/users')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(validSignupSeed[1])
+      .send(invalidSignupSeed[1])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('Success');
-        expect(typeof res.body.message).to.equal('string');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('Lastname required');
+        done();
+      });
+  });
+  it('should return 400 for empty password', (done) => {
+    request
+      .post('/api/v1/users')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidSignupSeed[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('Password required');
+        done();
+      });
+  });
+  it('should return 400 for empty email', (done) => {
+    request
+      .post('/api/v1/users')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidSignupSeed[3])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('Email required');
         done();
       });
   });

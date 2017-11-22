@@ -16,3 +16,4 @@ template/sass
 .env
 .eslintrc
 server/migrations
+.nyc_output

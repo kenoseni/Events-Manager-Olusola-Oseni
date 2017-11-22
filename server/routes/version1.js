@@ -4,9 +4,20 @@ import middleware from '../middleware';
 
 const router = express.Router();
 // Register a user on the platform
-router.post('/users', controller.userController.signup);
+router.post(
+  '/users',
+  middleware.userValidation.signupInputs,
+  middleware.userValidation.validUserInputs,
+  controller.userController.signup
+);
+
 // Signin a user on the platform
-router.post('/users/login', controller.userController.login);
+router.post(
+  '/users/login',
+  middleware.userValidation.emailExist,
+  middleware.userValidation.checkPassWord,
+  controller.userController.login
+);
 // create admin route
 router.put(
   '/admins',

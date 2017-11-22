@@ -28,7 +28,6 @@ const invalidSignupSeed = [
     password: 'thisisapassword',
   }];
 
-
 describe('Event Manager', () => {
   describe('Test Server Connection', () => {
     it('should respond with welcome message and status code 200', (done) => {
@@ -98,3 +97,4 @@ describe('signup API', () => {
       });
   });
 });
+

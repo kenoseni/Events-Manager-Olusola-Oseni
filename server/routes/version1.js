@@ -18,6 +18,12 @@ router.post(
   middleware.userValidation.checkPassWord,
   controller.userController.login
 );
+// User get all centers
+router.get(
+  '/centers',
+  middleware.tokenController.confirmToken,
+  controller.centerController.getCenters
+);
 // create admin route
 router.put(
   '/admins',
@@ -30,6 +36,8 @@ router.post(
   '/centers',
   middleware.tokenController.confirmToken,
   middleware.adminValidation,
+  middleware.centerValidation.centerInputs,
   controller.centerController.addCenter
 );
+
 export default router;

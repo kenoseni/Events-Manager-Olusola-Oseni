@@ -45,7 +45,13 @@ router.post(
   '/events',
   middleware.tokenController.confirmToken,
   middleware.eventValidation.eventInputs,
-  controller.eventController.addevent
+  controller.eventController.addEvent
+);
+// Delete Event Center
+router.delete(
+  '/events/:eventId',
+  middleware.tokenController.confirmToken,
+  controller.eventController.deletEvent
 );
 
 export default router;

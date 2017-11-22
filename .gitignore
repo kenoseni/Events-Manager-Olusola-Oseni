@@ -15,5 +15,5 @@ template/sass
 .sequelizerc
 .env
 .eslintrc
-server/migrations
+server/migrations/
 .nyc_output

@@ -5,23 +5,8 @@ import app from '../app';
 const request = supertest.agent(app);
 const { expect } = chai;
 
-const validSignupSeed = [{
-    firstname: 'Olusola',
-    lastname: 'Oseni',
-    email: 'kenolusola@gmail.com',
-    password: 'thisisapassword'
-  }, {
-    firstname: 'Efosa',
-    lastname: 'Okpugie',
-    email: 'efosaokpugie@gmail.com',
-    password: 'iloveandela'
-  }, {
-    firstname: 'Idris',
-    lastname: 'Ibrahim',
-    email: 'kenolusola@gmail.com',
-    password: 'iamawesome'
-  }],
-  invalidSignupSeed = [{
+const invalidSignupSeed = [
+  {
     firstname: '   ',
     lastname: 'Smith',
     email: 'paulsmith@gmail.com',

@@ -19,7 +19,7 @@ const validSignupSeed = [{
     firstname: 'Idris',
     lastname: 'Ibrahim',
     password: 'iamawesome',
-    email: 'idrisibrahim@gmail.com',
+    email: 'kenolusola@gmail.com',
   }],
   invalidSignupSeed = [{
     firstname: '   ',
@@ -89,7 +89,7 @@ describe('signup API', () => {
         done();
       });
   });
-  it('should return 500 for empty first', (done) => {
+  it('should return 400 for empty firstname', (done) => {
     request
       .post('/api/v1/users')
       .set('Connection', 'keep alive')
@@ -97,7 +97,46 @@ describe('signup API', () => {
       .type('form')
       .send(invalidSignupSeed[0])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(500);
+        expect(res.statusCode).to.equal(400);
+        done();
+      });
+  });
+  it('should return 400 for empty lastname', (done) => {
+    request
+      .post('/api/v1/users')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidSignupSeed[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('Lastname required');
+        done();
+      });
+  });
+  it('should return 400 for empty password', (done) => {
+    request
+      .post('/api/v1/users')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidSignupSeed[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('Password required');
+        done();
+      });
+  });
+  it('should return 400 for empty email', (done) => {
+    request
+      .post('/api/v1/users')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidSignupSeed[3])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('Email required');
         done();
       });
   });

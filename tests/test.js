@@ -61,39 +61,6 @@ describe('Event Manager', () => {
   });
 });
 describe('signup API', () => {
-  it('should allow user to create an account', (done) => {
-    request
-      .post('/api/v1/users')
-      .set('Connection', 'keep alive')
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send({
-        firstname: 'Olusola',
-        lastname: 'Oseni',
-        email: 'kenolusola@gmail.com',
-        password: 'thisisapassword'
-      })
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('Success');
-        expect(typeof res.body.message).to.equal('string');
-        done();
-      });
-  });
-  it('should allow another user to create an account', (done) => {
-    request
-      .post('/api/v1/users')
-      .set('Connection', 'keep alive')
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(validSignupSeed[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('Success');
-        expect(typeof res.body.message).to.equal('string');
-        done();
-      });
-  });
   it('should return 400 for empty firstname', (done) => {
     request
       .post('/api/v1/users')

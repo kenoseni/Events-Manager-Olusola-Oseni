@@ -17,7 +17,7 @@ class eventController {
   * @return {object} Success message with the event created or error message
   * @memberof eventController
   */
-  static addevent(req, res) {
+  static addEvent(req, res) {
     const {
       date,
       centerId
@@ -54,6 +54,30 @@ class eventController {
           }));
       })
       .catch(error => res.status(200).send({ error: error.message }));
+  }
+  /**
+  * Delete event from the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the event deleted or error message
+  * @memberof eventController
+  */
+  static deletEvent(req, res) {
+    return Event
+      .find({
+        where: {
+          id: req.params.eventId,
+          userId: req.decoded.userid,
+        }
+      })
+      .then(event => event.destroy())
+      .then(() => res.status(200).json({
+        status: 'Success',
+        message: 'Event has been successfully deleted'
+      }))
+      .catch(error => res.status(400).send(error));
   }
 }
 export default eventController;

@@ -13,19 +13,6 @@ export default (sequelize, DataTypes) => {
         this.setDataValue('name', value.toString().toLowerCase().trim());
       }
     },
-    venue: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Event venue cannot be empty'
-        },
-      },
-      set(value) {
-        this.setDataValue('venue', value.toString().toLowerCase().trim());
-      }
-    },
     date: {
       type: DataTypes.DATEONLY,
       allowNull: false,

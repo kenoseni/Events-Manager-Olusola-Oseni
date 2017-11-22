@@ -12,7 +12,7 @@ class centerController {
   * @static
   * @param {object} req - The request object
   * @param {object} res - The response object
-  * @return {object} Success message with the user created or error message
+  * @return {object} Success message with the center created or error message
   * @memberof centerController
   */
   static addCenter(req, res) {
@@ -29,6 +29,30 @@ class centerController {
         status: 'Success',
         message: `Center with centerId: ${center.id}
          was successfully created by ${center.userId}`,
+      }))
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
+  }
+  /**
+  * Create new center on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the center created or error message
+  * @memberof centerController
+  */
+  static getCenters(req, res) {
+    return db.Center
+      .findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
+      })
+      .then(center => res.status(200).json({
+        status: 'Success',
+        message: 'List of all centers',
+        center
       }))
       .catch(error => res.status(500).json({
         status: 'Error',

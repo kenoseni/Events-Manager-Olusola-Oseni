@@ -14,7 +14,7 @@ router.post(
 // Signin a user on the platform
 router.post(
   '/users/login',
-  middleware.userValidation.emailExist,
+  middleware.userValidation.checkEmail,
   middleware.userValidation.checkPassWord,
   controller.userController.login
 );

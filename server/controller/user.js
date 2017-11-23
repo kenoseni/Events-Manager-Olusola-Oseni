@@ -27,7 +27,9 @@ class userController {
       })
       .then(user => res.status(201).json({
         status: 'Success',
-        message: `User with userId: ${user.id} was successfully signed up`,
+        message: 'User successfully signed up',
+        firstname: user.firstname,
+        lastname: user.lastname
       }))
       .catch(error => res.status(500).json({
         status: 'Error',

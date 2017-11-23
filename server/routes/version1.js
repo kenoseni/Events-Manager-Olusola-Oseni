@@ -46,19 +46,25 @@ router.post(
   controller.centerController.addCenter
 );
 
-// Create Event Center
+// Create an Event
 router.post(
   '/events',
   middleware.tokenController.confirmToken,
   middleware.eventValidation.eventInputs,
   controller.eventController.addEvent
 );
-// Delete Event Center
+// Delete an Event
 router.delete(
   '/events/:eventId',
   middleware.tokenController.confirmToken,
-  controller.eventController.deletEvent
+  controller.eventController.deleteEvent
 );
-
+// Modify an Event
+router.put(
+  '/events/:eventId',
+  middleware.tokenController.confirmToken,
+  middleware.eventValidation.eventInputs,
+  controller.eventController.modifyEvent
+);
 
 export default router;

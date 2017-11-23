@@ -49,6 +49,9 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Please supply the right email format'
         }
+      },
+      set(value) {
+        this.setDataValue('email', value.toString().toLowerCase().trim());
       }
     },
     password: {

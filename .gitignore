@@ -17,3 +17,4 @@ template/sass
 .eslintrc
 server/migrations/
 .nyc_output
+.vscode

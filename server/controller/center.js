@@ -71,18 +71,22 @@ class centerController {
   static getOne(req, res) {
     return db.Center
       .findOne({
-        where: { id: req.params.centerId }
-      }, {
+        where: { id: req.params.centerId },
         include: [{
           model: db.Event,
-          as: 'events'
+          as: 'events',
         }]
       })
-      .then(center => res.status(200).json({
-        status: 'Success',
-        message: 'List of one center',
-        center
-      }))
+      .then((center) => {
+        if (!center) {
+          return res.status(400).send({ message: 'not found' });
+        }
+        res.status(200).json({
+          status: 'Success',
+          message: 'List of one center',
+          center
+        });
+      })
       .catch(error => res.status(500).json({
         status: 'Error',
         message: error.message

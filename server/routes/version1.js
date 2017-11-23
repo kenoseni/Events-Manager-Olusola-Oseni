@@ -24,6 +24,12 @@ router.get(
   middleware.tokenController.confirmToken,
   controller.centerController.getCenters
 );
+// Get One Event Center
+router.get(
+  '/centers/:centerId',
+  controller.centerController.getOne
+);
+
 // create admin route
 router.put(
   '/admins',
@@ -53,5 +59,6 @@ router.delete(
   middleware.tokenController.confirmToken,
   controller.eventController.deletEvent
 );
+
 
 export default router;

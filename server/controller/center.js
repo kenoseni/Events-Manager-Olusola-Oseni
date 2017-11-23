@@ -59,5 +59,34 @@ class centerController {
         message: error.message
       }));
   }
+  /**
+  * Create get one center on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the center created or error message
+  * @memberof centerController
+  */
+  static getOne(req, res) {
+    return db.Center
+      .findOne({
+        where: { id: req.params.centerId }
+      }, {
+        include: [{
+          model: db.Event,
+          as: 'events'
+        }]
+      })
+      .then(center => res.status(200).json({
+        status: 'Success',
+        message: 'List of one center',
+        center
+      }))
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
+  }
 }
 export default centerController;

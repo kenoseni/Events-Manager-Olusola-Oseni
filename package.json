@@ -7,7 +7,7 @@
     "node": "7.7.4"
   },
   "scripts": {
-    "start:dev": "nodemon ./app --exec babel-node",
+    "start:dev": "nodemon ./server/app --exec babel-node",
     "test": "nyc mocha --timeout 250000 tests/test.js --require babel-register --exit",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "nyc": "nyc report"

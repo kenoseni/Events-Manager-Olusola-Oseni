@@ -1,7 +1,7 @@
 import express from 'express';
 import volleyball from 'volleyball';
 import bodyParser from 'body-parser';
-import route from './server/routes';
+import route from './routes';
 // Set up the express app
 const app = express();
 

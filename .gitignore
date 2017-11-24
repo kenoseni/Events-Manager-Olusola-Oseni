@@ -14,6 +14,5 @@ template/sass
 /node_modules
 .env
 .eslintrc
-server/migrations/
 .nyc_output
 .vscode

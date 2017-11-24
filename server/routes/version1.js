@@ -14,7 +14,7 @@ router.post(
 // Signin a user on the platform
 router.post(
   '/users/login',
-  middleware.userValidation.emailExist,
+  middleware.userValidation.checkEmail,
   middleware.userValidation.checkPassWord,
   controller.userController.login
 );
@@ -28,6 +28,14 @@ router.get(
 router.get(
   '/centers/:centerId',
   controller.centerController.getOne
+);
+// Modify Event Center
+router.put(
+  '/centers/:centerId',
+  middleware.tokenController.confirmToken,
+  middleware.adminValidation,
+  middleware.centerValidation.centerInputs,
+  controller.centerController.modifyCenter
 );
 
 // create admin route
@@ -46,19 +54,25 @@ router.post(
   controller.centerController.addCenter
 );
 
-// Create Event Center
+// Create an Event
 router.post(
   '/events',
   middleware.tokenController.confirmToken,
   middleware.eventValidation.eventInputs,
   controller.eventController.addEvent
 );
-// Delete Event Center
+// Delete an Event
 router.delete(
   '/events/:eventId',
   middleware.tokenController.confirmToken,
-  controller.eventController.deletEvent
+  controller.eventController.deleteEvent
 );
-
+// Modify an Event
+router.put(
+  '/events/:eventId',
+  middleware.tokenController.confirmToken,
+  middleware.eventValidation.eventInputs,
+  controller.eventController.modifyEvent
+);
 
 export default router;

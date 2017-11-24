@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Centers', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Events', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -9,20 +9,11 @@ module.exports = {
     name: {
       type: Sequelize.STRING
     },
-    description: {
-      type: Sequelize.TEXT
+    date: {
+      type: Sequelize.DATEONLY
     },
-    location: {
+    time: {
       type: Sequelize.STRING
-    },
-    address: {
-      type: Sequelize.STRING
-    },
-    capacity: {
-      type: Sequelize.STRING
-    },
-    avaliability: {
-      type: Sequelize.BOOLEAN
     },
     createdAt: {
       allowNull: false,
@@ -34,12 +25,22 @@ module.exports = {
     },
     userId: {
       type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
       references: {
         model: 'Users',
         key: 'id',
         as: 'userId',
       }
+    },
+    centerId: {
+      type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Centers',
+        key: 'id',
+        as: 'centerId',
+      }
     }
   }),
-  down: queryInterface => queryInterface.dropTable('Centers')
+  down: queryInterface => queryInterface.dropTable('Events')
 };

@@ -77,11 +77,6 @@ class UserValidation {
         message: 'Invalid lastname, only alphabets and numbers allowed'
       });
     }
-    if (!isEmail(req.body.email)) {
-      return res.status(400).send({
-        message: 'Invalid email address format'
-      });
-    }
     return next();
   }
 
@@ -133,8 +128,30 @@ class UserValidation {
   static checkPassWord(req, res, next) {
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
-      return res.status(401).send({
+      return res.status(401).json({
+        status: 'Fail',
         message: 'Password required'
+      });
+    }
+    return next();
+  }
+  /**
+   * Check for required signin inputs fields
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {any} res - The response object
+   * @param {any} next - The next route handler function
+   * @returns {any} Object representing error message or
+   * calls the next function
+   * @memberof UserValidation
+   */
+  static checkEmail(req, res, next) {
+    // Check if password is empty
+    if (!req.body.email || isEmpty(req.body.email)) {
+      return res.status(401).json({
+        status: 'Fail',
+        message: 'Email required'
       });
     }
     return next();

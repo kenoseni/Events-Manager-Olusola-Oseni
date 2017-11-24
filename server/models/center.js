@@ -52,6 +52,10 @@ export default (sequelize, DataTypes) => {
           msg: 'Please provide the capacity for this center'
         },
       }
+    },
+    avaliability: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   });
   // associate the models

@@ -7,10 +7,13 @@
     "node": "7.7.4"
   },
   "scripts": {
-    "start:dev": "nodemon ./app --exec babel-node",
+    "start": "babel-node ./server/app.js",
+    "start:dev": "nodemon ./server/app --exec babel-node",
     "test": "nyc mocha --timeout 250000 tests/test.js --require babel-register --exit",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "nyc": "nyc report"
+    "nyc": "nyc report",
+    "migrate": "node_modules/.bin/sequelize db:migrate",
+    "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all"
   },
   "keywords": [
     "API"

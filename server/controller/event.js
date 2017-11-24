@@ -46,7 +46,7 @@ class eventController {
           })
           .then(event => res.status(201).json({
             status: 'Success',
-            message: `Event with eventId: ${event.id} was successfully created by userId: ${event.userId}`,
+            message: `Event with eventId: ${event.id} was successfully created`,
           }))
           .catch(error => res.status(500).json({
             status: 'Error',

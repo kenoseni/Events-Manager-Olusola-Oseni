@@ -16,7 +16,11 @@ export default (sequelize, DataTypes) => {
     date: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      unique: true,
+      isDate: true,
+      unique: {
+        args: true,
+        msg: 'An event has been slated for this date'
+      },
       validate: {
         notEmpty: {
           args: true,

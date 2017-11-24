@@ -25,19 +25,22 @@ class EventValidation {
   static eventInputs(req, res, next) {
     // Check if name is empty
     if (!req.body.name || isEmpty(req.body.name)) {
-      return res.status(400).send({
+      return res.status(400).json({
+        status: 'Fail',
         message: 'Event name required'
       });
     }
     // Check if date is empty
     if (!req.body.date || isEmpty(req.body.date)) {
-      return res.status(400).send({
+      return res.status(400).json({
+        status: 'Fail',
         message: 'Date field required'
       });
     }
     // Check if time is empty
     if (!req.body.time || isEmpty(req.body.time)) {
-      return res.status(400).send({
+      return res.status(400).json({
+        status: 'Fail',
         message: 'Time required'
       });
     }

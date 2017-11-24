@@ -77,11 +77,6 @@ class UserValidation {
         message: 'Invalid lastname, only alphabets and numbers allowed'
       });
     }
-    if (!isEmail(req.body.email)) {
-      return res.status(400).send({
-        message: 'Invalid email address format'
-      });
-    }
     return next();
   }
 

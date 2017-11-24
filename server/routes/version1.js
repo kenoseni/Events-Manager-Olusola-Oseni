@@ -29,6 +29,14 @@ router.get(
   '/centers/:centerId',
   controller.centerController.getOne
 );
+// Modify Event Center
+router.put(
+  '/centers/:centerId',
+  middleware.tokenController.confirmToken,
+  middleware.adminValidation,
+  middleware.centerValidation.centerInputs,
+  controller.centerController.modifyCenter
+);
 
 // create admin route
 router.put(

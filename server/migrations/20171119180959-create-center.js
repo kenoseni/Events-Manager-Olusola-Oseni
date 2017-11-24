@@ -21,6 +21,9 @@ module.exports = {
     capacity: {
       type: Sequelize.STRING
     },
+    avaliability: {
+      type: Sequelize.BOOLEAN
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE

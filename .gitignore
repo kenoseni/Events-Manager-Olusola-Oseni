@@ -13,6 +13,5 @@ template/js/jquery-3.2.1.min.js
 template/sass
 /node_modules
 .env
-.eslintrc
 .nyc_output
 .vscode

@@ -131,7 +131,8 @@ const validSignupSeed = [{
       capacity: ''
     }
   ],
-  userToken = [];
+  userToken = [],
+  adminToken = [];
 let userId1,
   centerId1;
 
@@ -217,7 +218,7 @@ describe('signup API', () => {
         done();
       });
   });
-  it('should allow another  user to login', (done) => {
+  it('should allow another  user to signup', (done) => {
     request
       .post('/api/v1/users')
       .set('Connection', 'keep alive')
@@ -286,6 +287,36 @@ describe('signup API', () => {
         expect(res.statusCode).to.equal(401);
         expect(res.body.status).to.equal('Fail');
         expect(res.body.message).to.equal('Password required');
+        done();
+      });
+  });
+  it('should update a user to an admin', (done) => {
+    request
+      .put('/api/v1/admins')
+      .set('Connection', 'keep alive')
+      .set('x-access-token', userToken[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send()
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('Success');
+        expect(res.body.message).to.equal('Admin created successfully');
+        done();
+      });
+  });
+  it('should return an error when a token is not supplied', (done) => {
+    request
+      .put('/api/v1/admins')
+      .set('Connection', 'keep alive')
+      .set('x-access-token', '')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send()
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.status).to.equal('Fail');
+        expect(res.body.message).to.equal('Access denied, no token provided');
         done();
       });
   });

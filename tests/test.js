@@ -320,5 +320,35 @@ describe('signup API', () => {
         done();
       });
   });
+  it('should return an error when a token is not supplied', (done) => {
+    request
+      .put('/api/v1/admins')
+      .set('Connection', 'keep alive')
+      .set('x-access-token', '')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send()
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.status).to.equal('Fail');
+        expect(res.body.message).to.equal('Access denied, no token provided');
+        done();
+      });
+  });
+  it('should return an error when a token is not supplied', (done) => {
+    request
+      .put('/api/v1/admins')
+      .set('Connection', 'keep alive')
+      .set('x-access-token', '')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send()
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.status).to.equal('Fail');
+        expect(res.body.message).to.equal('Access denied, no token provided');
+        done();
+      });
+  });
 });
 

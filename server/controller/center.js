@@ -142,9 +142,9 @@ class centerController {
               center
             });
           })
-          .catch(error => res.status(5000).send({ error: error.message }));
+          .catch(error => res.status(500).json({ error: error.message }));
       })
-      .catch(error => res.status(5000).send({ error: error.message }));
+      .catch(error => res.status(500).json({ error: error.message }));
   }
 }
 export default centerController;

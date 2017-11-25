@@ -69,6 +69,12 @@ const validSignupSeed = [{
       date: '2017-12-25',
       time: '5:00 pm',
       centerId: 1
+    },
+    {
+      name: 'Birthday',
+      date: '2017-12-30',
+      time: '4:00 pm',
+      centerId: 1
     }
   ],
   validCenterSeed = [
@@ -290,65 +296,203 @@ describe('signup API', () => {
         done();
       });
   });
-  it('should update a user to an admin', (done) => {
-    request
-      .put('/api/v1/admins')
-      .set('Connection', 'keep alive')
-      .set('x-access-token', userToken[0])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send()
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('Success');
-        expect(res.body.message).to.equal('Admin created successfully');
-        done();
-      });
+  describe('Create admin API', () => {
+    it('should update a user to an admin', (done) => {
+      request
+        .put('/api/v1/admins')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send()
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Admin created successfully');
+          done();
+        });
+    });
+    it('should allow an admin to signin again', (done) => {
+      request
+        .post('/api/v1/users/login')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validLoginSeed[0])
+        .end((err, res) => {
+          adminToken[0] = res.body.data.token;
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User logged in');
+          done();
+        });
+    });
   });
-  it('should return an error when a token is not supplied', (done) => {
-    request
-      .put('/api/v1/admins')
-      .set('Connection', 'keep alive')
-      .set('x-access-token', '')
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send()
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(401);
-        expect(res.body.status).to.equal('Fail');
-        expect(res.body.message).to.equal('Access denied, no token provided');
-        done();
-      });
-  });
-  it('should return an error when a token is not supplied', (done) => {
-    request
-      .put('/api/v1/admins')
-      .set('Connection', 'keep alive')
-      .set('x-access-token', '')
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send()
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(401);
-        expect(res.body.status).to.equal('Fail');
-        expect(res.body.message).to.equal('Access denied, no token provided');
-        done();
-      });
-  });
-  it('should return an error when a token is not supplied', (done) => {
-    request
-      .put('/api/v1/admins')
-      .set('Connection', 'keep alive')
-      .set('x-access-token', '')
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send()
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(401);
-        expect(res.body.status).to.equal('Fail');
-        expect(res.body.message).to.equal('Access denied, no token provided');
-        done();
-      });
+  describe(' Center API', () => {
+    it('should allow an admin to create a center', (done) => {
+      request
+        .post('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validCenterSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Center created successfully');
+          done();
+        });
+    });
+    it('should return an error when a token is not supplied when creating a center', (done) => {
+      request
+        .post('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', '')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send()
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Access denied, no token provided');
+          done();
+        });
+    });
+    it('should return an error when no center name is provided', (done) => {
+      request
+        .post('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidCenterSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Center name required');
+          done();
+        });
+    });
+    it('should return an error when no center description provided', (done) => {
+      request
+        .post('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidCenterSeed[1])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Description field required');
+          done();
+        });
+    });
+    it('should return an error when no center location is provided', (done) => {
+      request
+        .post('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidCenterSeed[2])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Location required');
+          done();
+        });
+    });
+    it('should return an error when no center address is provided', (done) => {
+      request
+        .post('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidCenterSeed[3])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Center address required');
+          done();
+        });
+    });
+    it('should return an error when no center capacity is provided', (done) => {
+      request
+        .post('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidCenterSeed[4])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Capacity required');
+          done();
+        });
+    });
+    it('should allow an admin to modify a center', (done) => {
+      request
+        .put('/api/v1/centers/1')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validCenterSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Center updated');
+          done();
+        });
+    });
+    it('should allow an admin to modify another a center', (done) => {
+      request
+        .put('/api/v1/centers/1')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validCenterSeed[1])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Center updated');
+          done();
+        });
+    });
+    it('should allow users get one center', (done) => {
+      request
+        .get('/api/v1/centers/1')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send()
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('List of one center');
+          done();
+        });
+    });
+    it('should allow admin get all centers', (done) => {
+      request
+        .get('/api/v1/centers')
+        .set('Connection', 'keep alive')
+        .set('x-access-token', adminToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send()
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('List of all centers');
+          done();
+        });
+    });
   });
 });
 

@@ -1,0 +1,19 @@
+/* Your custom styles */
+#info{
+    margin-top: 10%
+}
+#space, #space2 {
+    margin-top: 5%
+}
+li {
+    display: inline-block;
+}
+.table-wrapper-2 {
+    display: block;
+    max-height: 300px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+@media screen and (max-width: 768px) {
+    #info, #paradise, #etable {padding-top: 10%;}
+}

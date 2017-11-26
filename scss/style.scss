@@ -1,0 +1,65 @@
+
+$color_1: #CC0000;
+$color_2: #FFF;
+$background_color_1: #0C9;
+
+#event {
+	margin-top: 15%;
+}
+#info {
+	margin-top: 5%;
+}
+.fa-trash-o {
+	color: $color_1;
+}
+.modal-dialog {
+	margin-top: 8%;
+}
+a {
+	&:hover {
+		opacity: 0.5;
+	}
+}
+.float {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 40px;
+	right: 40px;
+	background-color: $background_color_1;
+	color: $color_2;
+	border-radius: 50px;
+	text-align: center;
+	box-shadow: 2px 2px 3px #999;
+}
+.my-float {
+	margin-top: 22px;
+}
+@media screen and (max-width: 768px) {
+	#event {
+		margin-top: 30%;
+	}
+
+$landing-height: 100%;
+$top-margin: 7%;
+html {
+	height: $landing-height;
+}
+body {
+	height: $landing-height;
+}
+header {
+	height: $landing-height;
+}
+#intro {
+	height: $landing-height;
+	background: url("../img/img1.jpg")no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#centerlogin {
+	margin-top: $top-margin;
+}
+}

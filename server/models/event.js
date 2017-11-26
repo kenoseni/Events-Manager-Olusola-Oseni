@@ -1,0 +1,58 @@
+export default (sequelize, DataTypes) => {
+  const Event = sequelize.define('Event', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Event name cannot be empty'
+        },
+      },
+      set(value) {
+        this.setDataValue('name', value.toString().toLowerCase().trim());
+      }
+    },
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      isDate: true,
+      unique: {
+        args: true,
+        msg: 'An event has been slated for this date'
+      },
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Event date cannot be empty'
+        },
+        isDate: {
+          args: true,
+          msg: 'Insert the correct date format'
+        }
+      }
+    },
+    time: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Event date cannot be empty'
+        }
+      }
+    }
+  });
+  // associate the models
+  Event.associate = (models) => {
+    Event.belongsTo(models.User, {
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
+    });
+    Event.belongsTo(models.Center, {
+      foreignKey: 'centerId',
+      onDelete: 'CASCADE'
+    });
+  };
+  return Event;
+};

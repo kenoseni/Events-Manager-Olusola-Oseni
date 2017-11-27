@@ -1,0 +1,1 @@
+{"version":3,"sources":["../components/App.js"],"names":["App"],"mappings":";;;;;;;;AAAA;;;;;;;;;;;;IAEqBA,G;;;;;;;;;;;iCACP;AACN,mBAAO;AAAA;AAAA;AAAA;AAAA,aAAP;AACH;;;;;;kBAHgBA,G","file":"App.js","sourcesContent":["import React, {Component} from 'react';\n\nexport default class App extends Component {\n    render () {\n        return <p>This is my new react app</p>\n    }\n}"]}

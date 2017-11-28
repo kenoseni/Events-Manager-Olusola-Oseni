@@ -1,11 +1,14 @@
 html {
-  height: 670px; }
+  height: 670px; 
+}
 
 body {
-  height: 670px; }
+  height: 670px; 
+}
 
 header {
-  height: 670px; }
+  height: 670px; 
+}
 
 #intro {
   height: 670px;
@@ -16,6 +19,7 @@ header {
   background-size: cover; }
 
 #centerlogin {
-  margin-top: 7%; }
+  margin-top: 7%; 
+}
 
 /*# sourceMappingURL=style2.css.map */

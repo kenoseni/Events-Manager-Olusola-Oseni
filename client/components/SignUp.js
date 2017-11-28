@@ -16,23 +16,23 @@ export default class SignUP extends Component {
               <div className="modal-body">       
                 <form action="" method="POST" role="form">
                   <div className="form-group">
-                    <label HTMLfor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> First Name:</label>
+                    <label htmlFor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> First Name:</label>
                     <input type="text" className="form-control" id="" placeholder="please enter your first name" autoFocus />
                   </div>
                   <div className="form-group">
-                    <label HTMLfor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> Last Name:</label>
+                    <label htmlFor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> Last Name:</label>
                     <input type="text" className="form-control" id="" placeholder="please enter your last name" />
                   </div>
                   <div className="form-group">
-                    <label HTMLfor="email" className="font-weight-bold"><i className="fa fa-envelope" aria-hidden="true"></i> Email:</label>
+                    <label htmlFor="email" className="font-weight-bold"><i className="fa fa-envelope" aria-hidden="true"></i> Email:</label>
                     <input type="email" className="form-control" id="" />
                   </div>
                   <div className="form-group">
-                    <label HTMLfor="password" className="font-weight-bold"><i className="fa fa-lock" aria-hidden="true"></i> Password:</label>
+                    <label htmlFor="password" className="font-weight-bold"><i className="fa fa-lock" aria-hidden="true"></i> Password:</label>
                     <input type="password" className="form-control" id="" />
                   </div>
                   <div className="form-group">
-                    <label HTMLfor="password" className="font-weight-bold"><i className="fa fa-lock" aria-hidden="true"></i> Retype Password:</label>
+                    <label htmlFor="password" className="font-weight-bold"><i className="fa fa-lock" aria-hidden="true"></i> Retype Password:</label>
                     <input type="password" className="form-control" id="" />
                   </div>            
                   <a href="eventcenters.html" type="submit" className="btn btn-success">Sign Up</a>

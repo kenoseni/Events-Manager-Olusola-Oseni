@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navbar from './Navbar'
 import LandingPage from './LandingPage'
 import SignUp from './SignUp'
+import SignIn from './SignIn'
 
 export default class App extends Component {
     render () {
@@ -9,7 +10,8 @@ export default class App extends Component {
         <div>
             <Navbar />
             <LandingPage />
-            <SignUp />   
+            <SignUp />
+            <SignIn />   
         </div>
         )
     }

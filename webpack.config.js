@@ -2,10 +2,11 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: {
-    path: path.resolve(__dirname, './client/index.js'),
-  },
-  output: { 
+  entry: [
+    'webpack-hot-middleware/client/',
+    path.resolve(__dirname, './client/index.js'),
+  ],
+  output: {
     path: path.resolve(__dirname, '/dist'),
     filename: './client/bundle.js'
   },
@@ -13,6 +14,10 @@ module.exports = {
     contentBase: path.resolve(__dirname, './client/'),
     historyApiFallback: true
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devtool: 'eval-source-map',
   module: {
     loaders: [
       {
@@ -21,8 +26,37 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css|sass)$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg|ico)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            },
+          },
+          {
+            loader: 'image-webpack-loader',
+            query: {
+              optipng: {
+                optimizationLevel: 7,
+              },
+              mozjpeg: {
+                progressive: true,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              pngquant: {
+                quality: '75-90',
+                speed: 3,
+              },
+            },
+          },
+        ],
       }
     ]
   },

@@ -1,6 +1,23 @@
 import React, {Component} from 'react';
 
 export default class SignUP extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+
+    }
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onChange(e) {
+    this.setState({[e.target.name]: e.target.value})
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(this.state)
+  }
   render () {
     return (
       <div>
@@ -14,16 +31,16 @@ export default class SignUP extends Component {
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
               </div>
               <div className="modal-body">            
-                <form action="" method="POST" role="form">         
+                <form action="" method="POST" role="form" onSubmit={this.onSubmit}>         
                   <div className="form-group"> 
                     <label className="control-label font-weight-bold" htmlFor="email"><i className="fa fa-envelope" aria-hidden="true"></i> Email: </label>
-                    <input type="email" className="form-control" id="" placeholder="username@domain.com" autoFocus />     
+                    <input type="email" name='email' value={this.state.email} onChange={this.onChange} className="form-control" id="" placeholder="username@domain.com" autoFocus />     
                   </div>
                   <div className="form-group">
                     <label className="control-label font-weight-bold" htmlFor="password"><i className="fa fa-lock" aria-hidden="true"></i> Password: </label>
-                    <input type="password" className="form-control" id="" />
+                    <input type="password" name='password' value={this.state.password} onChange={this.onChange} className="form-control" id="" />
                   </div>                 
-                  <a href="myevents.html" type="submit" className="btn btn-success">Log In</a>
+                  <button type="submit" className="btn btn-success">Log In</button>
                 </form>                      
               </div> 
               <div className="modal-footer">

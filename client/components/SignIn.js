@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-export default class SignUP extends Component {
+export default class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +17,7 @@ export default class SignUP extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state)
+    this.props.userSignInRequest(this.state)
   }
   render () {
     return (
@@ -53,4 +54,7 @@ export default class SignUP extends Component {
       </div> 
     );
   }
+}
+SignIn.propTypes = {
+  userSignInRequest: PropTypes.func.isRequired
 }

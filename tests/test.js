@@ -143,20 +143,6 @@ let userId1,
   centerId1;
 
 describe('Event Manager', () => {
-  describe('Test Server Connection', () => {
-    it('should respond with welcome message and status code 200', (done) => {
-      request
-        .get('/api/v1')
-        .set('Connection', 'keep alive')
-        .set('Content-Type', 'application/json')
-        .end((err, res) => {
-          expect('Content-Type', /json/);
-          expect(res.body.message).to.equal('Welcome to my API.');
-          expect(res.statusCode).to.equal(200);
-          done();
-        });
-    });
-  });
 });
 describe('signup API', () => {
   it('should return 400 for empty firstname', (done) => {

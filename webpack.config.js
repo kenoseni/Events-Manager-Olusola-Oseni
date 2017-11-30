@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   entry: [
-    'webpack-hot-middleware/client/',
+    'webpack-hot-middleware/client?reload=true',
     path.resolve(__dirname, './client/index.js'),
   ],
   output: {
@@ -23,7 +23,10 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          plugins: ['transform-decorators-legacy']
+        }
       },
       {
         test: /\.(scss|css|sass)$/,

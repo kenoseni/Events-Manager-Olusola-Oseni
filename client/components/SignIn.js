@@ -1,23 +1,37 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { userLogin } from '.././actions/UserActions';
+
+@connect((store) => {
+  return  {
+    user: store.user
+  }
+})
 
 export default class SignIn extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      email: '',
+      email: '' ,
       password: ''
-
     }
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
-  onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
+
+  getLoginInput = (e) => {
+    const state = this.state;
+    state[e.target.name] = e.target.value;
+    this.setState(state);
   }
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.userSignInRequest(this.state)
+  
+  loginInput = (e) => {
+    e.preventDefault()
+    const {
+      email, password
+    } = this.state;
+    this.props.dispatch(userLogin({
+      email,
+      password,
+    }));
   }
   render () {
     return (
@@ -32,16 +46,16 @@ export default class SignIn extends Component {
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
               </div>
               <div className="modal-body">            
-                <form action="" method="POST" role="form" onSubmit={this.onSubmit}>         
+                <form  method="POST" role="form">         
                   <div className="form-group"> 
                     <label className="control-label font-weight-bold" htmlFor="email"><i className="fa fa-envelope" aria-hidden="true"></i> Email: </label>
-                    <input type="email" name='email' value={this.state.email} onChange={this.onChange} className="form-control" id="" placeholder="username@domain.com" autoFocus />     
+                    <input type="email" name='email' onChange={this.getLoginInput} className="form-control" id="" placeholder="username@domain.com" autoFocus />     
                   </div>
                   <div className="form-group">
                     <label className="control-label font-weight-bold" htmlFor="password"><i className="fa fa-lock" aria-hidden="true"></i> Password: </label>
-                    <input type="password" name='password' value={this.state.password} onChange={this.onChange} className="form-control" id="" />
+                    <input type="password" name='password' onChange={this.getLoginInput} className="form-control" id="" />
                   </div>                 
-                  <button type="submit" className="btn btn-success">Log In</button>
+                  <button className="btn btn-success" onClick={this.loginInput}>Log In</button>
                 </form>                      
               </div> 
               <div className="modal-footer">
@@ -55,6 +69,4 @@ export default class SignIn extends Component {
     );
   }
 }
-SignIn.propTypes = {
-  userSignInRequest: PropTypes.func.isRequired
-}
+

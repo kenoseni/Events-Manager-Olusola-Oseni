@@ -23,14 +23,20 @@ class userController {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
-        password: req.body.password,
+        password: req.body.password
       })
-      .then(user => res.status(201).json({
-        status: 'Success',
-        message: 'User successfully signed up',
-        firstname: user.firstname,
-        lastname: user.lastname
-      }))
+      .then((user) => {
+        const token = auth.tokenController.createToken(user);
+        return res.status(201).json({
+          status: 'Success',
+          message: 'User successfully signed up',
+          firstname: user.firstname,
+          lastname: user.lastname,
+          data: {
+            token
+          }
+        });
+      })
       .catch(error => res.status(500).json({
         status: 'Error',
         message: error.message

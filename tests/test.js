@@ -196,7 +196,7 @@ describe('signup API', () => {
         done();
       });
   });
-  it('should allow a user to login', (done) => {
+  it('should allow a user to signup', (done) => {
     request
       .post('/api/v1/users')
       .set('Connection', 'keep alive')
@@ -204,12 +204,13 @@ describe('signup API', () => {
       .type('form')
       .send(validSignupSeed[0])
       .end((err, res) => {
-        // console.log(res.body)
+        userToken[0] = res.body.data.token;
         expect(res.statusCode).to.equal(201);
         expect(res.body.message).to.equal('User successfully signed up');
         done();
       });
   });
+  
   it('should allow another  user to signup', (done) => {
     request
       .post('/api/v1/users')
@@ -218,7 +219,6 @@ describe('signup API', () => {
       .type('form')
       .send(validSignupSeed[1])
       .end((err, res) => {
-        // console.log(res.body)
         expect(res.statusCode).to.equal(201);
         expect(res.body.message).to.equal('User successfully signed up');
         done();

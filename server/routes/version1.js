@@ -21,7 +21,7 @@ router.post(
 // User get all centers
 router.get(
   '/centers',
-  middleware.tokenController.confirmToken,
+  // middleware.tokenController.confirmToken,
   controller.centerController.getCenters
 );
 // Get One Event Center

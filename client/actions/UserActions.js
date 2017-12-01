@@ -25,8 +25,21 @@ const userLogin = (loginDetails) => {
       });
   };
 };
+const getCenters = (allCenters) => {
+  return (dispatch) => {
+    // dispatch({ type: 'ALL_CENTERS' });
+    axios.get('http://localhost:8000/api/v1/centers', allCenters)
+      .then((res) => {
+        dispatch({ type: 'ALL_CENTERS_RESOLVED', payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: 'ALL_CENTERS_REJECTED', payload: err.response.data });
+      });
+  };
+};
 
 export {
   createUser,
-  userLogin
+  userLogin,
+  getCenters
 };

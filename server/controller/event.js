@@ -116,5 +116,40 @@ class eventController {
         message: error.message
       }));
   }
+  /**
+  * Get one event on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the event  or error message
+  * @memberof eventController
+  */
+  static getEvent(req, res) {
+    return Event
+      .findOne({
+        where: {
+          id: req.params.eventId,
+          userId: req.decoded.userid
+        }
+      })
+      .then((event) => {
+        if (!event) {
+          return res.status(404).send({
+            status: 'Fail',
+            message: 'No such event available'
+          });
+        }
+        return res.status(200).send({
+          status: 'Success',
+          message: 'View event',
+          data: event
+        });
+      })
+      .catch(() => res.status(400).send({
+        status: 'Fail',
+        message: 'No such event is available'
+      }));
+  }
 }
 export default eventController;

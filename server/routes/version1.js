@@ -74,5 +74,11 @@ router.put(
   middleware.eventValidation.eventInputs,
   controller.eventController.modifyEvent
 );
+// Get an Event
+router.get(
+  '/events/:eventId',
+  middleware.tokenController.confirmToken,
+  controller.eventController.getEvent
+);
 
 export default router;

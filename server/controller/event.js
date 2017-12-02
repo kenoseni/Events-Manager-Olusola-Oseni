@@ -125,7 +125,7 @@ class eventController {
   * @return {object} Success message with the event  or error message
   * @memberof eventController
   */
-  static getEvent(req, res) {
+  static getOneEvent(req, res) {
     return Event
       .findOne({
         where: {
@@ -149,6 +149,36 @@ class eventController {
       .catch(() => res.status(400).send({
         status: 'Fail',
         message: 'No such event is available'
+      }));
+  }
+  /**
+  * Get all User Events from the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the event deleted or error message
+  * @memberof eventController
+  */
+  static userEvents(req, res) {
+    return Event
+      .findAll({
+        where: {
+          userId: req.decoded.userid,
+        }
+      })
+      .then((events) => {
+        if (!events) {
+          return res.status(400).json({ message: 'Events not found' });
+        }
+        res.status(200).json({
+          status: 'Success',
+          message: 'These are your events',
+          events
+        });
+      })
+      .catch(error => res.status(500).json({
+        message: error.message
       }));
   }
 }

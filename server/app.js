@@ -1,12 +1,13 @@
 import express from 'express';
 import volleyball from 'volleyball';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import route from './routes';
 
 // Set up the express app
 const app = express();
-
+app.use(cors({ credentials: true, origin: true }));
 
 // Log requests to the console.
 app.use(volleyball);
@@ -15,12 +16,7 @@ app.use(volleyball);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.all('*', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+
 route(app);
 // Set the app entry port
 const port = process.env.PORT || 8000;

@@ -1,6 +1,6 @@
 export default function reducer(state = [], action) {
   switch (action.type) {
-    case 'ALL_CENTERS': {
+    case 'ALL_USER_EVENT': {
       return {
         ...state,
         status: {
@@ -11,13 +11,13 @@ export default function reducer(state = [], action) {
         }
       };
     }
-    case 'ALL_CENTERS_RESOLVED': {
-      const { name, description, location, id, address, avaliability } = action.payload;
-      const newCenter = { name, description, location, id, address, avaliability };
-      console.log(action.payload)
-      return action.payload.center;
+    case 'ALL_USER_EVENT_RESOLVED': {
+      const { name, date, time, centerId } = action.payload;
+      const newEvent = { name, date, time, centerId };
+      console.log(action.payload);
+      return action.payload.events;
     }
-    case 'ALL_CENTERS_REJECTED': {
+    case 'ALL_USER_EVENT_REJECTED': {
       return {
         ...state,
         status: {

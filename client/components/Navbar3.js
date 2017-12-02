@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class Navbar2 extends Component {
+export default class Navbar3 extends Component {
     render () {
       return (
           <nav className="navbar navbar-expand-lg navbar-dark indigo smooth-scroll fixed-top">
@@ -14,10 +14,10 @@ export default class Navbar2 extends Component {
                   <li className="nav-item">
                   <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                 </li>
-                <li className="nav-item active">
+                <li className="nav-item ">
                   <a className="nav-link" href="/centers">Event Centers</a>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item active">
                   <a className="nav-link" href="/events">Events</a>
                 </li>
                 <li className="nav-item">

@@ -4,7 +4,8 @@ import { userLogin } from '.././actions/UserActions';
 
 @connect((store) => {
   return  {
-    user: store.user
+    user: store.user,
+    error: store.user.status.error.message
   }
 })
 

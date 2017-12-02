@@ -78,7 +78,12 @@ router.put(
 router.get(
   '/events/:eventId',
   middleware.tokenController.confirmToken,
-  controller.eventController.getEvent
+  controller.eventController.getOneEvent
+);
+router.get(
+  '/events',
+  middleware.tokenController.confirmToken,
+  controller.eventController.userEvents
 );
 
 export default router;

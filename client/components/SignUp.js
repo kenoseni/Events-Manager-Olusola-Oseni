@@ -60,19 +60,19 @@ export default class SignUp extends Component {
                 <form method="post" role="form" >
                   <div className="form-group">
                     <label htmlFor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> First Name:</label>
-                    <input type="text" name="firstname"  onChange={this.getInput} className="form-control" id="" placeholder="please enter your first name" autoFocus />
+                    <input type="text" name="firstname"  onChange={this.getInput} className="form-control" id="" placeholder="please enter your first name" autoFocus required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> Last Name:</label>
-                    <input type="text" name="lastname"  onChange={this.getInput}  className="form-control" id="" placeholder="please enter your last name" />
+                    <input type="text" name="lastname"  onChange={this.getInput}  className="form-control" id="" placeholder="please enter your last name" required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="email" className="font-weight-bold"><i className="fa fa-envelope" aria-hidden="true"></i> Email:</label>
-                    <input type="email" name="email"  onChange={this.getInput} className="form-control" id="" />
+                    <input type="email" name="email"  onChange={this.getInput} className="form-control" id="" required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password" className="font-weight-bold"><i className="fa fa-lock" aria-hidden="true"></i> Password:</label>
-                    <input type="password" name="password" onChange={this.getInput} className="form-control" id="" />
+                    <input type="password" name="password" onChange={this.getInput} className="form-control" id="" required />
                   </div>
                   <div>            
                   <button className="btn btn-success" onClick={this.register}>Sign Up.</button>

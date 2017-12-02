@@ -21,6 +21,7 @@ export default function reducer(state = {
           ...state.status,
           fetching: true,
           fetched: false,
+          authenticated: false,
           error: false
         }
       };
@@ -28,6 +29,7 @@ export default function reducer(state = {
     case 'FETCH_USER_RESOLVED': {
       const { firstname, lastname } = action.payload;
       const newUser = { firstname, lastname };
+      const {token} = action.payload
       return {
         ...state,
         user: newUser,
@@ -35,6 +37,7 @@ export default function reducer(state = {
           ...state.status,
           fetching: false,
           fetched: true,
+          authenticated: true,
         }
       };
     }

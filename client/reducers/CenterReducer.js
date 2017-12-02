@@ -15,7 +15,7 @@ export default function reducer(state = [], action) {
       const { name, description, location, id, address, avaliability } = action.payload;
       const newCenter = { name, description, location, id, address, avaliability };
       console.log(action.payload)
-      return action.payload.center
+      return action.payload.center;
     }
     case 'ALL_CENTERS_REJECTED': {
       return {

@@ -120,7 +120,7 @@ class userController {
             }
           });
         }
-        if (req.decoded.userid === req.params.userId) {
+        if (req.decoded.userid === Number(req.params.userId)) {
           return res.status(403).json({
             data: {
               status: 'Fail',
@@ -132,14 +132,20 @@ class userController {
           .update({
             isAdmin: true,
             role: 'admin'
-          });
+          })
+          .then(() => res.status(200).json({
+            data: {
+              status: 'Success',
+              message: 'User successfully upgraded to admin'
+            }
+          }))
+          .catch(error => res.status(500).json({
+            data: {
+              status: 'Error',
+              message: error.message
+            }
+          }));
       })
-      .then(() => res.status(200).json({
-        data: {
-          status: 'Success',
-          message: 'User successfully upgraded to admin'
-        }
-      }))
       .catch(error => res.status(500).json({
         data: {
           status: 'Error',

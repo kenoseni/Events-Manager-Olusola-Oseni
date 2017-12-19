@@ -40,7 +40,7 @@ router.put(
 
 // create admin route
 router.put(
-  '/admins',
+  '/users/:userId',
   middleware.tokenController.confirmToken,
   controller.userController.createAdmin
 );

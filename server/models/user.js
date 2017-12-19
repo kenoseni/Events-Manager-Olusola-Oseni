@@ -71,6 +71,11 @@ export default (sequelize, DataTypes) => {
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    role: {
+      type: DataTypes.ENUM,
+      values: ['user', 'admin', 'superadmin'],
+      defaultValue: 'user'
     }
   }, {
     hooks: {

@@ -17,7 +17,8 @@ class tokenController {
   static createToken(user) {
     const token = jwt.sign({
       userid: user.id,
-      isadmin: user.isAdmin
+      isadmin: user.isAdmin,
+      userrole: user.role
     }, process.env.SECRET, {
       expiresIn: 48 * 60 * 60
     });

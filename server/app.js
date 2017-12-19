@@ -13,7 +13,6 @@ const app = express();
 const compiler = webpack(config);
 app.use(cors({ credentials: true, origin: true }));
 const port = process.env.PORT || 8000;
-// app.set('port', 8000);
 
 // Log requests to the console.
 app.use(volleyball);

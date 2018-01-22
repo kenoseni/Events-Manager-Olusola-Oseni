@@ -32,8 +32,10 @@ class eventController {
       .then((result) => {
         if (result) {
           return res.status(400).json({
-            status: 'Fail',
-            message: 'Date already taken,please choose another date'
+            data: {
+              status: 'Fail',
+              message: 'Date already taken,please choose another date'
+            }
           });
         }
         Event
@@ -45,15 +47,20 @@ class eventController {
             centerId: req.body.centerId,
           })
           .then(event => res.status(201).json({
-            status: 'Success',
-            message: `Event with eventId: ${event.id} was successfully created`,
+            data: {
+              status: 'Success',
+              message: 'Event was successfully created',
+              event
+            }
           }))
           .catch(error => res.status(500).json({
-            status: 'Error',
-            message: error.message
+            data: {
+              status: 'Error',
+              message: error.message
+            }
           }));
       })
-      .catch(error => res.status(500).send({ message: error.message }));
+      .catch(error => res.status(500).json({ message: error.message }));
   }
   /**
   * Delete event from the platform
@@ -66,24 +73,44 @@ class eventController {
   */
   static deleteEvent(req, res) {
     return Event
-      .find({
-        where: {
-          id: req.params.eventId,
-          userId: req.decoded.userid,
-        }
-      })
+      .findById(req.params.eventId)
       .then((event) => {
         if (!event) {
-          return res.status(400).json({ message: 'Event not found' });
+          return res.status(404).json({
+            data: {
+              status: 'Fail',
+              message: 'Event not Found'
+            }
+          });
         }
-        event.destroy();
+        if (req.decoded.userid !== event.userId) {
+          return res.status(401).json({
+            data: {
+              status: 'Fail',
+              message: 'User cannot delete this event'
+            }
+          });
+        }
+        event
+          .destroy()
+          .then(() => res.status(200).json({
+            data: {
+              status: 'Success',
+              message: 'Event has been successfully deleted'
+            }
+          }))
+          .catch(error => res.status(500).json({
+            data: {
+              status: 'Fail',
+              message: error.message
+            }
+          }));
       })
-      .then(() => res.status(200).json({
-        status: 'Success',
-        message: 'Event has been successfully deleted'
-      }))
       .catch(error => res.status(500).json({
-        message: error.message
+        data: {
+          status: 'Fail',
+          message: error.message
+        }
       }));
   }
   /**
@@ -99,10 +126,15 @@ class eventController {
     Event.findById(req.params.eventId)
       .then((event) => {
         if (!event) {
-          return res.status(400).send({ message: 'not found' });
+          return res.status(400).json({ message: 'not found' });
         }
         if (event.date === req.body.date && event.centerId === req.body.centerId) {
-          return res.status(400).json({ message: 'Another event is already slated for this center,Please choose another date' });
+          return res.status(400).json({
+            data: {
+              status: 'Fail',
+              message: 'Another event is already slated for this center,Please choose another date'
+            }
+          });
         }
         event.updateAttributes({
           name: req.body.name || event.name,
@@ -110,7 +142,13 @@ class eventController {
           time: req.body.time || event.time,
           centerId: req.body.centerId || event.centerId,
         });
-        return res.status(200).json({ message: 'Event successfully modified', event });
+        return res.status(200).json({
+          data: {
+            status: 'Success',
+            message: 'Event was successfully modified',
+            event
+          }
+        });
       })
       .catch(error => res.status(500).json({
         message: error.message
@@ -135,20 +173,26 @@ class eventController {
       })
       .then((event) => {
         if (!event) {
-          return res.status(404).send({
-            status: 'Fail',
-            message: 'No such event available'
+          return res.status(404).json({
+            data: {
+              status: 'Fail',
+              message: 'No such event available'
+            }
           });
         }
-        return res.status(200).send({
-          status: 'Success',
-          message: 'View event',
-          data: event
+        return res.status(200).json({
+          data: {
+            status: 'Success',
+            message: 'Event available',
+            event
+          }
         });
       })
-      .catch(() => res.status(400).send({
-        status: 'Fail',
-        message: 'No such event is available'
+      .catch(error => res.status(500).json({
+        data: {
+          status: 'Fail',
+          message: error.message
+        }
       }));
   }
   /**
@@ -169,12 +213,19 @@ class eventController {
       })
       .then((events) => {
         if (!events) {
-          return res.status(400).json({ message: 'Events not found' });
+          return res.status(404).json({
+            data: {
+              status: 'Fail',
+              message: 'Events not found'
+            }
+          });
         }
         res.status(200).json({
-          status: 'Success',
-          message: 'These are your events',
-          events
+          data: {
+            status: 'Success',
+            message: 'These are your events',
+            events
+          }
         });
       })
       .catch(error => res.status(500).json({

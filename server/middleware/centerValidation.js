@@ -25,36 +25,46 @@ class CenterValidation {
     // Check if name is empty
     if (!req.body.name || isEmpty(req.body.name)) {
       return res.status(400).json({
-        status: 'Fail',
-        message: 'Center name required'
+        data: {
+          status: 'Fail',
+          message: 'Center name required'
+        }
       });
     }
     // Check if description is empty
     if (!req.body.description || isEmpty(req.body.description)) {
       return res.status(400).json({
-        status: 'Fail',
-        message: 'Description field required'
+        data: {
+          status: 'Fail',
+          message: 'Description field required'
+        }
       });
     }
     // Check if location is empty
     if (!req.body.location || isEmpty(req.body.location)) {
       return res.status(400).json({
-        status: 'Fail',
-        message: 'Location required'
+        data: {
+          status: 'Fail',
+          message: 'Location required'
+        } 
       });
     }
     // Check if address is empty
     if (!req.body.address || isEmpty(req.body.address)) {
       return res.status(400).json({
-        status: 'Fail',
-        message: 'Center address required'
+        data: {
+          status: 'Fail',
+          message: 'Center address required'
+        } 
       });
     }
     // Check if capacity is empty
     if (!req.body.capacity || isEmpty(req.body.capacity)) {
       return res.status(400).json({
-        status: 'Fail',
-        message: 'Capacity required'
+        data: {
+          status: 'Fail',
+          message: 'Capacity required'
+        }
       });
     }
     return next();

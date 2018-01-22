@@ -28,26 +28,39 @@ class UserValidation {
   static signupInputs(req, res, next) {
     // Check if firstname is empty
     if (!req.body.firstname || isEmpty(req.body.firstname)) {
-      return res.status(400).send({
-        message: 'Firstname required'
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Firstname required'
+        }
+
       });
     }
     // Check if lastname is empty
     if (!req.body.lastname || isEmpty(req.body.lastname)) {
-      return res.status(400).send({
-        message: 'Lastname required'
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Lastname required'
+        }
       });
     }
     // Check if email is empty
     if (!req.body.email || isEmpty(req.body.email)) {
-      return res.status(400).send({
-        message: 'Email required'
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Email required'
+        }
       });
     }
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
-      return res.status(400).send({
-        message: 'Password required'
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Password required'
+        }
       });
     }
     return next();
@@ -67,14 +80,20 @@ class UserValidation {
   static validUserInputs(req, res, next) {
     const firstname = (req.body.firstname).toLowerCase().trim();
     if (!isAlphaNumeric(firstname)) {
-      return res.status(400).send({
-        message: 'Invalid firstname, only alphabets and numbers allowed'
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Invalid firstname, only alphabets and numbers allowed'
+        }
       });
     }
     const lastname = (req.body.lastname).toLowerCase().trim();
     if (!isAlphaNumeric(lastname)) {
-      return res.status(400).send({
-        message: 'Invalid lastname, only alphabets and numbers allowed'
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Invalid lastname, only alphabets and numbers allowed'
+        }
       });
     }
     return next();
@@ -92,25 +111,30 @@ class UserValidation {
    * @memberof UserValidation
    */
   static emailExist(req, res, next) {
-    const { email } = req.body.email;
+    // const { email } = req.body.email;
     return User
-      .find({
-        attributes: ['email'],
+      .findOne({
         where: {
-          email
+          email: req.body.email
         }
       })
       .then((user) => {
-        if (!user) next();
-        else {
-          res.status(409).send({
-            status: 'Fail',
-            message: 'Email already exist'
+        if (!user) {
+          next();
+        } else {
+          res.status(409).json({
+            data: {
+              status: 'Fail',
+              message: 'Email already exist'
+            }
           });
         }
       })
-      .catch(error => res.status(400).send({
-        message: error.message,
+      .catch(error => res.status(500).json({
+        data: {
+          status: 'Fail',
+          message: error.message,
+        }
       }));
   }
 

@@ -38,14 +38,16 @@ class tokenController {
   static confirmToken(req, res, next) {
     const token = req.headers['x-access-token'];
     if (!token) {
-      return res.status(401).send({
-        status: 'Fail',
-        message: 'Access denied, no token provided'
+      return res.status(401).json({
+        data: {
+          status: 'Fail',
+          message: 'Access denied, no token provided'
+        }
       });
     } else if (token) {
       jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) {
-          return res.status(403).send({
+          return res.status(403).json({
             message: err.message,
           });
         }

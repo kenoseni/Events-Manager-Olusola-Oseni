@@ -13,13 +13,18 @@ module.exports = {
       type: Sequelize.STRING
     },
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      unique: true
     },
     password: {
       type: Sequelize.STRING
     },
     isAdmin: {
       type: Sequelize.BOOLEAN
+    },
+    role: {
+      type: Sequelize.ENUM('user', 'admin', 'superadmin'),
+      defaultValue: 'user'
     },
     createdAt: {
       allowNull: false,

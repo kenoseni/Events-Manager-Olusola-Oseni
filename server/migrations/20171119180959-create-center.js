@@ -19,7 +19,7 @@ module.exports = {
       type: Sequelize.STRING
     },
     capacity: {
-      type: Sequelize.STRING
+      type: Sequelize.INTEGER
     },
     avaliability: {
       type: Sequelize.BOOLEAN

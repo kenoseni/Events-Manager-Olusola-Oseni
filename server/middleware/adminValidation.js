@@ -1,8 +1,10 @@
 const adminValidation = (req, res, next) => {
-  if (req.decoded.isadmin === false) {
+  if (req.decoded.isadmin === false || req.decoded.userrole === 'user') {
     return res.status(401).json({
-      status: 'Fail',
-      message: 'User unauthorized'
+      data: {
+        status: 'Fail',
+        message: 'User unauthorized'
+      }
     });
   }
   next();

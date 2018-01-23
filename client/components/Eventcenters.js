@@ -27,9 +27,12 @@ class Eventcenters extends Component {
 
   render () {
     const {centerReducer} = this.props;
-    for(let x of centerReducer){
+    /*for(let x of centerReducer){
       console.log(x)
     }
+    if (!centerReducer) {
+      return <div>Loading.......</div>
+    }*/
     return (
       <div>
         <Navbar2 />
@@ -45,7 +48,7 @@ class Eventcenters extends Component {
                     <div className="card w-40">
                      
                       <div className="view overlay hm-white-slight">
-                        <img src="components/img/img1.jpg" className="img-fluid" alt="Emerald Enclave" style={{width: + '100%', height: + '250px'}} />
+                        <img src="./components/img/img1.jpg" className="img-fluid" alt="Emerald Enclave" style={{width: + '100%', height: + '250px'}} />
                       </div>
                      
                       <div className="card-body">
@@ -80,4 +83,3 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(getCenters, dispatch
 const Eventcenter = connect(mapStateToProps, mapDispatchToProps)(Eventcenters);
 
 export default Eventcenter;
-

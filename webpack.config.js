@@ -3,7 +3,6 @@ const path = require('path');
 
 module.exports = {
   entry: [
-    'webpack-hot-middleware/client?reload=true',
     path.resolve(__dirname, './client/index.js'),
   ],
   output: {
@@ -15,7 +14,11 @@ module.exports = {
     historyApiFallback: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.evn.PORT': JSON.stringify(process.env.PORT)
+    })
   ],
   devtool: 'eval-source-map',
   module: {

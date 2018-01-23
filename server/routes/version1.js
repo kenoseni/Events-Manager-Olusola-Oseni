@@ -8,6 +8,7 @@ router.post(
   '/users',
   middleware.userValidation.signupInputs,
   middleware.userValidation.validUserInputs,
+  middleware.userValidation.emailExist,
   controller.userController.signup
 );
 
@@ -37,10 +38,17 @@ router.put(
   middleware.centerValidation.centerInputs,
   controller.centerController.modifyCenter
 );
+// Delete an Event
+router.delete(
+  '/centers/:centerId',
+  middleware.tokenController.confirmToken,
+  middleware.adminValidation,
+  controller.centerController.deleteCenter
+);
 
 // create admin route
 router.put(
-  '/admins',
+  '/users/:userId',
   middleware.tokenController.confirmToken,
   controller.userController.createAdmin
 );

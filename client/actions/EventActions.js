@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getUserEvents = () => (dispatch) => {
   axios({
     method: 'get',
-    url: 'http://localhost:8000/api/v1/events',
+    url: `http://localhost:${process.env.PORT}/api/v1/events`,
     headers: { 'x-access-token': localStorage.getItem('x-access-token') }
   })
     .then((res) => {

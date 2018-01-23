@@ -7,6 +7,9 @@ import SignUp from './components/SignUp';
 import Eventcenters from './components/Eventcenters';
 import AllEvents from './components/AllEvents';
 import store from './store';
+import './components/css/style4.css'
+import './components/css/style2.css'
+import './components/css/style3.css'
 
 const app = document.getElementById('root')
 

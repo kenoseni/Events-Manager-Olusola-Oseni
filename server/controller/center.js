@@ -26,13 +26,17 @@ class centerController {
         capacity: req.body.capacity
       })
       .then(center => res.status(201).json({
-        status: 'Success',
-        message: 'Center created successfully',
-        center
+        data: {
+          status: 'Success',
+          message: 'Center created successfully',
+          center
+        }
       }))
       .catch(error => res.status(500).json({
-        status: 'Error',
-        message: error.message
+        data: {
+          status: 'Error',
+          message: error.message
+        }
       }));
   }
   /**
@@ -49,10 +53,10 @@ class centerController {
       .findAll({
         attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
       })
-      .then(center => res.status(200).json({
+      .then(centers => res.status(200).json({
         status: 'Success',
         message: 'List of all centers',
-        center
+        centers
       }))
       .catch(error => res.status(500).json({
         status: 'Error',
@@ -80,14 +84,18 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(400).json({
-            status: 'Fail',
-            message: 'No center found'
+            data: {
+              status: 'Fail',
+              message: 'No center found'
+            }
           });
         }
         res.status(200).json({
-          status: 'Success',
-          message: 'List of one center',
-          center
+          data: {
+            status: 'Success',
+            message: 'List of one center',
+            center
+          }
         });
       })
       .catch(error => res.status(500).json({
@@ -110,14 +118,18 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(404).json({
-            status: 'Fail',
-            message: 'No center found'
+            data: {
+              status: 'Fail',
+              message: 'No center found'
+            }
           });
         }
         if (req.decoded.userid !== center.userId) {
           return res.status(401).json({
-            status: 'Fail',
-            message: 'User cannot modify this center'
+            data: {
+              status: 'Fail',
+              message: 'User cannot modify this center'
+            }
           });
         }
         center
@@ -131,20 +143,75 @@ class centerController {
           })
           .then((value) => {
             if (!value) {
-              return res.statusCode(400).json({
-                status: 'Fail',
-                message: 'Center not updated'
+              return res.status(400).json({
+                data: {
+                  status: 'Fail',
+                  message: 'Center not updated'
+                }
               });
             }
             res.status(200).json({
-              status: 'Success',
-              message: 'Center updated',
-              center
+              data: {
+                status: 'Success',
+                message: 'Center updated',
+                center
+              }
             });
           })
           .catch(error => res.status(500).json({ error: error.message }));
       })
       .catch(error => res.status(500).json({ error: error.message }));
+  }
+  /**
+  * Delete center from the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the event deleted or error message
+  * @memberof centerController
+  */
+  static deleteCenter(req, res) {
+    return db.Center
+      .findById(req.params.centerId)
+      .then((center) => {
+        if (!center) {
+          return res.status(404).json({
+            data: {
+              status: 'Fail',
+              message: 'Center not found'
+            }
+          });
+        }
+        if (req.decoded.userid !== center.userId) {
+          return res.status(401).json({
+            data: {
+              status: 'Fail',
+              message: 'User cannot delete this center'
+            }
+          });
+        }
+        center
+          .destroy()
+          .then(() => res.status(200).json({
+            data: {
+              status: 'Success',
+              message: 'Center has been successfully deleted'
+            }
+          }))
+          .catch(error => res.status(500).json({
+            data: {
+              status: 'Fail',
+              message: error.message
+            }
+          }));
+      })
+      .catch(error => res.status(500).json({
+        data: {
+          status: 'Fail',
+          message: error.message
+        }
+      }));
   }
 }
 export default centerController;

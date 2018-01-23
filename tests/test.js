@@ -11,12 +11,14 @@ const validSignupSeed = [{
     lastname: 'Oseni',
     email: 'kenoseni@gmail.com',
     password: 'thisisapassword'
-  }, {
+  },
+  {
     firstname: 'Efosa',
     lastname: 'Okpugie',
     email: 'efosaokpugie@gmail.com',
     password: 'iloveandela'
-  }, {
+  },
+  {
     firstname: 'Idris',
     lastname: 'Ibrahim',
     email: 'kenoseni@gmail.com',
@@ -34,17 +36,20 @@ const validSignupSeed = [{
       lastname: 'Smith',
       email: 'paulsmith@gmail.com',
       password: 'thisisapassword',
-    }, {
+    },
+    {
       firstname: 'Paul',
       lastname: '   ',
       email: 'paulsmith@gmail.com',
       password: 'thisisapassword',
-    }, {
+    },
+    {
       firstname: 'Paul',
       lastname: 'Smith',
       email: 'paulsmith@gmail.com',
       password: '   '
-    }, {
+    },
+    {
       firstname: 'Paul',
       lastname: 'Smith',
       email: '  ',

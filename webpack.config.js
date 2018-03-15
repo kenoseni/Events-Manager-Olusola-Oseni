@@ -3,20 +3,24 @@ const path = require('path');
 
 module.exports = {
   entry: [
+    'webpack-hot-middleware/client?reload=true',
     path.resolve(__dirname, './client/index.js'),
   ],
   output: {
     path: path.resolve(__dirname, '/dist'),
-    filename: './client/bundle.js'
+    publicPath: '/',
+    filename: 'bundle.js'
   },
   devServer: {
+    hot: true,
     contentBase: path.resolve(__dirname, './client/'),
     historyApiFallback: true
   },
   plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.NODE_ENV': JSON.stringify('development'),
       'process.evn.PORT': JSON.stringify(process.env.PORT)
     })
   ],
@@ -25,6 +29,7 @@ module.exports = {
     loaders: [
       {
         test: /\.(js|jsx)$/,
+        include: path.join(__dirname, './client'),
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {

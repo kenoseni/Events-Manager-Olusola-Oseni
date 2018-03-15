@@ -21,6 +21,10 @@
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "unseed": "node_modules/.bin/sequelize db:seed:undo:all"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenoseni/Events-Manager-Olusola-Oseni.git"
+  },
   "keywords": [
     "API"
   ],

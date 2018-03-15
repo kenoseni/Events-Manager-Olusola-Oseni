@@ -33,13 +33,23 @@ export default (sequelize, DataTypes) => {
         },
       }
     },
-    address: {
+    price: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
           args: true,
-          msg: 'Please provide the address for this center'
+          msg: 'Please provide the price for this center'
+        },
+      }
+    },
+    facilities: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Please provide the facilities for this center'
         },
       }
     },

@@ -27,7 +27,7 @@ class CenterValidation {
       return res.status(400).json({
         data: {
           status: 'Fail',
-          message: 'Center name required'
+          message: 'Center name is required'
         }
       });
     }
@@ -45,17 +45,26 @@ class CenterValidation {
       return res.status(400).json({
         data: {
           status: 'Fail',
-          message: 'Location required'
+          message: 'Center location is required'
         } 
       });
     }
-    // Check if address is empty
-    if (!req.body.address || isEmpty(req.body.address)) {
+    // Check if price is empty
+    if (!req.body.price || isEmpty(req.body.price)) {
       return res.status(400).json({
         data: {
           status: 'Fail',
-          message: 'Center address required'
+          message: 'Center price is required'
         } 
+      });
+    }
+    // Check if facilities is empty
+    if (!req.body.facilities || isEmpty(req.body.facilities)) {
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Center facilities is required'
+        }
       });
     }
     // Check if capacity is empty
@@ -63,7 +72,7 @@ class CenterValidation {
       return res.status(400).json({
         data: {
           status: 'Fail',
-          message: 'Capacity required'
+          message: 'Center capacity is required'
         }
       });
     }

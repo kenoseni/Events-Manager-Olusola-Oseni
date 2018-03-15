@@ -441,7 +441,8 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Center name is required');
+              expect(res.body.data.message).to
+                .equal('Center name is required');
               done();
             });
         });
@@ -472,7 +473,8 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Center location is required');
+              expect(res.body.data.message).to
+                .equal('Center location is required');
               done();
             });
         });
@@ -487,7 +489,8 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Center price is required');
+              expect(res.body.data.message).to
+                .equal('Center price is required');
               done();
             });
         });
@@ -502,7 +505,8 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Center facilities is required');
+              expect(res.body.data.message).to
+                .equal('Center facilities is required');
               done();
             });
         });
@@ -517,7 +521,8 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Center capacity is required');
+              expect(res.body.data.message).to
+                .equal('Center capacity is required');
               done();
             });
         });

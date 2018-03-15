@@ -103,22 +103,25 @@ const validSignupSeed = [{
     {
       name: 'Baltic Center',
       description: 'A lovely place to party',
-      location: 'Lagos State',
-      address: '5, Alapere road Ketu',
+      location: '5, Alapere road Ketu Lagos State',
+      price: '200',
+      facilities: 'Swimming pool, generator',
       capacity: 2000
     },
     {
       name: 'Crematoria',
       description: 'A lovely experience',
-      location: 'Abuja',
-      address: '14, NNPC road Kruminmashi',
+      location: '14, NNPC road Kruminmashi Abuja',
+      price: '2000',
+      facilities: 'Swimming pool, generator',
       capacity: 1000
     },
     {
       name: 'Double tree',
       description: 'Experience the feeling of euphoria',
-      location: 'Ogun State',
-      address: '12, Sabo road',
+      location: '12, Sabo road Ogun State',
+      price: '8000',
+      facilities: 'Swimming pool, generator',
       capacity: 8000
     }
   ],
@@ -126,36 +129,49 @@ const validSignupSeed = [{
     {
       name: '    ',
       description: 'A lovely place to party',
-      location: 'Lagos State',
-      address: '5, Alapere road Ketu',
+      location: '5, Alapere road Ketu Lagos State',
+      price: '200',
+      facilities: 'Swimming pool, generator',
       capacity: 2000
     },
     {
       name: 'Crematoria',
       description: '   ',
-      location: 'Abuja',
-      address: '14, NNPC road Kruminmashi',
+      location: '14, NNPC road Kruminmashi Abuja',
+      price: '2000',
+      facilities: 'Swimming pool, generator',
       capacity: 1000
     },
     {
       name: 'Double tree',
       description: 'Experience the feeling of euphoria',
       location: '    ',
-      address: '12, Sabo road',
+      price: '8000',
+      facilities: 'Swimming pool, generator',
       capacity: 8000
     },
     {
       name: 'The Gooche',
       description: 'Experience the feeling of euphoria',
-      location: 'Ogun State',
-      address: '   ',
+      location: '4, association road Ogun State',
+      price: ' ',
+      facilities: 'Swimming pool, generator',
       capacity: 8000
     },
     {
       name: 'The Gooche',
       description: 'Experience the feeling of euphoria',
-      location: 'Ogun State',
-      address: '4, association road',
+      location: '4, association road Ogun State',
+      price: '4000',
+      facilities: '  ',
+      capacity: 8000
+    },
+    {
+      name: 'The Gooche',
+      description: 'Experience the feeling of euphoria',
+      location: '4, association road Ogun State',
+      price: '4000',
+      facilities: 'Swimming pool, generator',
       capacity: null
     }
   ],
@@ -425,7 +441,7 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Center name required');
+              expect(res.body.data.message).to.equal('Center name is required');
               done();
             });
         });
@@ -456,11 +472,11 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Location required');
+              expect(res.body.data.message).to.equal('Center location is required');
               done();
             });
         });
-        it('should return an error when no address is provided', (done) => {
+        it('should return an error when no price is provided', (done) => {
           request
             .post('/api/v1/centers')
             .set('Connection', 'keep alive')
@@ -471,11 +487,11 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Center address required');
+              expect(res.body.data.message).to.equal('Center price is required');
               done();
             });
         });
-        it('should return an error when no capacity is provided', (done) => {
+        it('should return an error when no facilities are provided', (done) => {
           request
             .post('/api/v1/centers')
             .set('Connection', 'keep alive')
@@ -486,7 +502,22 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('Capacity required');
+              expect(res.body.data.message).to.equal('Center facilities is required');
+              done();
+            });
+        });
+        it('should return an error when no capacity is provided', (done) => {
+          request
+            .post('/api/v1/centers')
+            .set('Connection', 'keep alive')
+            .set('x-access-token', adminToken[0])
+            .set('Content-Type', 'application/json')
+            .type('form')
+            .send(invalidCenterSeed[5])
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body.data.status).to.equal('Fail');
+              expect(res.body.data.message).to.equal('Center capacity is required');
               done();
             });
         });

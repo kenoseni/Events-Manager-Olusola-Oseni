@@ -15,8 +15,11 @@ module.exports = {
     location: {
       type: Sequelize.STRING
     },
-    address: {
+    price: {
       type: Sequelize.STRING
+    },
+    facilities: {
+      type: Sequelize.TEXT
     },
     capacity: {
       type: Sequelize.INTEGER

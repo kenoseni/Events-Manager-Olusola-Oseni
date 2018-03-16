@@ -1,52 +1,50 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import Navbar from './Navbar';
-import LandingPage from './LandingPage';
-import SignIn from './SignIn'
-import { createUser } from '.././actions/UserActions';
+import PropTypes from 'prop-types';
 
-@connect((store) => {
-  return  {
-    user: store.user
-  }
-})
-
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor() {
     super();
     this.state = {
       firstname: '' ,
       lastname: '' ,
       email: '' ,
-      password: ''
+      password: '',
+      error: {}
     }
+    this.getInput = this.getInput.bind(this);
+    this.register = this.register.bind(this);
   }
 
-  getInput = (e) => {
+  getInput (e) {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
-  
 
-  register = (e) => {
+  register (e) {
     e.preventDefault()
+    this.setState({error: {}})
     const {
       firstname, lastname, email, password,
-    } = this.state;
-    this.props.dispatch(createUser({
+    } = this.state; 
+    this.props.createUser({
       firstname,
       lastname,
       email,
-      password,
-    }));
+      password
+    });
+  }
+  componentWillReceiveProps(nextProps){
+    if (nextProps.user.error) {
+      this.setState({
+        error: nextProps.user.error
+      })
+    }
   }
   render () {
+    const {error, firstname, lastname, email, password} = this.state
     return (
       <div>
-        <Navbar />
-        <LandingPage />
-        <SignIn />
         {/*Sign Up Modal*/}
         <div className="modal fade" id="signUp" role="dialog">
           <div className="modal-dialog modal-md">      
@@ -59,20 +57,21 @@ export default class SignUp extends Component {
               <div className="modal-body">       
                 <form method="post" role="form" >
                   <div className="form-group">
+                    {error.message && <div className="alert alert-danger">{error.message}</div>}
                     <label htmlFor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> First Name:</label>
-                    <input type="text" name="firstname"  onChange={this.getInput} className="form-control" id="" placeholder="please enter your first name" autoFocus required />
+                    <input type="text" name="firstname"  onChange={this.getInput} className="form-control" id="fname" placeholder="please enter your first name" autoFocus required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="name" className="font-weight-bold"><i className="fa fa-user" aria-hidden="true"></i> Last Name:</label>
-                    <input type="text" name="lastname"  onChange={this.getInput}  className="form-control" id="" placeholder="please enter your last name" required />
+                    <input type="text" name="lastname"  onChange={this.getInput}  className="form-control" id="lname" placeholder="please enter your last name" required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="email" className="font-weight-bold"><i className="fa fa-envelope" aria-hidden="true"></i> Email:</label>
-                    <input type="email" name="email"  onChange={this.getInput} className="form-control" id="" required />
+                    <input type="email" name="email"  onChange={this.getInput} className="form-control" id="mail" required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password" className="font-weight-bold"><i className="fa fa-lock" aria-hidden="true"></i> Password:</label>
-                    <input type="password" name="password" onChange={this.getInput} className="form-control" id="" required />
+                    <input type="password" name="password" onChange={this.getInput} className="form-control" id="pword" required />
                   </div>
                   <div>            
                   <button className="btn btn-success" onClick={this.register}>Sign Up.</button>
@@ -86,3 +85,8 @@ export default class SignUp extends Component {
     );
   }
 }
+
+SignUp.propTypes = {
+  createUser: PropTypes.func.isRequired,
+}
+export default SignUp;

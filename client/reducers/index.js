@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 
-import user from './UserReducer';
-import center from './CenterReducer';
-import event from './EventReducer';
+import userReducer from './UserReducer';
+
+const { user } = userReducer;
 
 export default combineReducers({
   user,
-  center,
-  event
 });

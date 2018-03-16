@@ -1,93 +1,73 @@
-export default function reducer(state = {
-  user: {
-    firstname: '' ,
-    lastname: '' ,
-    email: '' ,
-    password:'' ,
-    id: '' ,
-    token: ''
-  },
-  status: {
-    fetching: false,
-    fetched: false,
-    error: false,
-  }
-}, action) {
-  switch (action.type) {
-    case 'FETCH_USER': {
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          fetching: true,
-          fetched: false,
-          authenticated: false,
-          error: false
-        }
-      };
-    }
-    case 'FETCH_USER_RESOLVED': {
-      const { firstname, lastname } = action.payload;
-      const newUser = { firstname, lastname };
-      const {token} = action.payload
-      return {
-        ...state,
-        user: newUser,
-        status: {
-          ...state.status,
-          fetching: false,
-          fetched: true,
-          authenticated: true,
-        }
-      };
-    }
-    case 'FETCH_USER_REJECTED': {
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          fetching: false,
-          error: action.payload
-        }
-      };
-    }
-    case 'LOGIN_USER': {
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          fetching: true,
-          fetched: false,
-          error: false
-        }
-      };
-    }
-    case 'LOGIN_RESOLVED': {
-      const { message } = action.payload;
-      const token = action.payload.token;
-      const newLogin = { message, token };
-      return {
-        ...state,
-        user: newLogin,
-        status: {
-          ...state.status,
-          fetching: false,
-          fetched: true,
-        }
-      };
-    }
-    case 'LOGIN_REJECTED': {
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          fetching: false,
-          error: action.payload
-        }
-      };
-    }
-    default: {
-      return state;
+/**
+* Class representing reducer
+*
+* @class userReducer
+*/
+class userReducer {
+  /**
+  * Register a user on the platform
+  *
+  * @static
+  * @param {object} state - The initial state of the store
+  * @param {object} action - The action to be dispatched
+  * @return {object} new state of the store
+  * @memberof userReducer
+  */
+  static user(state = {}, action) {
+    // console.log('The state will change');
+    switch (action.type) {
+      case 'SIGNUP_USER': {
+        return {
+          ...state
+        };
+      }
+      case 'SIGNUP_USER_RESOLVED': {
+        const {
+          firstname, lastname, role, token, status, message
+        } = action.payload.data;
+        return {
+          ...state,
+          firstname,
+          lastname,
+          role,
+          token,
+          status,
+          message
+        };
+      }
+      case 'SIGNUP_USER_REJECTED': {
+        const error = action.payload.data;
+        return {
+          ...state,
+          error
+        };
+      }
+      case 'LOGIN_USER': {
+        return {
+          ...state
+        };
+      }
+      case 'LOGIN_RESOLVED': {
+        const { status, message, token } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message,
+          token
+        };
+      }
+      case 'LOGIN_REJECTED': {
+        const { status, message } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
+      default: {
+        return state;
+      }
     }
   }
 }
+export default userReducer;

@@ -3,6 +3,7 @@ import volleyball from 'volleyball';
 import bodyParser from 'body-parser';
 import path from 'path';
 import cors from 'cors';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
 import config from '.././webpack.config';
 
@@ -27,6 +28,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: false,
   publicPath: config.output.publicPath
 }));
+
+app.use(webpackHotMiddleware(compiler));
 
 route(app);
 // Set the app entry port

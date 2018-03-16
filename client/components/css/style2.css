@@ -1,18 +1,20 @@
-
+* {
+  border: 0px;
+}
 html {
-  height: 670px; 
+  height: 100%; 
 }
 
 body {
-  height: 670px; 
+  height: 100%; 
 }
 
 header {
-  height: 670px; 
+  height: 100%; 
 }
 
 #intro {
-  height: 670px;
+  height: 579px;
   background: url("../img1.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -21,6 +23,80 @@ header {
 
 #centerlogin {
   margin-top: 7%; 
+}
+
+#event {
+  margin-top: 10%; }
+
+#info {
+  margin-top: 5%; }
+
+.fa-trash-o {
+  color: #CC0000; }
+
+.modal-dialog {
+  margin-top: 5%; }
+
+button:hover {
+  opacity: 0.5; }
+
+.float {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #0C9;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999; }
+
+.my-float {
+  margin-top: 12px; }
+
+@media screen and (max-width: 768px) {
+  #event {
+    margin-top: 10%; } }
+
+
+#centers {
+  margin-top: 5%;}
+  img:hover {
+  opacity: 0.8;}
+@media screen and (max-width: 768px) {
+  #centers {
+  margin-top: 5%;}
+  }
+
+  #info{
+    margin-top: 10%
+}
+#space, #space2 {
+    margin-top: 5%
+}
+li {
+  display: inline-block;
+}
+.table-wrapper-2 {
+    display: block;
+    max-height: 300px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+@media screen and (max-width: 768px) {
+    #info, #paradise, #etable {padding-top: 10%;}
+}
+.input-group-addon{
+  height: 45px;
+}
+.form-control {
+  height: 10px;
+}
+button {
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 /*# sourceMappingURL=style2.css.map */

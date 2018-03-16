@@ -157,7 +157,6 @@ class UserValidation {
           status: 'Fail',
           message: 'Password required'
         }
-        
       });
     }
     return next();

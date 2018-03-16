@@ -153,8 +153,11 @@ class UserValidation {
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
       return res.status(401).json({
-        status: 'Fail',
-        message: 'Password required'
+        data: {
+          status: 'Fail',
+          message: 'Password required'
+        }
+        
       });
     }
     return next();
@@ -174,8 +177,10 @@ class UserValidation {
     // Check if password is empty
     if (!req.body.email || isEmpty(req.body.email)) {
       return res.status(401).json({
-        status: 'Fail',
-        message: 'Email required'
+        data: {
+          status: 'Fail',
+          message: 'Email required'
+        }
       });
     }
     return next();
@@ -197,9 +202,11 @@ class UserValidation {
       .findById(req.params.userId)
       .then((user) => {
         if (!user) {
-          return res.status(404).send({
-            status: 'Fail',
-            message: 'User does not exist'
+          return res.status(404).json({
+            data: {
+              status: 'Fail',
+              message: 'User does not exist'
+            }
           });
         }
         next();

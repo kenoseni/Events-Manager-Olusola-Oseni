@@ -47,8 +47,11 @@ class tokenController {
     } else if (token) {
       jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) {
-          return res.status(403).json({
-            message: err.message,
+          return res.status(401).json({
+            data: {
+              status: 'Fail',
+              message: 'Failed to authenticate'
+            }
           });
         }
         req.decoded = decoded;

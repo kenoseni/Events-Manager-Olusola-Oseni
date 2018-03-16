@@ -12,16 +12,16 @@ export default class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                  <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+                  <button className="nav-link">{this.props.home}<span className="sr-only">(current)</span></button>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/centers">Event Centers</a>
+                  <button className="nav-link">{this.props.centers}</button>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/events">Events</a>
+                  <button className="nav-link" >{this.props.events}</button>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="">About Us</a>
+                    <button className="nav-link">About Us</button>
                   </li>
               </ul>
               <form className="form-inline">
@@ -30,15 +30,15 @@ export default class Navbar extends Component {
               </form>
               <ul className="nav navbar-nav">
                 <li className="nav-item">
-                  <a href="#" className="nav-link" data-toggle="modal" data-target="#logIn"><h5>Log In</h5></a>
+                  <button className="nav-link" data-toggle="modal" data-target="#logIn">{this.props.login}</button>
                 </li>
                 <li className="nav-item">
-                  <a href="myevents.html" className="nav-link" data-toggle="modal" data-target="#signUp"><h5>Sign Up</h5></a>
+                  <button className="nav-link" data-toggle="modal" data-target="#signUp">{this.props.signup}</button>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
     );
-    }
+  }
 }

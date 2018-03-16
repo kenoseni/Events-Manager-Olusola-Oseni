@@ -321,8 +321,8 @@ describe('Event Manager', () => {
           .send(invalidLoginSeed[0])
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
-            expect(res.body.status).to.equal('Fail');
-            expect(res.body.message).to.equal('Email required');
+            expect(res.body.data.status).to.equal('Fail');
+            expect(res.body.data.message).to.equal('Email required');
             done();
           });
       });
@@ -335,8 +335,8 @@ describe('Event Manager', () => {
           .send(invalidLoginSeed[1])
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
-            expect(res.body.status).to.equal('Fail');
-            expect(res.body.message).to.equal('Password required');
+            expect(res.body.data.status).to.equal('Fail');
+            expect(res.body.data.message).to.equal('Password required');
             done();
           });
       });

@@ -13,7 +13,7 @@ module.exports = {
   },
   devServer: {
     hot: true,
-    contentBase: path.resolve(__dirname, './client/'),
+    contentBase: path.resolve(__dirname, './client'),
     historyApiFallback: true
   },
   plugins: [

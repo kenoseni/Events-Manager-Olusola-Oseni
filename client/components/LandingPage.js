@@ -6,10 +6,11 @@ import * as userActions from '../actions/UserActions';
 import user from '../reducers'
 import Navbar from './Navbar';
 import SignUp from './SignUp'
+import SignIn from './SignIn'
 
 class LandingPage extends Component {
   render () {
-    const {createUser} = this.props
+    const {createUser, userLogin} = this.props
     return (
       <div>
       <Navbar home='Home' centers='Centers' events='Events' login='Log In' signup='Sign Up' />
@@ -28,6 +29,7 @@ class LandingPage extends Component {
           </div>
         </div>
         <SignUp  createUser={createUser} {...this.props}/>
+        <SignIn userLogin={userLogin} {...this.props} />
       </div>
     );
   }

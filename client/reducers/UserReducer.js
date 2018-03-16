@@ -57,11 +57,10 @@ class userReducer {
         };
       }
       case 'LOGIN_REJECTED': {
-        const { status, message } = action.payload.data;
+        const error = action.payload.data;
         return {
           ...state,
-          status,
-          message
+          error
         };
       }
       default: {

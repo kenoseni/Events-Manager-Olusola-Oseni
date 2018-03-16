@@ -2,39 +2,45 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { userLogin } from '.././actions/UserActions';
 
-@connect((store) => {
-  return  {
-    user: store.user,
-    error: store.user.status.error.message
-  }
-})
-
-export default class SignIn extends Component {
+class SignIn extends Component {
   constructor() {
     super();
     this.state = {
       email: '' ,
-      password: ''
+      password: '',
+      error: {}
     }
+    this.getLoginInput = this.getLoginInput.bind(this);
+    this.loginInput = this.loginInput.bind(this);
   }
 
-  getLoginInput = (e) => {
+  getLoginInput (e) {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
   
-  loginInput = (e) => {
+  loginInput (e) {
     e.preventDefault()
+    this.setState({error: {}})
     const {
       email, password
     } = this.state;
-    this.props.dispatch(userLogin({
+    this.props.userLogin({
       email,
       password,
-    }));
+    });
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.user.error) {
+      this.setState({
+        error: nextProps.user.error
+      })
+    }
   }
   render () {
+    const {error, email, password} = this.state
     return (
       <div>
         {/*Sign in Modal*/}
@@ -49,19 +55,20 @@ export default class SignIn extends Component {
               <div className="modal-body">            
                 <form  method="POST" role="form">         
                   <div className="form-group"> 
+                    {error.message && <div className="alert alert-danger">{error.message}</div>}
                     <label className="control-label font-weight-bold" htmlFor="email"><i className="fa fa-envelope" aria-hidden="true"></i> Email: </label>
-                    <input type="email" name='email' onChange={this.getLoginInput} className="form-control" id="" placeholder="username@domain.com" autoFocus />     
+                    <input type="email" name='email' onChange={this.getLoginInput} className="form-control" id="email" placeholder="username@domain.com" autoFocus />     
                   </div>
                   <div className="form-group">
                     <label className="control-label font-weight-bold" htmlFor="password"><i className="fa fa-lock" aria-hidden="true"></i> Password: </label>
-                    <input type="password" name='password' onChange={this.getLoginInput} className="form-control" id="" />
+                    <input type="password" name='password' onChange={this.getLoginInput} className="form-control" id="password" />
                   </div>                 
                   <button className="btn btn-success" onClick={this.loginInput}>Log In</button>
                 </form>                      
               </div> 
               <div className="modal-footer">
-                <h6 id="join">Not a member?<p> <a href="#" data-toggle="modal" data-target="#signUp" data-dismiss="modal">Sign Up</a></p></h6> 
-                <h6> <p> Forgot <a href="#" data-toggle="modal" data-target="">Password?</a> </p> </h6> 
+                <span id="join">Not a member? <a data-toggle="modal" data-target="#signUp" data-dismiss="modal">Sign Up</a></span> 
+                <span>Forgot <a data-toggle="modal" data-target="">Password?</a></span>
               </div>    
             </div>
           </div>               
@@ -71,3 +78,4 @@ export default class SignIn extends Component {
   }
 }
 
+export default SignIn;

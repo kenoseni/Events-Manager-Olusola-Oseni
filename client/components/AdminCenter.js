@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
-import DeleteModal from './DeleteModal'
+import {Link} from 'react-router-dom';
+import DeleteModal from './DeleteModal';
+import ModifyCenter from './ModifyCenter'
 
 
 class AdminCenter extends Component {
@@ -27,13 +28,18 @@ class AdminCenter extends Component {
             <p className="card-text font-weight-bold">
               Availability: 
               {(center.avaliability === true) ? 
-                'Center Available': 
-                'Currently not Available'
+                ' Center Available': 
+                ' Currently not Available'
               } 
             </p>                                            
           </div>
           <div className="card-footer bg-transparent">
             <ul className="nav">
+              <li>
+                <button data-toggle="modal" data-target={`#${center.id}`}>
+                  <i className="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i>
+                </button>
+              </li>
               <li>
                 <button data-toggle="modal" data-target={`#${i}`}>
                   <i className="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i>
@@ -42,6 +48,7 @@ class AdminCenter extends Component {
             </ul>
           </div>
         </div>
+        <ModifyCenter title='Modify Center' i={i} center={center} {...this.props} />
         <DeleteModal 
           title={`Are you sure you want to delete ${center.name} center?`} 
           i={i} 

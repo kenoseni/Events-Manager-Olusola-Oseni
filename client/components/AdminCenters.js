@@ -20,12 +20,12 @@ class AdminCenters extends Component {
   
   render () {
     const { centers } = this.props.eventCenters;
-    const { addCenter, deleteCenter } = this.props;
+    const { addCenter, deleteCenter, modifyCenter } = this.props;
     
     if (this.props.isAdmin) {
       return (
         <div>
-          <AdminCenterList centers={centers} deleteCenter={deleteCenter} {...this.props}  />
+          <AdminCenterList centers={centers} deleteCenter={deleteCenter} modifyCenter={modifyCenter} {...this.props}  />
           <AddCenterModalButton />
           <AddCenter  title='Add Center' addCenter={addCenter} {...this.props} />
         </div>
@@ -40,6 +40,7 @@ class AdminCenters extends Component {
 AdminCenters.propTypes = {
   addCenter: PropTypes.func.isRequired,
   deleteCenter: PropTypes.func.isRequired,
+  modifyCenter: PropTypes.func.isRequired,
   eventCenters: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired

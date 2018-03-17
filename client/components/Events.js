@@ -22,11 +22,11 @@ class Events extends Component {
 
   render() {
     const { events } = this.props.userEvents;
-    const { addEvent } = this.props;
+    const { addEvent, deleteEvent } = this.props;
     
     return (
       <div>
-        <EventList  events={events} {...this.props}/>
+        <EventList events={events} deleteEvent={deleteEvent} {...this.props}/>
         <AddEventModalButton />
         <AddEvent title={'ADD EVENT'} addEvent={addEvent} {...this.props} />
       </div>
@@ -35,6 +35,7 @@ class Events extends Component {
 }
 Events.propTypes = {
   addEvent: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired,
   eventCenters: PropTypes.object.isRequired,
   userEvents: PropTypes.object.isRequired,
 }

@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 class DeleteModal extends Component {
   constructor(props) {
     super(props);
-
+    this.handleDeleteEvent = this.handleDeleteEvent.bind(this);
     this.handleDeleteCenter = this.handleDeleteCenter.bind(this);
+  }
+  handleDeleteEvent() {
+    const {i, id} = this.props
+    this.props.deleteEvent(id)
   } 
   handleDeleteCenter() {
     const {i, center} = this.props
@@ -26,7 +30,7 @@ class DeleteModal extends Component {
                 </div>
                 <div className="modal-body">
                   {/*<!--Warning message-->*/}
-                  <button className="btn btn-danger" onClick={this.handleDeleteCenter} data-dismiss="modal">DELETE</button>
+                  <button className="btn btn-danger" onClick={(this.props.event)? this.handleDeleteEvent: this.handleDeleteCenter} data-dismiss="modal">DELETE</button>
                 </div>
               </div>
             </div>
@@ -40,6 +44,7 @@ DeleteModal.propTypes = {
   i: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   deleteCenter: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired,
 }
 
 export default DeleteModal;

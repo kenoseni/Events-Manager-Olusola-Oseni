@@ -44,7 +44,30 @@ const addEvent = eventInfo => (dispatch) => {
     });
 };
 
+const deleteEvent = id => (dispatch) => {
+  dispatch({ type: 'DELETE_EVENT' });
+  axios({
+    method: 'delete',
+    url: `/api/v1/events/${id}`,
+    headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+  })
+    .then((res) => {
+      dispatch({
+        type: 'DELETE_EVENT_RESOLVED',
+        payload: res.data,
+        id
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'DELETE_EVENT_REJECTED',
+        payload: err.response.data.data
+      });
+    });
+};
+
 export {
   allUserEvents,
-  addEvent
+  addEvent,
+  deleteEvent
 };

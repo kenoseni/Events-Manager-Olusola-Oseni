@@ -14,7 +14,7 @@ class EventList extends Component {
         <Navbar3 />
         {(events.length === 0) ? 
         <h1 style={{marginTop:'150px', paddingLeft: '300px'}}>No Events Created, Add an Event</h1> :
-        events.map((event, i) => <Event {...this.props} key={event.id} i={i} event={event} />)
+        events.map((event, i) => <Event {...this.props} key={event.id} i={i * -1} event={event} />)
         }
       </div>
     )

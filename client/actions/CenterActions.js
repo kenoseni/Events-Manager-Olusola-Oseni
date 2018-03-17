@@ -57,8 +57,32 @@ const deleteCenter = id => (dispatch) => {
       });
     });
 };
+
+const modifyCenter = (centerInfo, id) => (dispatch) => {
+  dispatch({ type: 'MODIFY_CENTER' });
+  return axios({
+    method: 'put',
+    url: `/api/v1/centers/${id}`,
+    data: centerInfo,
+    headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+  })
+    .then((res) => {
+      dispatch({
+        type: 'MODIFY_CENTER_RESOLVED',
+        payload: res.data,
+        id
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'MODIFY_CENTER_REJECTED',
+        payload: err.response.data.data
+      });
+    });
+};
 export {
   getAllCenters,
   addCenter,
-  deleteCenter
+  deleteCenter,
+  modifyCenter
 };

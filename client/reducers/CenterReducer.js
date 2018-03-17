@@ -83,6 +83,34 @@ class centerReducer {
           message
         };
       }
+      case 'DELETE_CENTER': {
+        return {
+          ...state
+        };
+      }
+      case 'DELETE_CENTER_RESOLVED': {
+        const {
+          status, message
+        } = action.payload.data;
+        return {
+          ...state,
+          centers: [
+            ...state.centers.filter(center => center.id !== action.id)
+          ],
+          status,
+          message,
+        };
+      }
+      case 'DELETE_CENTER_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
       default: {
         return state;
       }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
+import DeleteModal from './DeleteModal'
 
 
 class AdminCenter extends Component {
@@ -31,7 +32,22 @@ class AdminCenter extends Component {
               } 
             </p>                                            
           </div>
-        </div> 
+          <div className="card-footer bg-transparent">
+            <ul className="nav">
+              <li>
+                <button data-toggle="modal" data-target={`#${i}`}>
+                  <i className="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <DeleteModal 
+          title={`Are you sure you want to delete ${center.name} center?`} 
+          i={i} 
+          center={center} 
+          {...this.props} 
+        /> 
       </div>
     )
   }

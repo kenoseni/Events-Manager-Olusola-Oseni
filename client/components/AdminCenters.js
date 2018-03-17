@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import * as centerActions  from '../actions/CenterActions'
 import { eventCenters } from '../reducers';
 import AdminCenterList from './AdminCenterList';
+import AddCenterModalButton from './AddCenterModalButton'
+import AddCenter from './AddCenter';
 
 class AdminCenters extends Component {
   constructor(props) {
@@ -18,11 +20,14 @@ class AdminCenters extends Component {
   
   render () {
     const { centers } = this.props.eventCenters;
+    const { addCenter } = this.props;
     
     if (this.props.isAdmin) {
       return (
         <div>
           <AdminCenterList centers={centers} {...this.props}  />
+          <AddCenterModalButton />
+          <AddCenter  title='Add Center' addCenter={addCenter} {...this.props} />
         </div>
       )
     }else {
@@ -33,6 +38,7 @@ class AdminCenters extends Component {
   }
 }
 AdminCenters.propTypes = {
+  addCenter: PropTypes.func.isRequired,
   eventCenters: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired

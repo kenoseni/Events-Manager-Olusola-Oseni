@@ -154,6 +154,32 @@ class centerReducer {
           message
         };
       }
+      case 'GET_CENTERDETAILS': {
+        return {
+          ...state
+        };
+      }
+      case 'GET_CENTERDETAILS_RESOLVED': {
+        const {
+          status, message, center
+        } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message,
+          center
+        };
+      }
+      case 'GET_CENTERDETAILS_REJECTED': {
+        const {
+          status, message
+        } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
       default: {
         return state;
       }

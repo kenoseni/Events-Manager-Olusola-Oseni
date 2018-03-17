@@ -80,9 +80,32 @@ const modifyCenter = (centerInfo, id) => (dispatch) => {
       });
     });
 };
+
+const getOneCenter = id => (dispatch) => {
+  dispatch({ type: 'GET_CENTERDETAILS' });
+  return axios({
+    method: 'get',
+    url: `/api/v1/centers/${id}`,
+    headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+  })
+    .then((res) => {
+      dispatch({
+        type: 'GET_CENTERDETAILS_RESOLVED',
+        payload: res.data,
+        id
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'GET_CENTERDETAILS_REJECTED',
+        payload: err.response.data.data
+      });
+    });
+};
 export {
   getAllCenters,
   addCenter,
   deleteCenter,
-  modifyCenter
+  modifyCenter,
+  getOneCenter
 };

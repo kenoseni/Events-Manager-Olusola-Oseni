@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history';
 
 import LandingPage from './components/LandingPage';
 import AdminCenters from './components/AdminCenters';
+import AdminCenterDetails from './components/AdminCenterDetails';
 
 
 
@@ -14,6 +15,7 @@ export const Routes = () => {
     <Switch>
       <Route exact path='/' component={LandingPage}/>
       <Route exact path='/centers' component={AdminCenters}/>
+      <Route exact path='/centers/:id' component={AdminCenterDetails} />
     </Switch>
   )
 }

@@ -78,6 +78,34 @@ class eventReducer {
           message
         };
       }
+      case 'DELETE_EVENT': {
+        return {
+          ...state
+        };
+      }
+      case 'DELETE_EVENT_RESOLVED': {
+        const {
+          status, message
+        } = action.payload.data;
+        return {
+          ...state,
+          events: [
+            ...state.events.filter(event => event.id !== action.id)
+          ],
+          status,
+          message,
+        };
+      }
+      case 'DELETE_EVENT_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
       default: {
         return state;
       }

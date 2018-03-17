@@ -68,7 +68,7 @@ class CenterValidation {
       });
     }
     // Check if capacity is empty
-    if (!req.body.capacity || isEmpty(req.body.capacity)) {
+    if (!req.body.capacity) {
       return res.status(400).json({
         data: {
           status: 'Fail',

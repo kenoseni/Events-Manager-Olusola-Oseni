@@ -8,6 +8,8 @@ import * as userActions  from '../actions/UserActions';
 import { userEvents } from '../reducers/';
 import { eventCenters } from '../reducers/';
 import EventList from './EventList';
+import AddEventModalButton from './AddEventModalButton';
+import AddEvent from './AddEvent'
 
 class Events extends Component {
   constructor(props) {
@@ -20,15 +22,19 @@ class Events extends Component {
 
   render() {
     const { events } = this.props.userEvents;
+    const { addEvent } = this.props;
     
     return (
       <div>
         <EventList  events={events} {...this.props}/>
+        <AddEventModalButton />
+        <AddEvent title={'ADD EVENT'} addEvent={addEvent} {...this.props} />
       </div>
     )
   }
 }
 Events.propTypes = {
+  addEvent: PropTypes.func.isRequired,
   eventCenters: PropTypes.object.isRequired,
   userEvents: PropTypes.object.isRequired,
 }

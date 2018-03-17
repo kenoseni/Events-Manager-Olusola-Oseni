@@ -45,6 +45,39 @@ class eventReducer {
           message
         };
       }
+      case 'ADD_EVENT': {
+        return {
+          ...state
+        };
+      }
+      case 'ADD_EVENT_RESOLVED': {
+        const {
+          event
+        } = action.payload.data;
+        return {
+          ...state,
+          events: [
+            ...state.events,
+            {
+              id: event.id,
+              name: event.name,
+              centerId: event.centerId,
+              date: event.date,
+              time: event.time,
+            }
+          ]
+        };
+      }
+      case 'ADD_EVENT_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
       default: {
         return state;
       }

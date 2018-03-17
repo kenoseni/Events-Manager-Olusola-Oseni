@@ -45,6 +45,44 @@ class centerReducer {
           message
         };
       }
+      case 'ADD_CENTER': {
+        return {
+          ...state
+        };
+      }
+      case 'ADD_CENTER_RESOLVED': {
+        const {
+          center, status, message
+        } = action.payload.data;
+        return {
+          ...state,
+          centers: [
+            ...state.centers,
+            {
+              id: center.id,
+              name: center.name,
+              description: center.description,
+              location: center.location,
+              price: center.price,
+              facilities: center.facilities,
+              capacity: center.capacity,
+              avaliability: center.avaliability
+            }
+          ],
+          status,
+          message
+        };
+      }
+      case 'ADD_CENTER_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
       default: {
         return state;
       }

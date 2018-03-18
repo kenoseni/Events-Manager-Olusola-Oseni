@@ -126,13 +126,13 @@ class eventController {
     Event.findById(req.params.eventId)
       .then((event) => {
         if (!event) {
-          return res.status(400).json({ message: 'not found' });
+          return res.status(404).json({ message: 'not found' });
         }
-        if (event.date === req.body.date && event.centerId === req.body.centerId) {
-          return res.status(400).json({
+        if (req.decoded.userid !== event.userId) {
+          return res.status(401).json({
             data: {
               status: 'Fail',
-              message: 'Another event is already slated for this center,Please choose another date'
+              message: 'User cannot modify this event'
             }
           });
         }

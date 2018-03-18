@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class SignUp extends Component {
@@ -33,6 +34,10 @@ class SignUp extends Component {
       email,
       password
     });
+    this.props.addFlashMessage({
+      type: 'Success',
+      text: 'You have successfully signed up. Welcome!'
+    })
   }
   componentWillReceiveProps(nextProps){
     if (nextProps.user.error) {
@@ -43,6 +48,11 @@ class SignUp extends Component {
   }
   render () {
     const {error, firstname, lastname, email, password} = this.state
+    const {addFlashMessage} = this.props
+
+    if (this.props.user.status == 'Success') {
+      return <Redirect to="/events" push />;
+    }
     return (
       <div>
         {/*Sign Up Modal*/}
@@ -74,7 +84,7 @@ class SignUp extends Component {
                     <input type="password" name="password" onChange={this.getInput} className="form-control" id="pword" required />
                   </div>
                   <div>            
-                  <button className="btn btn-success" onClick={this.register}>Sign Up.</button>
+                  <button className="btn btn-success" onClick={this.register} data-dismiss="modal">Sign Up.</button>
                   </div>
                 </form>            
               </div>            
@@ -88,5 +98,6 @@ class SignUp extends Component {
 
 SignUp.propTypes = {
   createUser: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 }
 export default SignUp;

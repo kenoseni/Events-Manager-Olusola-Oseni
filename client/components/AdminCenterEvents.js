@@ -7,8 +7,9 @@ class AdminCenterEvents extends Component {
   }
 
   render () {
+    const {events} = this.props
     return (
-      <div className="col-xs-12 col-md-8" id="etable">
+      <div className="col-xs-12 col-md-6" id="etable">
         <div className="card w-40">
           <div className="card-body">
             <div className="table-wrapper-2">
@@ -20,11 +21,10 @@ class AdminCenterEvents extends Component {
                     <th className="th-lg">Event Type</th>
                     <th className="th-lg">Date</th>
                     <th className="th-lg">Time</th>
-                    <th className="th-lg">Duration</th>
                   </tr>
                 </thead>
                 <tbody>
-                {/*(events === undefined ? null: events.map((event, i) => <AdminCenterEventsTable i={i+1} key={event.id} event={event}  />))*/}
+                {(events === undefined ? null: events.map((event, i) => <AdminCenterEventsTable i={i+1} key={event.id} event={event}  />))}
                 </tbody>
               </table>
               {/*<!--Table-->*/}

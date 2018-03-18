@@ -6,13 +6,13 @@ class AdminCenterEventsTable extends Component {
   }
 
   render () {
+    const {event, i} = this.props
     return (
       <tr>
         <th scope="row">{i}</th> 
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{event.name.toUpperCase()}</td>
+        <td>{event.date}</td>
+        <td>{event.time}</td>
       </tr>
     )
   }

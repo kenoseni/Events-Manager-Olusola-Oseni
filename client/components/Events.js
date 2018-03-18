@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import * as eventActions from '../actions/EventActions';
 import * as centerActions  from '../actions/CenterActions'
 import * as userActions  from '../actions/UserActions';
+import { deleteFlashMessage }  from '.././actions/FlashMessageActions';
 import { userEvents } from '../reducers/';
 import { eventCenters } from '../reducers/';
 import EventList from './EventList';
 import AddEventModalButton from './AddEventModalButton';
-import AddEvent from './AddEvent'
+import AddEvent from './AddEvent';
+import flashMessage from '../reducers'
 
 class Events extends Component {
   constructor(props) {
@@ -22,11 +24,22 @@ class Events extends Component {
 
   render() {
     const { events } = this.props.userEvents;
-    const { addEvent, deleteEvent, modifyEvent } = this.props;
+    const { addEvent,
+       deleteEvent,
+       modifyEvent,
+       messages,
+       deleteFlashMessage
+     } = this.props;
     
     return (
       <div>
-        <EventList events={events} deleteEvent={deleteEvent} modifyEvent={modifyEvent} {...this.props}/>
+        <EventList events={events}
+         deleteEvent={deleteEvent}
+         modifyEvent={modifyEvent}
+         messages={messages}
+         deleteFlashMessage={deleteFlashMessage}
+         {...this.props}
+        />
         <AddEventModalButton />
         <AddEvent title={'ADD EVENT'} addEvent={addEvent} {...this.props} />
       </div>
@@ -43,12 +56,14 @@ Events.propTypes = {
 const mapStateToProps = (state) => ({
   userEvents: state.userEvents,
   eventCenters: state.eventCenters,
+  messages: state.flashMessage
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   { ...eventActions, 
     ...centerActions, 
     ...userActions,
+    deleteFlashMessage
   }, dispatch
 )
 

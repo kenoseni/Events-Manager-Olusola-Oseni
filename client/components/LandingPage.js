@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
 import * as userActions from '../actions/UserActions';
+import { addFlashMessage } from '../actions/FlashMessageActions';
 import user from '../reducers'
 import Navbar from './Navbar';
 import SignUp from './SignUp'
@@ -10,7 +11,7 @@ import SignIn from './SignIn'
 
 class LandingPage extends Component {
   render () {
-    const {createUser, userLogin} = this.props
+    const {createUser, userLogin, addFlashMessage} = this.props
     return (
       <div>
       <Navbar home='Home' centers='Centers' events='Events' login='Log In' signup='Sign Up' />
@@ -28,7 +29,7 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <SignUp  createUser={createUser} {...this.props}/>
+        <SignUp  createUser={createUser} addFlashMessage={addFlashMessage} {...this.props}/>
         <SignIn userLogin={userLogin} {...this.props} />
       </div>
     );
@@ -36,6 +37,7 @@ class LandingPage extends Component {
 }
 LandingPage.propTypes = {
   createUser: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -43,7 +45,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-    ...userActions, 
+    ...userActions,
+    addFlashMessage 
   }, dispatch
 );
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage)

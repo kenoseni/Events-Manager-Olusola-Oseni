@@ -66,8 +66,32 @@ const deleteEvent = id => (dispatch) => {
     });
 };
 
+const modifyEvent = (eventInfo, id) => (dispatch) => {
+  dispatch({ type: 'MODIFY_EVENT' });
+  axios({
+    method: 'put',
+    url: `/api/v1/events/${id}`,
+    data: eventInfo,
+    headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+  })
+    .then((res) => {
+      dispatch({
+        type: 'MODIFY_EVENT_RESOLVED',
+        payload: res.data,
+        id
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'MODIFY_EVENT_REJECTED',
+        payload: err.response.data.data
+      });
+    });
+};
+
 export {
   allUserEvents,
   addEvent,
-  deleteEvent
+  deleteEvent,
+  modifyEvent
 };

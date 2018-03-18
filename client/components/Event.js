@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DeleteModal from './DeleteModal';
+import ModifyEvent from './ModifyEvent';
 
 class Event extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class Event extends Component {
                   </div>
                   <div className="card-footer bg-transparent">
                     <ul className="nav">
+                    <li><button data-toggle="modal" data-target={`#${id}`}><i className="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i></button></li>
                       <li><button data-toggle="modal" data-target={`#${i}`} id="alert-target" ><i className="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i></button></li>
                     </ul>
                   </div>
@@ -39,6 +41,7 @@ class Event extends Component {
             <div className="col-md-2"></div>
           </div>
         </div>
+        <ModifyEvent title='Modify Event' i={i} id={id} event={event} {...this.props} />
         <DeleteModal title={`Are you sure you want to delete ${event.name} event?`} i={i} id={id} event={event} {...this.props}/>
       </div>
     )

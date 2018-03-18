@@ -14,6 +14,8 @@ class AdminCenterDetail extends Component {
 
   render () {
     const { center } = this.props;
+    const { events } = this.props.center
+
     return (
       <div>
         <Navbar2 />
@@ -42,13 +44,20 @@ class AdminCenterDetail extends Component {
                     Details 
                   </div>
                   <div className="card-body">
-                    <h4 className="card-title">Description</h4>
-                    <h5 className="card-text">{center.description}</h5>
+                    <h5 className="card-title">Description</h5>
+                    <h6 className="card-text">{center.description}</h6>
                     <hr />
-                    <h4 className="card-text">Facilities</h4>
-                    <ul>
-                      <li>{center.facilities}</li>
-                    </ul>
+                    <h5 className="card-title">Location</h5>
+                    <h6 className="card-text">{center.location}</h6>
+                    <hr />
+                    <h5 className="card-title">Price</h5>
+                    <h6 className="card-text">{center.price}</h6>
+                    <hr />
+                    <h5 className="card-title">Capacity</h5>
+                    <h6 className="card-text">{center.capacity} guests</h6>
+                    <hr />
+                    <h5 className="card-title">Facilities</h5>
+                    <h6 className="card-text">{center.facilities}</h6>
                   </div>
                 </div>
               </div>
@@ -63,7 +72,7 @@ class AdminCenterDetail extends Component {
                 </div>
                 {/*<!--/.Card-->*/}
               </div>
-              <AdminCenterEvents/>
+              <AdminCenterEvents events={events}/>
             </div>
           </div>
         </main>

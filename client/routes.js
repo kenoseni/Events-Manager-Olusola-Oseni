@@ -7,6 +7,8 @@ import AdminCenters from './components/AdminCenters';
 import AdminCenterDetails from './components/AdminCenterDetails';
 import Events from './components/Events';
 import NotFound from './components/NotFound';
+import checkAuth from './utils/checkAuthentication';
+
 
 
 
@@ -16,9 +18,9 @@ export const Routes = () => {
   return (
     <Switch>
       <Route exact path='/' component={LandingPage}/>
-      <Route exact path='/centers' component={AdminCenters}/>
-      <Route exact path='/centers/:id' component={AdminCenterDetails} />
-      <Route exact path='/events' component={Events}/>
+      <Route exact path='/centers' component={checkAuth(AdminCenters)}/>
+      <Route exact path='/centers/:id' component={checkAuth(AdminCenterDetails)} />
+      <Route exact path='/events' component={checkAuth(Events)}/>
       <Route exact path='*' component={NotFound}/>
     </Switch>
   )

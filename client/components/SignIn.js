@@ -63,7 +63,7 @@ class SignIn extends Component {
                     <label className="control-label font-weight-bold" htmlFor="password"><i className="fa fa-lock" aria-hidden="true"></i> Password: </label>
                     <input type="password" name='password' onChange={this.getLoginInput} className="form-control" id="password" />
                   </div>                 
-                  <button className="btn btn-success" onClick={this.loginInput}>Log In</button>
+                  <button className="btn btn-success" onClick={this.loginInput} data-dismiss="modal">Log In</button>
                 </form>                      
               </div> 
               <div className="modal-footer">

@@ -1,18 +1,27 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import SubmitButton from './SubmitButton'
-import * as centerActions  from '../actions/CenterActions'
+import SubmitButton from './SubmitButton';
+import CenterImage from './CenterImage';
+import * as centerActions  from '../actions/CenterActions';
 import { eventCenters } from '../reducers';
 
 class AddCenter extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      center: {}
+      center: {},
+      image: ''
     }
     this.submit = this.submit.bind(this)
     this.getInput = this.getInput.bind(this)
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.image.image !== this.props.image.image) {
+      this.setState({image: nextProps.image.image})
+    }
+  }
+
   getInput(e) {
     this.setState({ center: {
       ...this.state.center,
@@ -24,6 +33,7 @@ class AddCenter extends Component {
   submit(e) {
     e.preventDefault();
     const {name, description, location, price, facilities, capacity} = this.state.center
+    const { image } = this.state
     $('#addCenter').modal('hide')
     this.props.addCenter({
       name, 
@@ -31,11 +41,13 @@ class AddCenter extends Component {
       location, 
       price,
       facilities, 
-      capacity
+      capacity,
+      image
     })
   }
   
   render() {
+    const {addImage} = this.props
     return (
       <div>
         <div className="container">            
@@ -52,9 +64,7 @@ class AddCenter extends Component {
                   <form action="" method="" role="form" onSubmit={this.submit}>       
                     <div className="card">
                       <div className="card-header text-center">
-                        <div className="input-group input-group-sm">
-                          <input type="file" name="file" className="form-control-file" aria-describedby="sizing-addon1" />
-                        </div>
+                        <CenterImage addImage={addImage} />
                       </div>
                       <div className="card-body">
                         <div className="container-fluid">

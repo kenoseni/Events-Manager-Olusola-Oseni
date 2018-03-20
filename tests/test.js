@@ -106,7 +106,8 @@ const validSignupSeed = [{
       location: '5, Alapere road Ketu Lagos State',
       price: '200',
       facilities: 'Swimming pool, generator',
-      capacity: 2000
+      capacity: 2000,
+      image: 'image'
     },
     {
       name: 'Crematoria',
@@ -114,7 +115,8 @@ const validSignupSeed = [{
       location: '14, NNPC road Kruminmashi Abuja',
       price: '2000',
       facilities: 'Swimming pool, generator',
-      capacity: 1000
+      capacity: 1000,
+      image: 'image'
     },
     {
       name: 'Double tree',
@@ -122,7 +124,8 @@ const validSignupSeed = [{
       location: '12, Sabo road Ogun State',
       price: '8000',
       facilities: 'Swimming pool, generator',
-      capacity: 8000
+      capacity: 8000,
+      image: 'image'
     }
   ],
   invalidCenterSeed = [
@@ -132,7 +135,8 @@ const validSignupSeed = [{
       location: '5, Alapere road Ketu Lagos State',
       price: '200',
       facilities: 'Swimming pool, generator',
-      capacity: 2000
+      capacity: 2000,
+      image: 'image'
     },
     {
       name: 'Crematoria',
@@ -140,7 +144,8 @@ const validSignupSeed = [{
       location: '14, NNPC road Kruminmashi Abuja',
       price: '2000',
       facilities: 'Swimming pool, generator',
-      capacity: 1000
+      capacity: 1000,
+      image: 'image'
     },
     {
       name: 'Double tree',
@@ -148,7 +153,8 @@ const validSignupSeed = [{
       location: '    ',
       price: '8000',
       facilities: 'Swimming pool, generator',
-      capacity: 8000
+      capacity: 8000,
+      image: 'image'
     },
     {
       name: 'The Gooche',
@@ -156,7 +162,8 @@ const validSignupSeed = [{
       location: '4, association road Ogun State',
       price: ' ',
       facilities: 'Swimming pool, generator',
-      capacity: 8000
+      capacity: 8000,
+      image: 'image'
     },
     {
       name: 'The Gooche',
@@ -164,7 +171,8 @@ const validSignupSeed = [{
       location: '4, association road Ogun State',
       price: '4000',
       facilities: '  ',
-      capacity: 8000
+      capacity: 8000,
+      image: 'image'
     },
     {
       name: 'The Gooche',
@@ -172,7 +180,8 @@ const validSignupSeed = [{
       location: '4, association road Ogun State',
       price: '4000',
       facilities: 'Swimming pool, generator',
-      capacity: null
+      capacity: null,
+      image: 'image'
     }
   ],
   userToken = [],

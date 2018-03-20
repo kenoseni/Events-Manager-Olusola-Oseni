@@ -44,7 +44,6 @@ DeleteModal.propTypes = {
   i: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   deleteCenter: PropTypes.func.isRequired,
-  deleteEvent: PropTypes.func.isRequired,
 }
 
 export default DeleteModal;

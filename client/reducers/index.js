@@ -4,6 +4,7 @@ import userReducer from './UserReducer';
 import centerReducer from './CenterReducer';
 import eventReducer from './EventReducer';
 import flashMessage from './FlashMessageReducer';
+import image from './ImageReducer';
 import auth from './AuthReducer';
 
 const { user } = userReducer;
@@ -16,4 +17,5 @@ export default combineReducers({
   eventCenters,
   userEvents,
   flashMessage,
+  image
 });

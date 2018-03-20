@@ -66,7 +66,8 @@ class centerReducer {
               price: center.price,
               facilities: center.facilities,
               capacity: center.capacity,
-              avaliability: center.avaliability
+              avaliability: center.avaliability,
+              image: center.image
             }
           ],
           status,

@@ -24,7 +24,8 @@ class centerController {
         location: req.body.location,
         price: req.body.price,
         facilities: req.body.facilities,
-        capacity: req.body.capacity
+        capacity: req.body.capacity,
+        image: req.body.image
       })
       .then(center => res.status(201).json({
         data: {
@@ -141,7 +142,8 @@ class centerController {
             price: req.body.price || center.price,
             facilities: req.body.facilities || center.facilities,
             capacity: req.body.capacity || center.capacity,
-            avaliability: req.body.avaliability || center.avaliability
+            avaliability: req.body.avaliability || center.avaliability,
+            image: req.body.image || center.image
           })
           .then((value) => {
             if (!value) {

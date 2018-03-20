@@ -46,7 +46,7 @@ class CenterValidation {
         data: {
           status: 'Fail',
           message: 'Center location is required'
-        } 
+        }
       });
     }
     // Check if price is empty
@@ -55,7 +55,7 @@ class CenterValidation {
         data: {
           status: 'Fail',
           message: 'Center price is required'
-        } 
+        }
       });
     }
     // Check if facilities is empty
@@ -64,6 +64,15 @@ class CenterValidation {
         data: {
           status: 'Fail',
           message: 'Center facilities is required'
+        }
+      });
+    }
+    // Check if image is empty
+    if (!req.body.image || isEmpty(req.body.image)) {
+      return res.status(400).json({
+        data: {
+          status: 'Fail',
+          message: 'Center image is required'
         }
       });
     }

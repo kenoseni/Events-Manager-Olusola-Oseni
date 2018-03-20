@@ -66,6 +66,10 @@ export default (sequelize, DataTypes) => {
     avaliability: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
   // associate the models

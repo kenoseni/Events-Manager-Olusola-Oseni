@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as centerActions  from '../actions/CenterActions'
+import  addImage  from '../actions/ImageActions'
 import { eventCenters } from '../reducers';
 import AdminCenterList from './AdminCenterList';
 import AddCenterModalButton from './AddCenterModalButton'
@@ -20,14 +21,14 @@ class AdminCenters extends Component {
   
   render () {
     const { centers } = this.props.eventCenters;
-    const { addCenter, deleteCenter, modifyCenter } = this.props;
+    const { addCenter, deleteCenter, modifyCenter, addImage } = this.props;
     
     if (this.props.isAdmin) {
       return (
         <div>
           <AdminCenterList centers={centers} deleteCenter={deleteCenter} modifyCenter={modifyCenter} {...this.props}  />
           <AddCenterModalButton />
-          <AddCenter  title='Add Center' addCenter={addCenter} {...this.props} />
+          <AddCenter  title='Add Center' addCenter={addCenter} addImage={addImage} {...this.props} />
         </div>
       )
     }else {
@@ -49,10 +50,12 @@ const mapStateToProps = (state) => ({
   eventCenters: state.eventCenters,
   isAuthenticated: state.auth.isAuthenticated,
   isAdmin: state.auth.user.isadmin,
+  image: state.image
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  ...centerActions, 
+  ...centerActions,
+  addImage 
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminCenters)

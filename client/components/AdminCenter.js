@@ -15,7 +15,7 @@ class AdminCenter extends Component {
         <div className="card w-40">
           <div className="view overlay hm-white-slight">
             <Link to={`/centers/${center.id}`}>
-              <img src="./img1.jpg" className="img-fluid" alt={center.name} style={{width:'100%', height:'250px'}} />
+              <img src={center.image} className="img-fluid" alt={center.name} id="img-preview" style={{width:'100%', height:'250px'}} />
             </Link>
           </div>
           <div className="card-body">

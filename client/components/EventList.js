@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Navbar3 from './Navbar3';
+import NavBar from './NavBar';
 import Event from './Event';
 import FlashMessageList from './FlashMessageList';
 
@@ -12,7 +12,7 @@ class EventList extends Component {
     const { events, messages, deleteFlashMessage} = this.props;
     return (
       <div style={{paddingTop: '60px'}}>
-        <Navbar3 />
+        <NavBar home='Home' centers='Centers' events='Events' page='Events' />
         <FlashMessageList messages={messages} deleteFlashMessage={deleteFlashMessage}  />
         {(events.length === 0) ? 
         <h1 style={{marginTop:'150px', paddingLeft: '300px'}}>No Events Created, Add an Event</h1> :

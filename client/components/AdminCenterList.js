@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AdminCenter from './AdminCenter';
-import Navbar2 from './Navbar2';
+import NavBar from './NavBar';
 
 class AdminCenterList extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class AdminCenterList extends Component {
     const { centers } = this.props;
     return (
       <div style={{paddingTop: '90px'}}>
-        <Navbar2 />
+        <NavBar home='Home' centers='Centers' events='Events' page='Centers' />
         <div className="container">
           <div className="row" id="centers">
             {(centers.length > 0) ?

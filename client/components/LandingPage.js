@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as userActions from '../actions/UserActions';
 import { addFlashMessage } from '../actions/FlashMessageActions';
 import user from '../reducers'
-import Navbar from './Navbar';
+import NavBar from './NavBar';
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 
@@ -14,7 +14,8 @@ class LandingPage extends Component {
     const {createUser, userLogin, addFlashMessage} = this.props
     return (
       <div>
-      <Navbar home='Home' centers='Centers' events='Events' login='Log In' signup='Sign Up' />
+      <NavBar home='Home' centers='Centers' events='Events'
+       login='Log In' signup='Sign Up' logout='Log Out' admin='Admin' page='Home' />
         <div  id="intro" className="view hm-black-light">
           <div className="container-fluid full-bg-img d-flex align-items-center justify-content-center">
             <div className="row d-flex justify-content-center">

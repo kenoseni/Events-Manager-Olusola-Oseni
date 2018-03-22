@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as centerActions  from '.././actions/CenterActions'
 import { eventCenters } from '.././reducers/';
-import Navbar2 from './Navbar2';
+import NavBar from './NavBar';
 import AdminCenterEvents from './AdminCenterEvents'
 
 class AdminCenterDetail extends Component {
@@ -13,12 +13,12 @@ class AdminCenterDetail extends Component {
   }
 
   render () {
-    const { center } = this.props;
+    const { center, id } = this.props;
     const { events } = this.props.center
 
     return (
       <div>
-        <Navbar2 />
+        <NavBar home='Home' centers='Centers' events='Events' centerDetails='CenterDetails' page='CenterDetails' id={id} />
         <main>
           <div className="container">
             <div className="row" id="info">

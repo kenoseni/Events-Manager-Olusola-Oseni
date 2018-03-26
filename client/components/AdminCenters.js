@@ -44,7 +44,7 @@ AdminCenters.propTypes = {
   modifyCenter: PropTypes.func.isRequired,
   eventCenters: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  isAdmin: PropTypes.bool.isRequired
+  isAdmin: PropTypes.bool
 }
 const mapStateToProps = (state) => ({
   eventCenters: state.eventCenters,

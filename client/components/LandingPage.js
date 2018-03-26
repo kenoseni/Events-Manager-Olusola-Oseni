@@ -11,11 +11,11 @@ import SignIn from './SignIn'
 
 class LandingPage extends Component {
   render () {
-    const {createUser, userLogin, addFlashMessage} = this.props
+    const {createUser, userLogin, addFlashMessage, match} = this.props
     return (
       <div>
       <NavBar home='Home' centers='Centers' events='Events'
-       login='Log In' signup='Sign Up' logout='Log Out' admin='Admin' page='Home' />
+       login='Log In' signup='Sign Up' admin='Admin' page='Home' logout='Log Out' match={match}/>
         <div  id="intro" className="view hm-black-light">
           <div className="container-fluid full-bg-img d-flex align-items-center justify-content-center">
             <div className="row d-flex justify-content-center">

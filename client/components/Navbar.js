@@ -9,23 +9,24 @@ export default class Navbar extends Component {
     this.isAdmin = false
     this.isLoggedIn = false
   }
-
+  
   componentWillMount() {
     let token = localStorage.getItem('x-access-token');
-    let decodedToken = jwtDecode(token);
-    let isAdmin = decodedToken.isadmin;
-    let role = decodedToken.userrole
-    let timeLeft = decodedToken.exp - (Date.now() / 1000);
-    let isLoggedIn = !(timeLeft <= 0)
+    if (token) {
+      let decodedToken = jwtDecode(token);
+      let isAdmin = decodedToken.isadmin;
+      let role = decodedToken.userrole
+      let timeLeft = decodedToken.exp - (Date.now() / 1000);
+      let isLoggedIn = !(timeLeft <= 0)
 
-    if (isLoggedIn) {
+      if (isLoggedIn) {
       this.isLoggedIn = true
-    }
+      }
 
-    if(isAdmin) {
+      if(isAdmin) {
       this.isAdmin = true
-    }
-    
+      }
+    }  
   }
 
   render () {
@@ -111,9 +112,11 @@ export default class Navbar extends Component {
                 </li>
               }
               { this.isLoggedIn &&
-                <li className="nav-item">
-                  <button className="nav-link">{this.props.logout}</button>
-                </li>
+                <Link to={`/logout`}> 
+                  <li className="nav-item">
+                    <button className="nav-link">{this.props.logout}</button>
+                  </li>
+                </Link>
               }
             </ul>
           </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
+import { history } from '../routes';
 import PropTypes from 'prop-types';
 
 class SignUp extends Component {
@@ -45,14 +45,14 @@ class SignUp extends Component {
         error: nextProps.user.error
       })
     }
+    if (nextProps.user.status == 'Success' && nextProps.user.token !== '') {
+      history.push("/events")
+    }
   }
   render () {
     const {error, firstname, lastname, email, password} = this.state
     const {addFlashMessage} = this.props
 
-    if (this.props.user.status == 'Success') {
-      return <Redirect to="/events" push />;
-    }
     return (
       <div>
         {/*Sign Up Modal*/}

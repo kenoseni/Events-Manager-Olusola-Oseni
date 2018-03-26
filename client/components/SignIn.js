@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { userLogin } from '.././actions/UserActions';
+import { history } from '../routes';
+import PropTypes from 'prop-types';
 
 class SignIn extends Component {
   constructor() {
@@ -37,6 +37,9 @@ class SignIn extends Component {
       this.setState({
         error: nextProps.user.error
       })
+    }
+    if (nextProps.user.status == 'Success') {
+      history.push("/events")
     }
   }
   render () {
@@ -78,4 +81,8 @@ class SignIn extends Component {
   }
 }
 
+
+SignIn.propTypes = {
+  userLogin: PropTypes.func.isRequired
+}
 export default SignIn;

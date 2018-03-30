@@ -12,6 +12,8 @@
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js",
     "start:dev": "nodemon ./server/app --exec babel-node",
     "test": "nyc mocha --timeout 250000 tests/test.js --require babel-register --exit",
+    "test:client": "./node_modules/.bin/jest --coverage __tests__/ ",
+    "test:client:watch": "npm run test:client -- --watch",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "nyc": "nyc report",
     "compile-component": "babel client/components --presets es2015 --out-dir client/public --source-maps",
@@ -34,7 +36,6 @@
     "axios": "^0.17.1",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.5",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -82,6 +83,8 @@
     "webpack-hot-middleware": "^2.21.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.1",
     "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -89,8 +92,12 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.0",
+    "expect": "^22.4.3",
+    "jest": "^22.4.2",
     "mocha": "^4.0.1",
+    "moxios": "^0.4.0",
     "nyc": "^11.3.0",
+    "redux-mock-store": "^1.5.1",
     "supertest": "^3.0.0"
   }
 }

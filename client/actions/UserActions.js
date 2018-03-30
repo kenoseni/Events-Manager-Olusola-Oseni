@@ -1,5 +1,5 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
+import jwt from 'jsonwebtoken';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 // Create User
@@ -10,11 +10,11 @@ const createUser = userDetails => (dispatch) => {
       const { token } = res.data.data;
       localStorage.setItem('x-access-token', token);
       setAuthorizationToken(token);
-      dispatch({ type: 'SET_CURRENT_USER', user: jwtDecode(token) });
+      dispatch({ type: 'SET_CURRENT_USER', user: jwt.decode(token) });
       dispatch({ type: 'SIGNUP_USER_RESOLVED', payload: res.data });
     })
     .catch((err) => {
-      dispatch({ type: 'SIGNUP_USER_REJECTED', payload: err.response.data });
+      dispatch({ type: 'SIGNUP_USER_REJECTED', payload: err });
     });
 };
 
@@ -26,7 +26,7 @@ const userLogin = loginDetails => (dispatch) => {
       const { token } = res.data.data;
       localStorage.setItem('x-access-token', token);
       setAuthorizationToken(token);
-      dispatch({ type: 'SET_CURRENT_USER', user: jwtDecode(token) });
+      dispatch({ type: 'SET_CURRENT_USER', user: jwt.decode(token) });
       dispatch({ type: 'LOGIN_RESOLVED', payload: res.data });
     })
     .catch((err) => {

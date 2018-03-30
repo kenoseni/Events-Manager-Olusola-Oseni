@@ -4,7 +4,7 @@ const allUserEvents = () => (dispatch) => {
   dispatch({
     type: 'ALL_USER_EVENT',
   });
-  axios({
+  return axios({
     method: 'get',
     url: '/api/v1/events',
     headers: { 'x-access-token': localStorage.getItem('x-access-token') }
@@ -24,7 +24,7 @@ const addEvent = eventInfo => (dispatch) => {
   dispatch({
     type: 'ADD_EVENT',
   });
-  axios({
+  return axios({
     method: 'post',
     url: '/api/v1/events',
     data: eventInfo,
@@ -46,7 +46,7 @@ const addEvent = eventInfo => (dispatch) => {
 
 const deleteEvent = id => (dispatch) => {
   dispatch({ type: 'DELETE_EVENT' });
-  axios({
+  return axios({
     method: 'delete',
     url: `/api/v1/events/${id}`,
     headers: { 'x-access-token': localStorage.getItem('x-access-token') }
@@ -68,7 +68,7 @@ const deleteEvent = id => (dispatch) => {
 
 const modifyEvent = (eventInfo, id) => (dispatch) => {
   dispatch({ type: 'MODIFY_EVENT' });
-  axios({
+  return axios({
     method: 'put',
     url: `/api/v1/events/${id}`,
     data: eventInfo,

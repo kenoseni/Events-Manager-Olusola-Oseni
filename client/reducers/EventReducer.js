@@ -52,7 +52,7 @@ class eventReducer {
       }
       case 'ADD_EVENT_RESOLVED': {
         const {
-          event
+          event, status, message
         } = action.payload.data;
         return {
           ...state,
@@ -65,7 +65,9 @@ class eventReducer {
               date: event.date,
               time: event.time,
             }
-          ]
+          ],
+          status,
+          message
         };
       }
       case 'ADD_EVENT_REJECTED': {

@@ -14,7 +14,7 @@ const createUser = userDetails => (dispatch) => {
       dispatch({ type: 'SIGNUP_USER_RESOLVED', payload: res.data });
     })
     .catch((err) => {
-      dispatch({ type: 'SIGNUP_USER_REJECTED', payload: err });
+      dispatch({ type: 'SIGNUP_USER_REJECTED', payload: err.response.data });
     });
 };
 

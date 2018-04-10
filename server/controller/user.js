@@ -2,6 +2,9 @@ import bcrypt from 'bcrypt';
 import db from '../models';
 import auth from '../middleware';
 
+const { Event } = db;
+const { Center } = db;
+
 /**
 * Class representing controller
 *
@@ -151,6 +154,78 @@ class userController {
           status: 'Error',
           message: error.message
         }
+      }));
+  }
+  /**
+  * Get all Users from the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with all users
+  * @memberof userController
+  */
+  static getAllUsers(req, res) {
+    return db.User
+      .findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt', 'password'] },
+        include: [{
+          model: Center,
+          as: 'centers',
+          attributes: {
+            exclude: [
+              'createdAt',
+              'updatedAt',
+              'userId',
+              'description',
+              'avaliability',
+              'price',
+              'facilities',
+              'capacity',
+              'location'
+            ]
+          }
+        },
+        {
+          model: Event,
+          as: 'events',
+          attributes: {
+            exclude: [
+              'createdAt',
+              'updatedAt',
+              'userId',
+            ]
+          }
+        }
+        ],
+      })
+      .then((users) => {
+        if (!users) {
+          return res.status(404).json({
+            data: {
+              status: 'Fail',
+              message: 'user not found'
+            }
+          });
+        }
+        if (!req.decoded.isadmin) {
+          return res.status(401).json({
+            data: {
+              status: 'Fail',
+              message: 'You are not authorised to view this information'
+            }
+          });
+        }
+        res.status(200).json({
+          data: {
+            status: 'Success',
+            message: 'These are all user details',
+            users
+          }
+        });
+      })
+      .catch(error => res.status(500).json({
+        message: error.message
       }));
   }
 }

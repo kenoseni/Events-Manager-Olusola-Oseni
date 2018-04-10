@@ -39,8 +39,28 @@ const signout = () => (dispatch) => {
   setAuthorizationToken(false);
   dispatch({ type: 'SET_CURRENT_USER', user: {} });
 };
+
+const getAllUsers = () => dispatch => axios({
+  method: 'get',
+  url: '/api/v1/users',
+  headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+})
+  .then((res) => {
+    dispatch({ type: 'GET_USERS' });
+    dispatch({
+      type: 'GET_USERS_RESOLVED',
+      payload: res.data,
+    });
+  })
+  .catch((err) => {
+    dispatch({
+      type: 'GET_USERS_REJECTED',
+      payload: err.response.data.data
+    });
+  });
 export {
   createUser,
   userLogin,
-  signout
+  signout,
+  getAllUsers
 };

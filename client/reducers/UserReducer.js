@@ -14,7 +14,6 @@ class userReducer {
   * @memberof userReducer
   */
   static user(state = {}, action) {
-    // console.log('The state will change');
     switch (action.type) {
       case 'SIGNUP_USER': {
         return {
@@ -61,6 +60,32 @@ class userReducer {
         return {
           ...state,
           error
+        };
+      }
+      case 'GET_USERS': {
+        return {
+          ...state
+        };
+      }
+      case 'GET_USERS_RESOLVED': {
+        const {
+          status, message, users
+        } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message,
+          users
+        };
+      }
+      case 'GET_USERS_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
         };
       }
       default: {

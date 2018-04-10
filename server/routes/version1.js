@@ -12,6 +12,12 @@ router.post(
   controller.userController.signup
 );
 
+// Get all users on the platform
+router.get(
+  '/users',
+  middleware.tokenController.confirmToken,
+  controller.userController.getAllUsers
+);
 // Signin a user on the platform
 router.post(
   '/users/login',

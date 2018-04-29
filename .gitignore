@@ -16,3 +16,4 @@ template/sass
 .nyc_output
 .vscode
 /coverage
+/lib

@@ -119,6 +119,7 @@ class AddCenter extends Component {
                         </div>
                       </div>
                     </div>
+                    <br />
                     <SubmitButton name='ADD CENTER' />
                   </form>            
                 </div>

@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+/**
+* Add image action
+*
+* @method
+* @param {object} imageData - Image details added to input
+* @param {object} res - The response object
+* @return {object} image action payload
+* @memberof ImageActions
+*/
 const addImage = imageData => (dispatch) => {
   dispatch({ type: 'ADD_IMAGE' });
   return axios({

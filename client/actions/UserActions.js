@@ -2,7 +2,15 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-// Create User
+/**
+* User signup action
+*
+* @method
+* @param {object} userDetails - The user sign up details
+* @param {object} res - The response object
+* @return {object} Sign Up action payload
+* @memberof UserActions
+*/
 const createUser = userDetails => (dispatch) => {
   dispatch({ type: 'SIGNUP_USER' });
   return axios.post('/api/v1/users', userDetails)
@@ -18,7 +26,15 @@ const createUser = userDetails => (dispatch) => {
     });
 };
 
-// User Login action
+/**
+* User Login action
+*
+* @method
+* @param {object} loginDetails - The user sign in details
+* @param {object} res - The response object
+* @return {object} Login action payload
+* @memberof UserActions
+*/
 const userLogin = loginDetails => (dispatch) => {
   dispatch({ type: 'LOGIN_USER' });
   return axios.post('/api/v1/users/login', loginDetails)
@@ -34,12 +50,28 @@ const userLogin = loginDetails => (dispatch) => {
     });
 };
 
+/**
+* User Signout action
+*
+* @method
+* @return {object} dispatch user property as empty onject
+* @memberof UserActions
+*/
 const signout = () => (dispatch) => {
   localStorage.removeItem('x-access-token');
   setAuthorizationToken(false);
   dispatch({ type: 'SET_CURRENT_USER', user: {} });
 };
 
+/**
+* Get all user action
+*
+* @method
+* @param {object} none
+* @param {object} res - The response object
+* @return {object} all users action payload
+* @memberof UserActions
+*/
 const getAllUsers = () => dispatch => axios({
   method: 'get',
   url: '/api/v1/users',
@@ -58,6 +90,7 @@ const getAllUsers = () => dispatch => axios({
       payload: err.response.data.data
     });
   });
+
 export {
   createUser,
   userLogin,

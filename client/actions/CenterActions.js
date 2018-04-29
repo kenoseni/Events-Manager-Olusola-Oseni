@@ -1,6 +1,14 @@
 import axios from 'axios';
 // import { history } from '../routes';
 
+/**
+* Get all center action
+*
+* @method
+* @param {object} res - The response object
+* @return {object} All centers action payload
+* @memberof CenterActions
+*/
 const getAllCenters = () => dispatch => axios({
   method: 'get',
   url: '/api/v1/centers',
@@ -13,6 +21,16 @@ const getAllCenters = () => dispatch => axios({
     dispatch({ type: 'ALL_CENTERS_REJECTED', payload: err });
     // history.push('/');
   });
+
+/**
+* Add center action
+*
+* @method
+* @param {object} centerInfo - Event details
+* @param {object} res - The response object
+* @return {object} Add center action payload
+* @memberof EventActions
+*/
 const addCenter = centerInfo => (dispatch) => {
   dispatch({
     type: 'ADD_CENTER',
@@ -36,6 +54,16 @@ const addCenter = centerInfo => (dispatch) => {
       });
     });
 };
+
+/**
+* Delete center action
+*
+* @method
+* @param {object} id - Center id
+* @param {object} res - The response object
+* @return {object} Delete center action payload
+* @memberof CenterActions
+*/
 const deleteCenter = id => (dispatch) => {
   dispatch({ type: 'DELETE_CENTER' });
   return axios({
@@ -58,6 +86,16 @@ const deleteCenter = id => (dispatch) => {
     });
 };
 
+/**
+* Modify center action
+*
+* @method
+* @param {object} centerInfo - Center details
+* @param {object} id - Center id
+* @param {object} res - The response object
+* @return {object} Modify center action payload
+* @memberof EventActions
+*/
 const modifyCenter = (centerInfo, id) => (dispatch) => {
   dispatch({ type: 'MODIFY_CENTER' });
   return axios({
@@ -81,6 +119,15 @@ const modifyCenter = (centerInfo, id) => (dispatch) => {
     });
 };
 
+/**
+* Get one center action
+*
+* @method
+* @param {object} id - Center id
+* @param {object} res - The response object
+* @return {object} Get one center action payload
+* @memberof CenterActions
+*/
 const getOneCenter = id => (dispatch) => {
   dispatch({ type: 'GET_CENTERDETAILS' });
   return axios({

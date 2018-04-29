@@ -14,7 +14,7 @@ header {
 }
 
 #intro {
-  height: 579px;
+  height: 860px;
   background: url("../img/img1.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -32,7 +32,16 @@ header {
   margin-top: 5%; }
 
 .fa-trash-o {
+  cursor: pointer;
   color: #CC0000; }
+
+.fa-pencil-square-o {
+  cursor: pointer;
+  color: rgb(31, 0, 204); }
+
+.close {
+  cursor: pointer;
+}
 
 .modal-dialog {
   margin-top: 5%; }
@@ -49,8 +58,9 @@ button:hover {
   background-color: #0C9;
   color: #FFF;
   border-radius: 50px;
+  cursor: pointer;
   text-align: center;
-  box-shadow: 2px 2px 3px #999; }
+  box-shadow: 0 8px 16px 0 #999; }
 
 .my-float {
   margin-top: 12px; }

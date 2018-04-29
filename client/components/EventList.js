@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NavBar from './NavBar';
+import NavBar from './Navbar';
 import Event from './Event';
 import FlashMessageList from './FlashMessageList';
 
@@ -17,11 +17,17 @@ class EventList extends Component {
           logout='Log Out' match={match} 
           location={location} 
         />
-        <FlashMessageList messages={messages} deleteFlashMessage={deleteFlashMessage}  />
-        {(events.length === 0) ? 
-        <h1 style={{marginTop:'150px', paddingLeft: '300px'}}>No Events Created, Add an Event</h1> :
-        events.map((event, i) => <Event {...this.props} key={event.id} i={i * -1} event={event} />)
+        {
+          (messages.length > 0) ? <FlashMessageList messages={messages} deleteFlashMessage={deleteFlashMessage}  /> : null
         }
+        <div className="container">
+          <div className="row">
+            {(events.length === 0) ? 
+              <h1 style={{marginTop:'150px', paddingLeft: '300px'}}>No Events Created, Add an Event</h1> :
+              events.map((event, i) => <Event {...this.props} key={event.id} i={i * -1} event={event} />)
+            }
+          </div>
+        </div>
       </div>
     )
   }

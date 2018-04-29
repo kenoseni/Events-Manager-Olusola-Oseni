@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as centerActions  from '.././actions/CenterActions'
 import { eventCenters } from '.././reducers/';
-import NavBar from './NavBar';
+import NavBar from './Navbar';
 import AdminCenterEvents from './AdminCenterEvents'
 
 class AdminCenterDetail extends Component {

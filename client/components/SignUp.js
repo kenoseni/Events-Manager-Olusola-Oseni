@@ -25,9 +25,7 @@ class SignUp extends Component {
   register (e) {
     e.preventDefault()
     this.setState({error: {}})
-    const {
-      firstname, lastname, email, password,
-    } = this.state; 
+    const { firstname, lastname, email, password} = this.state; 
     this.props.createUser({
       firstname,
       lastname,
@@ -39,6 +37,7 @@ class SignUp extends Component {
       text: 'You have successfully signed up. Welcome!'
     })
   }
+
   componentWillReceiveProps(nextProps){
     if (nextProps.user.error) {
       this.setState({
@@ -49,9 +48,9 @@ class SignUp extends Component {
       history.push("/events")
     }
   }
+
   render () {
     const {error, firstname, lastname, email, password} = this.state
-    const {addFlashMessage} = this.props
 
     return (
       <div>

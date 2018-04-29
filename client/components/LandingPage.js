@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as userActions from '../actions/UserActions';
 import { addFlashMessage } from '../actions/FlashMessageActions';
 import user from '../reducers'
-import NavBar from './NavBar';
+import NavBar from './Navbar';
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 

@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+/**
+* Get all event actions
+*
+* @method
+* @param {object} res - The response object
+* @return {object} All event action payload
+* @memberof EventActions
+*/
 const allUserEvents = () => (dispatch) => {
   dispatch({
     type: 'ALL_USER_EVENT',
@@ -20,6 +28,15 @@ const allUserEvents = () => (dispatch) => {
     });
 };
 
+/**
+* Add Event action
+*
+* @method
+* @param {object} eventInfo - Event details
+* @param {object} res - The response object
+* @return {object} Add event action payload
+* @memberof EventActions
+*/
 const addEvent = eventInfo => (dispatch) => {
   dispatch({
     type: 'ADD_EVENT',
@@ -44,6 +61,15 @@ const addEvent = eventInfo => (dispatch) => {
     });
 };
 
+/**
+* Delete event action
+*
+* @method
+* @param {object} id - Event id
+* @param {object} res - The response object
+* @return {object} Delete event action payload
+* @memberof EventActions
+*/
 const deleteEvent = id => (dispatch) => {
   dispatch({ type: 'DELETE_EVENT' });
   return axios({
@@ -66,6 +92,16 @@ const deleteEvent = id => (dispatch) => {
     });
 };
 
+/**
+* Modify Event action
+*
+* @method
+* @param {object} eventInfo - Event details
+* @param {object} id - Event id
+* @param {object} res - The response object
+* @return {object} Modify event action payload
+* @memberof EventActions
+*/
 const modifyEvent = (eventInfo, id) => (dispatch) => {
   dispatch({ type: 'MODIFY_EVENT' });
   return axios({

@@ -51,7 +51,7 @@ export default class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark indigo smooth-scroll fixed-top">
-        <div className="container">
+        <div className="container-fluid">
           <Link to={`/`}>
             <button className="navbar-brand" ><i className="" aria-hidden="true"></i> <i>Encore </i></button>
           </Link>
@@ -98,7 +98,7 @@ export default class Navbar extends Component {
             </ul>
             <form className="form-inline">
               <i className="fa fa-search fa-lg "></i>
-              <input className="form-control mr-sm-2" type="text" placeholder="Search for event centers" aria-label="Search" />
+              <input className="form-control mr-sm-2" type="text" placeholder="Search for centers" aria-label="Search" />
             </form>
             <ul className="nav navbar-nav">
               { !this.isLoggedIn &&

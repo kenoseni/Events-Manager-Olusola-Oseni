@@ -117,6 +117,7 @@ class ModifyCenter extends Component {
                       </div>
                     </div>
                   </div>
+                  <br />
                   <SubmitButton name='MODIFY CENTER'/>
                 </form>                       
               </div>

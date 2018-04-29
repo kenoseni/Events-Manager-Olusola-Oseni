@@ -3,6 +3,7 @@ import SubmitButton from './SubmitButton'
 import * as centerActions from '../actions/CenterActions';
 import { getAllCenters } from '../actions/CenterActions';
 
+
 class ModifyEvent extends Component {
   constructor(props) {
     super(props);
@@ -100,6 +101,7 @@ class ModifyEvent extends Component {
                         </div>
                       </div>
                     </div>
+                    <br />
                     <SubmitButton name='MODIFY EVENT'/>
                   </form>            
                 </div>

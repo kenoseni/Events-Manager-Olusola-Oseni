@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AdminCenter from './AdminCenter';
-import NavBar from './NavBar';
+import NavBar from './Navbar';
 
 class AdminCenterList extends Component {
   constructor(props) {

@@ -56,16 +56,16 @@ class AddEvent extends Component {
                 <div className="modal-body">
                   <form action="" method="" role="form" onSubmit={this.submit}>       
                     <div className="card">
-                      <div className="card-header text-center">
+                      <div className="card-body text-center">
                         <div className="input-group input-group-sm">
                           <span className="input-group-addon" id="sizing-addon1">Event Name</span>
-                          <input type="text" name="name" onChange={this.getInput} className="form-control" placeholder="" aria-describedby="sizing-addon1" />
+                          <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                         </div>
                       </div>
                       <div className="card-body">
                         <div className="container-fluid">
                           <div className="row">
-                            <div className="col-xs-12 col-md-4">
+                            <div className="col-xs-12">
                               <div className="input-group input-group-sm">
                                 <span className="input-group-addon" id="sizing-addon1">Location</span>
                                 <select className="form-control" name="centerId" onChange={this.getInput}>
@@ -76,22 +76,23 @@ class AddEvent extends Component {
                                 </select>
                               </div>
                             </div>
-                            <div className="col-xs-12 col-md-4">
+                            <div className="col-xs-12">
                               <div className="input-group input-group-sm">
                                 <span className="input-group-addon" id="sizing-addon1">Date</span>
                                 <input type="date" name="date" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
-                            <div className="col-xs-12 col-md-4">
+                            <div className="col-xs-12">
                               <div className="input-group input-group-sm">
                                 <span className="input-group-addon" id="sizing-addon1">Time</span>
-                                <input type="text" name="time" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                                <input type="time" name="time" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                    <br />
                     <SubmitButton name='ADD EVENT'/>
                   </form>            
                 </div>

@@ -14,7 +14,7 @@
     "test": "nyc mocha --timeout 250000 tests/test.js --require babel-register --exit",
     "test:client": "./node_modules/.bin/jest --coverage __tests__/ ",
     "test:client:watch": "npm run test:client -- --watch",
-    "build": "babel server -d lib",
+    "build": "babel server -d lib --source-maps inline --copy-files",
     "heroku-postbuild": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "nyc": "nyc report",

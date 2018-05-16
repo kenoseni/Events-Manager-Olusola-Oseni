@@ -61,6 +61,10 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Please provide the capacity for this center'
         },
+        isInt: {
+          args: true,
+          msg: 'Allows only integers'
+        }
       }
     },
     avaliability: {

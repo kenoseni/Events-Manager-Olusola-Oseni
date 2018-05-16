@@ -26,8 +26,9 @@ class centerReducer {
       }
       case 'ALL_CENTERS_RESOLVED': {
         const {
-          status, message, centers
+          status, message
         } = action.payload;
+        const { centers } = action.payload.data;
         return {
           ...state,
           status,
@@ -52,8 +53,9 @@ class centerReducer {
       }
       case 'ADD_CENTER_RESOLVED': {
         const {
-          center, status, message
+          center
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           centers: [
@@ -92,7 +94,7 @@ class centerReducer {
       case 'DELETE_CENTER_RESOLVED': {
         const {
           status, message
-        } = action.payload.data;
+        } = action.payload;
         return {
           ...state,
           centers: [
@@ -119,8 +121,9 @@ class centerReducer {
       }
       case 'MODIFY_CENTER_RESOLVED': {
         const {
-          status, message, center
+          center
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           centers: [
@@ -162,8 +165,9 @@ class centerReducer {
       }
       case 'GET_CENTERDETAILS_RESOLVED': {
         const {
-          status, message, center
+          center
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -174,7 +178,7 @@ class centerReducer {
       case 'GET_CENTERDETAILS_REJECTED': {
         const {
           status, message
-        } = action.payload.data;
+        } = action.payload;
         return {
           ...state,
           status,

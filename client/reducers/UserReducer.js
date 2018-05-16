@@ -22,8 +22,9 @@ class userReducer {
       }
       case 'SIGNUP_USER_RESOLVED': {
         const {
-          firstname, lastname, role, token, status, message
+          firstname, lastname, role, token
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           firstname,
@@ -35,7 +36,7 @@ class userReducer {
         };
       }
       case 'SIGNUP_USER_REJECTED': {
-        const error = action.payload.data;
+        const error = action.payload;
         return {
           ...state,
           error
@@ -47,7 +48,8 @@ class userReducer {
         };
       }
       case 'LOGIN_RESOLVED': {
-        const { status, message, token } = action.payload.data;
+        const { token } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -56,7 +58,7 @@ class userReducer {
         };
       }
       case 'LOGIN_REJECTED': {
-        const error = action.payload.data;
+        const error = action.payload;
         return {
           ...state,
           error
@@ -69,8 +71,9 @@ class userReducer {
       }
       case 'GET_USERS_RESOLVED': {
         const {
-          status, message, users
+          users
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,

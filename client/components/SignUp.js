@@ -32,10 +32,6 @@ class SignUp extends Component {
       email,
       password
     });
-    this.props.addFlashMessage({
-      type: 'Success',
-      text: 'You have successfully signed up. Welcome!'
-    })
   }
 
   componentWillReceiveProps(nextProps){
@@ -46,6 +42,12 @@ class SignUp extends Component {
     }
     if (nextProps.user.status == 'Success' && nextProps.user.token !== '') {
       history.push("/events")
+    }
+    if (nextProps.user.status == 'Success') {
+      this.props.addFlashMessage({
+        type: 'Success',
+        text: 'You have successfully signed up. Welcome!'
+      })
     }
   }
 

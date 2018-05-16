@@ -28,17 +28,15 @@ class centerController {
         image: req.body.image
       })
       .then(center => res.status(201).json({
+        status: 'Success',
+        message: 'Center created successfully',
         data: {
-          status: 'Success',
-          message: 'Center created successfully',
           center
         }
       }))
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Error',
-          message: error.message
-        }
+        status: 'Error',
+        message: error.message
       }));
   }
   /**
@@ -58,7 +56,9 @@ class centerController {
       .then(centers => res.status(200).json({
         status: 'Success',
         message: 'List of all centers',
-        centers
+        data: {
+          centers
+        }
       }))
       .catch(error => res.status(500).json({
         status: 'Error',
@@ -86,16 +86,14 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(400).json({
-            data: {
-              status: 'Fail',
-              message: 'No center found'
-            }
+            status: 'Error',
+            message: 'No center found'
           });
         }
         res.status(200).json({
+          status: 'Success',
+          message: 'List of one center',
           data: {
-            status: 'Success',
-            message: 'List of one center',
             center
           }
         });
@@ -120,18 +118,14 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'No center found'
-            }
+            status: 'Error',
+            message: 'No center found'
           });
         }
         if (req.decoded.userid !== center.userId) {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'User cannot modify this center'
-            }
+            status: 'Error',
+            message: 'User cannot modify this center'
           });
         }
         center
@@ -148,21 +142,22 @@ class centerController {
           .then((value) => {
             if (!value) {
               return res.status(400).json({
-                data: {
-                  status: 'Fail',
-                  message: 'Center not updated'
-                }
+                status: 'Error',
+                message: 'Center not updated'
               });
             }
             res.status(200).json({
+              status: 'Success',
+              message: 'Center updated',
               data: {
-                status: 'Success',
-                message: 'Center updated',
                 center
               }
             });
           })
-          .catch(error => res.status(500).json({ error: error.message }));
+          .catch(error => res.status(500).json({
+            status: 'Error',
+            message: error.message
+          }));
       })
       .catch(error => res.status(500).json({ error: error.message }));
   }
@@ -181,40 +176,30 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'Center not found'
-            }
+            status: 'Error',
+            message: 'Center not found'
           });
         }
         if (req.decoded.userid !== center.userId) {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'User cannot delete this center'
-            }
+            status: 'Error',
+            message: 'User cannot delete this center'
           });
         }
         center
           .destroy()
           .then(() => res.status(200).json({
-            data: {
-              status: 'Success',
-              message: 'Center has been successfully deleted'
-            }
+            status: 'Success',
+            message: 'Center has been successfully deleted'
           }))
           .catch(error => res.status(500).json({
-            data: {
-              status: 'Fail',
-              message: error.message
-            }
+            status: 'Error',
+            message: error.message
           }));
       })
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Fail',
-          message: error.message
-        }
+        status: 'Error',
+        message: error.message
       }));
   }
 }

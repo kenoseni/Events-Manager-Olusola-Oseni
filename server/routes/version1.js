@@ -99,5 +99,13 @@ router.get(
   middleware.tokenController.confirmToken,
   controller.eventController.userEvents
 );
+router.get(
+  '*',
+  controller.userController.notFound
+);
+router.post(
+  '*',
+  controller.userController.notFound
+);
 
 export default router;

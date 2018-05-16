@@ -1,8 +1,10 @@
 import helpers from '../helpers';
 
-
 const {
   isEmpty,
+  isAlphaNumeric,
+  isNumeric,
+  isDateFormat
 } = helpers;
 
 /**
@@ -25,23 +27,58 @@ class EventValidation {
   static eventInputs(req, res, next) {
     // Check if name is empty
     if (!req.body.name || isEmpty(req.body.name)) {
-      return res.status(400).json({
-        status: 'Fail',
+      return res.status(401).json({
+        status: 'Error',
         message: 'Event name required'
       });
     }
     // Check if date is empty
     if (!req.body.date || isEmpty(req.body.date)) {
-      return res.status(400).json({
-        status: 'Fail',
+      return res.status(401).json({
+        status: 'Error',
         message: 'Date field required'
       });
     }
     // Check if time is empty
     if (!req.body.time || isEmpty(req.body.time)) {
-      return res.status(400).json({
-        status: 'Fail',
+      return res.status(401).json({
+        status: 'Error',
         message: 'Time required'
+      });
+    }
+    // Check if centerId is empty
+    if (!req.body.centerId || isEmpty(req.body.centerId)) {
+      return res.status(401).json({
+        status: 'Error',
+        message: 'CenterId required'
+      });
+    }
+    // check if centerId is a number
+    if (!isNumeric(req.body.centerId)) {
+      return res.status(401).json({
+        status: 'Error',
+        message: 'CenterId must be an integer'
+      });
+    }
+    // check if event name is alphanumeric
+    if (!isAlphaNumeric(req.body.name)) {
+      return res.status(401).json({
+        status: 'Error',
+        message: 'Event name is invalid'
+      });
+    }
+    // check if event name is alphanumeric
+    if (!isAlphaNumeric(req.body.time)) {
+      return res.status(401).json({
+        status: 'Error',
+        message: 'Event time is invalid'
+      });
+    }
+    // check if event date is alphanumeric
+    if (!isDateFormat(req.body.date)) {
+      return res.status(401).json({
+        status: 'Error',
+        message: 'Date format is invalid, use YYYY-MM-DD'
       });
     }
     return next();

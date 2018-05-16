@@ -5,6 +5,8 @@ import path from 'path';
 import cors from 'cors';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 import config from '.././webpack.config';
 
 import route from './routes';
@@ -22,6 +24,7 @@ app.use(volleyball);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ type: 'application/json' }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(require('webpack-dev-middleware')(compiler, {
   hot: true,

@@ -23,7 +23,7 @@ const allUserEvents = () => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'ALL_USER_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
@@ -56,7 +56,7 @@ const addEvent = eventInfo => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'ADD_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
@@ -87,7 +87,7 @@ const deleteEvent = id => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'DELETE_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
@@ -120,7 +120,7 @@ const modifyEvent = (eventInfo, id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'MODIFY_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };

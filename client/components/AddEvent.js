@@ -85,7 +85,7 @@ class AddEvent extends Component {
                             <div className="col-xs-12">
                               <div className="input-group input-group-sm">
                                 <span className="input-group-addon" id="sizing-addon1">Time</span>
-                                <input type="time" name="time" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                                <input type="text" name="time" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>

@@ -28,28 +28,28 @@ class UserValidation {
   static signupInputs(req, res, next) {
     // Check if firstname is empty
     if (!req.body.firstname || isEmpty(req.body.firstname)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Firstname required'
       });
     }
     // Check if lastname is empty
     if (!req.body.lastname || isEmpty(req.body.lastname)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Lastname required'
       });
     }
     // Check if email is empty
     if (!req.body.email || isEmpty(req.body.email)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Email required'
       });
     }
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Password required'
       });
@@ -71,14 +71,14 @@ class UserValidation {
   static validUserInputs(req, res, next) {
     const firstname = (req.body.firstname).toLowerCase().trim();
     if (!isAlphaNumeric(firstname)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Invalid firstname, only alphabets and numbers allowed'
       });
     }
     const lastname = (req.body.lastname).toLowerCase().trim();
     if (!isAlphaNumeric(lastname)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Invalid lastname, only alphabets and numbers allowed'
       });
@@ -124,7 +124,7 @@ class UserValidation {
       })
       .catch(error => res.status(500).json({
         data: {
-          status: 'Fail',
+          status: 'Error',
           error: error.message,
         }
       }));
@@ -144,7 +144,7 @@ class UserValidation {
   static checkPassWord(req, res, next) {
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Password required'
       });
@@ -165,7 +165,7 @@ class UserValidation {
   static checkEmail(req, res, next) {
     // Check if password is empty
     if (!req.body.email || isEmpty(req.body.email)) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: 'Error',
         message: 'Email required'
       });

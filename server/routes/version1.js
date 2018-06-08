@@ -33,12 +33,12 @@ router.get(
 );
 // Get One Event Center
 router.get(
-  '/centers/:centerId',
+  '/centers/:centerId([0-9]+)',
   controller.centerController.getOne
 );
 // Modify Event Center
 router.put(
-  '/centers/:centerId',
+  '/centers/:centerId([0-9]+)',
   middleware.tokenController.confirmToken,
   middleware.adminValidation,
   middleware.centerValidation.centerInputs,
@@ -46,7 +46,7 @@ router.put(
 );
 // Delete an Event
 router.delete(
-  '/centers/:centerId',
+  '/centers/:centerId([0-9]+)',
   middleware.tokenController.confirmToken,
   middleware.adminValidation,
   controller.centerController.deleteCenter
@@ -54,7 +54,7 @@ router.delete(
 
 // create admin route
 router.put(
-  '/users/:userId',
+  '/users/:userId([0-9]+)',
   middleware.tokenController.confirmToken,
   controller.userController.createAdmin
 );
@@ -77,20 +77,20 @@ router.post(
 );
 // Delete an Event
 router.delete(
-  '/events/:eventId',
+  '/events/:eventId([0-9]+)',
   middleware.tokenController.confirmToken,
   controller.eventController.deleteEvent
 );
 // Modify an Event
 router.put(
-  '/events/:eventId',
+  '/events/:eventId([0-9]+)',
   middleware.tokenController.confirmToken,
   middleware.eventValidation.eventInputs,
   controller.eventController.modifyEvent
 );
 // Get an Event
 router.get(
-  '/events/:eventId',
+  '/events/:eventId([0-9]+)',
   middleware.tokenController.confirmToken,
   controller.eventController.getOneEvent
 );

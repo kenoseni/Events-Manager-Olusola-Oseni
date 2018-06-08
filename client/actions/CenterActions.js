@@ -5,13 +5,15 @@ import axios from 'axios';
 * Get all center action
 *
 * @method
+* @param {object} page - The page query
 * @param {object} res - The response object
 * @return {object} All centers action payload
 * @memberof CenterActions
 */
-const getAllCenters = () => dispatch => axios({
+const getAllCenters = page => dispatch => axios({
   method: 'get',
   url: '/api/v1/centers',
+  params: { page },
 })
   .then((res) => {
     dispatch({ type: 'ALL_CENTERS' });

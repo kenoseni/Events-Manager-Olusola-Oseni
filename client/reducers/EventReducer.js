@@ -26,14 +26,15 @@ class eventReducer {
       }
       case 'ALL_USER_EVENT_RESOLVED': {
         const {
-          events
+          events, count
         } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
           status,
           message,
-          events
+          events,
+          count
         };
       }
       case 'ALL_USER_EVENT_REJECTED': {

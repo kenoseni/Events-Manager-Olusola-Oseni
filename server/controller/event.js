@@ -186,11 +186,19 @@ class eventController {
   * @memberof eventController
   */
   static userEvents(req, res) {
+    const { page } = req.query;
+    const limit = 6;
+    const offset = (page === undefined || page < 1) ?
+      0 : (parseInt(page, 10) - 1) * limit;
     return Event
-      .findAll({
+      .findAndCountAll({
         where: {
           userId: req.decoded.userid,
-        }
+        },
+        limit,
+        order: ['id'],
+        offset,
+        attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
       })
       .then((events) => {
         if (!events) {
@@ -203,7 +211,8 @@ class eventController {
           status: 'Success',
           message: 'These are your events',
           data: {
-            events
+            events: events.rows,
+            count: events.count
           }
         });
       })

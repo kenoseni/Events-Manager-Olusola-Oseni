@@ -28,12 +28,13 @@ class centerReducer {
         const {
           status, message
         } = action.payload;
-        const { centers } = action.payload.data;
+        const { centers, count } = action.payload.data;
         return {
           ...state,
           status,
           message,
-          centers
+          centers,
+          count
         };
       }
       case 'ALL_CENTERS_REJECTED': {

@@ -4,17 +4,19 @@ import axios from 'axios';
 * Get all event actions
 *
 * @method
+* @param {object} page - The page query
 * @param {object} res - The response object
 * @return {object} All event action payload
 * @memberof EventActions
 */
-const allUserEvents = () => (dispatch) => {
+const allUserEvents = page => (dispatch) => {
   dispatch({
     type: 'ALL_USER_EVENT',
   });
   return axios({
     method: 'get',
     url: '/api/v1/events',
+    params: { page },
     headers: { 'x-access-token': localStorage.getItem('x-access-token') }
   })
     .then((res) => {

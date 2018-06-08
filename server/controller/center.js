@@ -49,15 +49,23 @@ class centerController {
   * @memberof centerController
   */
   static getCenters(req, res) {
+    const { page } = req.query;
+    const limit = 6;
+    const offset = (page === undefined || page < 1) ?
+      0 : (parseInt(page, 10) - 1) * limit;
     return db.Center
-      .findAll({
+      .findAndCountAll({
+        limit,
+        order: ['id'],
+        offset,
         attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
       })
       .then(centers => res.status(200).json({
         status: 'Success',
         message: 'List of all centers',
         data: {
-          centers
+          centers: centers.rows,
+          count: centers.count
         }
       }))
       .catch(error => res.status(500).json({

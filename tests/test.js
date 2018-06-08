@@ -222,7 +222,7 @@ const validSignupSeed = [{
 describe('Event Manager', () => {
   describe('Users', () => {
     describe('signup API', () => {
-      it('should return 401 for empty firstname', (done) => {
+      it('should return 400 for empty firstname', (done) => {
         request
           .post('/api/v1/users')
           .set('Connection', 'keep alive')
@@ -230,11 +230,13 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidSignupSeed[0])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.status).to.equal('Error');
+            expect(res.body.message).to.equal('Firstname required');
             done();
           });
       });
-      it('should return 401 for empty lastname', (done) => {
+      it('should return 400 for empty lastname', (done) => {
         request
           .post('/api/v1/users')
           .set('Connection', 'keep alive')
@@ -242,13 +244,13 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidSignupSeed[1])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
+            expect(res.statusCode).to.equal(400);
             expect(res.body.status).to.equal('Error');
             expect(res.body.message).to.equal('Lastname required');
             done();
           });
       });
-      it('should return 401 for empty password', (done) => {
+      it('should return 400 for empty password', (done) => {
         request
           .post('/api/v1/users')
           .set('Connection', 'keep alive')
@@ -256,13 +258,13 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidSignupSeed[2])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
+            expect(res.statusCode).to.equal(400);
             expect(res.body.status).to.equal('Error');
             expect(res.body.message).to.equal('Password required');
             done();
           });
       });
-      it('should return 401 for empty email', (done) => {
+      it('should return 400 for empty email', (done) => {
         request
           .post('/api/v1/users')
           .set('Connection', 'keep alive')
@@ -270,7 +272,7 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidSignupSeed[3])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
+            expect(res.statusCode).to.equal(400);
             expect(res.body.status).to.equal('Error');
             expect(res.body.message).to.equal('Email required');
             done();
@@ -374,7 +376,7 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidLoginSeed[0])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
+            expect(res.statusCode).to.equal(400);
             expect(res.body.status).to.equal('Error');
             expect(res.body.message).to.equal('Email required');
             done();
@@ -388,7 +390,7 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidLoginSeed[1])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
+            expect(res.statusCode).to.equal(400);
             expect(res.body.status).to.equal('Error');
             expect(res.body.message).to.equal('Password required');
             done();
@@ -496,7 +498,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidCenterSeed[0])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Center name is required');
@@ -512,7 +514,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidCenterSeed[1])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Description field required');
@@ -528,7 +530,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidCenterSeed[2])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Center location is required');
@@ -544,7 +546,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidCenterSeed[3])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Center price is required');
@@ -560,7 +562,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidCenterSeed[4])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Center facilities is required');
@@ -576,7 +578,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidCenterSeed[5])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Center capacity is required');
@@ -690,7 +692,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidEventSeed[0])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Event name required');
@@ -706,7 +708,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidEventSeed[1])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Date field required');
@@ -722,7 +724,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidEventSeed[2])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('Time required');
@@ -738,7 +740,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidEventSeed[3])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('CenterId required');
@@ -754,7 +756,7 @@ describe('Event Manager', () => {
             .type('form')
             .send(invalidEventSeed[4])
             .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
+              expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
                 .equal('CenterId must be an integer');

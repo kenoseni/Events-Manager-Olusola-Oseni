@@ -8,27 +8,30 @@ import { eventCenters } from '../reducers';
 import AdminCenterList from './AdminCenterList';
 import AddCenterModalButton from './AddCenterModalButton'
 import AddCenter from './AddCenter';
+import Pages from './Pages';
 
 class AdminCenters extends Component {
   constructor(props) {
     super(props);
+
   }
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      this.props.getAllCenters();
+      const page = this.props.history.location.search.split('=')[1];
+      this.props.getAllCenters(page);
     }
   }
   
   render () {
-    const { centers } = this.props.eventCenters;
-    const { addCenter, deleteCenter, modifyCenter, addImage } = this.props;
-    
+    const { centers, count } = this.props.eventCenters;
+    const { addCenter, deleteCenter, modifyCenter, addImage, history, getAllCenters } = this.props;
     if (this.props.isAdmin) {
       return (
         <div>
           <AdminCenterList centers={centers} deleteCenter={deleteCenter} modifyCenter={modifyCenter} {...this.props}  />
           <AddCenterModalButton />
           <AddCenter  title='Add Center' addCenter={addCenter} addImage={addImage} {...this.props} />
+          {count !== undefined && <Pages count={count} history={history} />}
         </div>
       )
     }else {

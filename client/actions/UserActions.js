@@ -49,6 +49,35 @@ const userLogin = loginDetails => (dispatch) => {
       dispatch({ type: 'LOGIN_REJECTED', payload: err.response.data });
     });
 };
+/**
+* Upgrade user to admin action
+*
+* @method
+* @param {number} id - Id of user to be upgraded
+* @return {object} dispatch user property as empty onject
+* @memberof UserActions
+*/
+const upgradeUserToAdmin = id => (dispatch) => {
+  dispatch({ type: 'UPGRADING_USER' });
+  return axios({
+    method: 'put',
+    url: `/api/v1/users/${id}`,
+    headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+  })
+    .then((res) => {
+      dispatch({
+        type: 'UPGRADING_USER_RESOLVED',
+        payload: res.data,
+        id
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'UPGRADING_USER_REJECTED',
+        payload: err.response.data
+      });
+    });
+};
 
 /**
 * User Signout action
@@ -67,14 +96,15 @@ const signout = () => (dispatch) => {
 * Get all user action
 *
 * @method
-* @param {object} none
+* @param {object} page - The page query
 * @param {object} res - The response object
 * @return {object} all users action payload
 * @memberof UserActions
 */
-const getAllUsers = () => dispatch => axios({
+const getAllUsers = page => dispatch => axios({
   method: 'get',
   url: '/api/v1/users',
+  params: { page },
   headers: { 'x-access-token': localStorage.getItem('x-access-token') }
 })
   .then((res) => {
@@ -94,6 +124,7 @@ const getAllUsers = () => dispatch => axios({
 export {
   createUser,
   userLogin,
+  upgradeUserToAdmin,
   signout,
   getAllUsers
 };

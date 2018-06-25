@@ -1,31 +1,34 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import AdminPanelTable from './AdminPanelTable';
+import Pages from './Pages';
 
 class AdminPanel extends Component {
   
   render () {
-    const {users, match} = this.props
+    const {users, match, history, count, limit} = this.props
+    console.log(users);
     return (
       <div className="container">
         <div className="row" id="">
-          <div className="col-xs-12 col-md-1"></div>
-          <div className="col-xs-12 col-md-10" id="etable">
+          <div className="col-xs-12 col-md-0"></div>
+          <div className="col-xs-12 col-md-12" id="etable">
               <div className="card w-40">
                 <div className="card-body">
-                  <div className="table-wrapper-2">
+                  <div className="table-wrapper">
+                    <h3>Users</h3>
                     {/*<!--Table-->*/}
                     <table className="table table-hover table-responsive">
-                      <thead className="mdb-color lighten-4">
+                      <thead className="blue-grey text-white lighten-1">
                         <tr>
                           <th>#</th>
                           <th className="th-lg">ID</th>
-                          <th className="th-lg">EVENT NAME</th>
-                          <th className="th-lg">DATE</th>
-                          <th className="th-lg">CENTER</th>
+                          <th className="th-lg">FIRST NAME</th>
+                          <th className="th-lg">LAST NAME</th>
+                          <th className="th-lg">ISADMIN</th>
                           <th className="th-lg">ROLE</th>
                           <th className="th-lg">EMAIL</th>
-                          <th className="th-lg"></th>
+                          <th className="th-lg">ACTION</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -36,11 +39,20 @@ class AdminPanel extends Component {
                       </tbody>
                     </table>
                     {/*<!--Table-->*/}
+                    <div >
+                      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <span className="count">
+                          {users ? `1 - ${users.length} of ${users.length}` : null}
+                        </span>
+                        <span>{count !== undefined && <Pages count={count} history={history} limit={limit} />}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
               </div>
            </div>
-          <div className="col-xs-12 col-md-1"></div>
+          <div className="col-xs-12 col-md-0"></div>
         </div>
       </div>
     )

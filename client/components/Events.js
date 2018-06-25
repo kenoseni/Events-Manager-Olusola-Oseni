@@ -22,11 +22,10 @@ class Events extends Component {
   componentDidMount() {
     const page = this.props.history.location.search.split('=')[1];
     this.props.allUserEvents(page);
-    this.props.getAllCenters(page)
+    this.props.getAllCenters()
   }
-
   render() {
-    const { events, count } = this.props.userEvents;
+    const { events, count, limit } = this.props.userEvents;
     const { addEvent,
        deleteEvent,
        modifyEvent,
@@ -46,7 +45,7 @@ class Events extends Component {
         />
         <AddEventModalButton />
         <AddEvent title={'ADD EVENT'} addEvent={addEvent} {...this.props} />
-        {count !== undefined && <Pages count={count} history={history} />}
+        {count !== undefined && <Pages count={count} history={history} limit={limit} />}
       </div>
     )
   }

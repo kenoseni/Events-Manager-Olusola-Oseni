@@ -23,7 +23,7 @@ class AdminCenters extends Component {
   }
   
   render () {
-    const { centers, count } = this.props.eventCenters;
+    const { centers, count, limit } = this.props.eventCenters;
     const { addCenter, deleteCenter, modifyCenter, addImage, history, getAllCenters } = this.props;
     if (this.props.isAdmin) {
       return (
@@ -31,7 +31,7 @@ class AdminCenters extends Component {
           <AdminCenterList centers={centers} deleteCenter={deleteCenter} modifyCenter={modifyCenter} {...this.props}  />
           <AddCenterModalButton />
           <AddCenter  title='Add Center' addCenter={addCenter} addImage={addImage} {...this.props} />
-          {count !== undefined && <Pages count={count} history={history} />}
+          {count !== undefined && <Pages count={count} history={history} limit={limit} />}
         </div>
       )
     }else {

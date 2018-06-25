@@ -212,7 +212,8 @@ class eventController {
           message: 'These are your events',
           data: {
             events: events.rows,
-            count: events.count
+            count: events.count,
+            limit
           }
         });
       })

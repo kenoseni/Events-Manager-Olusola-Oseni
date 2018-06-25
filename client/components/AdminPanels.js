@@ -13,13 +13,13 @@ class AdminPanels extends Component {
   }
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      this.props.getAllUsers();
+      const page = this.props.history.location.search.split('=')[1];
+      this.props.getAllUsers(page);
     }
   }
   
   render () {
     const { users } = this.props.user;
-    console.log(users)
     
     if (this.props.isAdmin) {
       return (

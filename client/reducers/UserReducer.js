@@ -71,17 +71,61 @@ class userReducer {
       }
       case 'GET_USERS_RESOLVED': {
         const {
-          users
+          users, count, limit
         } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
           status,
           message,
-          users
+          users,
+          count,
+          limit
         };
       }
       case 'GET_USERS_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
+      case 'UPGRADING_USER': {
+        return {
+          ...state
+        };
+      }
+      case 'UPGRADING_USER_RESOLVED': {
+        const { status, message } = action.payload;
+        const
+          {
+            id, firstname, lastname, email, role, isAdmin
+          } = action.payload.data;
+        return {
+          ...state,
+          users: [
+            ...state.users.map((user) => {
+              if (user.id !== action.id) {
+                return user;
+              }
+              return {
+                id,
+                firstname,
+                lastname,
+                role,
+                isAdmin,
+                email
+              };
+            })
+          ],
+          status,
+          message
+        };
+      }
+      case 'UPGRADING_USER_REJECTED': {
         const {
           status, message
         } = action.payload;

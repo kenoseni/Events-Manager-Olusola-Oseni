@@ -52,7 +52,7 @@ const addCenter = centerInfo => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'ADD_CENTER_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
@@ -116,7 +116,7 @@ const modifyCenter = (centerInfo, id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'MODIFY_CENTER_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };

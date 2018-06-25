@@ -83,9 +83,11 @@ export default class Navbar extends Component {
                 </li>
               </Link>
               { this.isAdmin &&
+                <Link to={`/admin`}>
                 <li className={(this.props.page === 'Admin') ? navItemClass.join(' ') : 'nav-item'}>
                   <button className="nav-link">{this.props.admin}</button>
                 </li>
+                </Link>
               }
               { this.isLoggedIn &&
                 <Link to={`/centers/${this.props.id}`}>

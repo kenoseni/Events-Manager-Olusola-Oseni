@@ -52,8 +52,8 @@ class AddCenter extends Component {
       <div>
         <div className="container">            
           {/*<!-- Add Center Modal -->*/}
-          <div className="modal fade top" id="addCenter" role="dialog" aria-labelledby="addCenter">
-            <div className="modal-dialog modal-lg">      
+          <div className="modal fade right" id="addCenter" role="dialog" aria-labelledby="addCenter">
+            <div className="modal-dialog modal-full-height modal-right">      
               {/*<!-- Modal content-->*/}
               <div className="modal-content">
                 <div className="modal-header">
@@ -62,56 +62,56 @@ class AddCenter extends Component {
                 </div>
                 <div className="modal-body">
                   <form action="" method="" role="form" onSubmit={this.submit}>       
-                    <div className="card">
-                      <div className="card-header text-center">
+                    <div className="">
+                      <div className="input-group mb-3">
                         <CenterImage addImage={addImage} />
                       </div>
-                      <div className="card-body">
+                      <div className="">
                         <div className="container-fluid">
                           <div className="row">
                             <div className="col-sm-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Name</span>
+                              <div className="">
+                                <span className="" id="sizing-addon1">Name:</span>
                                 <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-sm-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Description</span>
+                              <div className="">
+                                <span className="" id="sizing-addon1">Description:</span>
                                 <input type="text" name='description' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-sm-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Location</span>
+                              <div className="">
+                                <span className="" id="sizing-addon1">Location:</span>
                                 <input type="text" name='location' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-sm-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Price</span>
+                              <div className="">
+                                <span className="" id="sizing-addon1">Price:</span>
                                 <input type="text" name='price' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-sm-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Facilities</span>
+                              <div className="">
+                                <span className="" id="sizing-addon1">Facilities:</span>
                                 <input type="text" name='facilities' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-sm-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Capacity</span>
+                              <div className="">
+                                <span className="" id="sizing-addon1">Capacity:</span>
                                 <input type="text" name= 'capacity' onChange={this.getInput} className="form-control" placeholder="" aria-describedby="sizing-addon1" />
                               </div>
                             </div>

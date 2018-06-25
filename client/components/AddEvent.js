@@ -45,8 +45,8 @@ class AddEvent extends Component {
       <div>
         <div className="container">            
           {/*<!-- Add Events Modal -->*/}
-          <div className="modal fade" id="addEvent" role="dialog">
-            <div className="modal-dialog modal-lg">      
+          <div className="modal fade right" id="addEvent" role="dialog">
+            <div className="modal-dialog modal-full-height modal-right">      
               {/*<!-- Modal content-->*/}
               <div className="modal-content">
                 <div className="modal-header">
@@ -55,19 +55,20 @@ class AddEvent extends Component {
                 </div>
                 <div className="modal-body">
                   <form action="" method="" role="form" onSubmit={this.submit}>       
-                    <div className="card">
-                      <div className="card-body text-center">
-                        <div className="input-group input-group-sm">
-                          <span className="input-group-addon" id="sizing-addon1">Event Name</span>
-                          <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                    <div className="">
+                      <div className="">
+                        <div className="input-group mb-3">
                         </div>
                       </div>
-                      <div className="card-body">
-                        <div className="container-fluid">
-                          <div className="row">
-                            <div className="col-xs-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Location</span>
+                      <div className="container-fluid">
+                        <div className="row">
+                          <span className="" id="sizing-addon1">Event Name:</span>
+                          <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                        </div>
+                          <div className="">
+                            <div className="row">
+                              <div className="col-xs-12">
+                                <span className="" id="sizing-addon1">Location:</span>
                                 <select className="form-control" name="centerId" onChange={this.getInput}>
                                   <option value={this.state.value}>Choose a Center</option>
                                   {
@@ -76,20 +77,19 @@ class AddEvent extends Component {
                                 </select>
                               </div>
                             </div>
-                            <div className="col-xs-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Date</span>
+                            <div className="row">
+                              <div className="col-xs-12">
+                                <span className="" id="sizing-addon1">Date:</span>
                                 <input type="date" name="date" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
-                            <div className="col-xs-12">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Time</span>
+                            <div className="row">
+                              <div className="col-xs-12">
+                                <span className="" id="sizing-addon1">Time:</span>
                                 <input type="text" name="time" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                           </div>
-                        </div>
                       </div>
                     </div>
                     <br />

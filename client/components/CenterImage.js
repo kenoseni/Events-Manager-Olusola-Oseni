@@ -19,7 +19,7 @@ class CenterImage extends Component {
 
   render() {
     return (
-      <div className="input-group input-group-sm">
+      <div className="">
         <input type="file" name="file" id="file-upload" onChange={this.uploadImage} className="form-control-file" aria-describedby="sizing-addon1" />
       </div>
     ) 

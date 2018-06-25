@@ -11,8 +11,7 @@ class Event extends Component {
   render() {
     const {event, i} = this.props
     const { id } = this.props.event
-    const { centers } = this.props.eventCenters
-    const center = centers.filter(center => center.id === event.centerId)
+    const center = this.props.eventCenters.centers.filter(center => center.id === event.centerId)
     const [centerName] = center
     return (
       <div className="col-md-4">
@@ -21,8 +20,8 @@ class Event extends Component {
             <h4>{event.name.toUpperCase()}</h4>
           </div>
           <div className="card-body">
-            <p className="card-text font-weight-bold">Location: {(centerName) ? centerName.name.toUpperCase():null}</p>
-            <p className="card-text font-weight-bold">Address: {(centerName) ? centerName.location:null}</p>
+            <p className="card-text font-weight-bold">Location: {(centerName) ? centerName.name.toUpperCase() : null}</p>
+            <p className="card-text font-weight-bold">Address: {(centerName) ? centerName.location : null}</p>
             <p className="card-text font-weight-bold">Date: {event.date}</p>
             <p className="card-text font-weight-bold">Time: {event.time}</p>
           </div>

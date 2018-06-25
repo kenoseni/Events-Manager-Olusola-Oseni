@@ -28,13 +28,14 @@ class centerReducer {
         const {
           status, message
         } = action.payload;
-        const { centers, count } = action.payload.data;
+        const { centers, count, limit } = action.payload.data;
         return {
           ...state,
           status,
           message,
           centers,
-          count
+          count,
+          limit
         };
       }
       case 'ALL_CENTERS_REJECTED': {
@@ -140,7 +141,8 @@ class centerReducer {
                 price: center.price,
                 facilities: center.facilities,
                 capacity: center.capacity,
-                avaliability: center.avaliability
+                avaliability: center.avaliability,
+                image: center.image
               };
             })
           ],

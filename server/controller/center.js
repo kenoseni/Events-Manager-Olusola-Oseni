@@ -65,7 +65,8 @@ class centerController {
         message: 'List of all centers',
         data: {
           centers: centers.rows,
-          count: centers.count
+          count: centers.count,
+          limit
         }
       }))
       .catch(error => res.status(500).json({

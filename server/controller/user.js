@@ -115,6 +115,12 @@ class userController {
             message: 'You are not authorised to modify this user'
           });
         }
+        if (user.role === 'admin') {
+          return res.status(401).json({
+            status: 'Fail',
+            message: 'User is already an admin'
+          });
+        }
         if (req.decoded.userid === Number(req.params.userId)) {
           return res.status(403).json({
             status: 'Fail',
@@ -124,11 +130,19 @@ class userController {
         user
           .update({
             isAdmin: true,
-            role: 'admin'
+            role: 'admin',
           })
           .then(() => res.status(200).json({
             status: 'Success',
-            message: 'User successfully upgraded to admin'
+            message: 'User successfully upgraded to admin',
+            data: {
+              id: user.id,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              email: user.email,
+              role: user.role,
+              isAdmin: user.isAdmin
+            }
           }))
           .catch(error => res.status(500).json({
             status: 'Error',
@@ -150,38 +164,45 @@ class userController {
   * @memberof userController
   */
   static getAllUsers(req, res) {
+    const { page } = req.query;
+    const limit = 10;
+    const offset = (page === undefined || page < 1) ?
+      0 : (parseInt(page, 10) - 1) * limit;
     return db.User
-      .findAll({
+      .findAndCountAll({
+        limit,
+        // order: ['id'],
+        offset,
         attributes: { exclude: ['createdAt', 'updatedAt', 'password'] },
-        include: [{
-          model: Center,
-          as: 'centers',
-          attributes: {
-            exclude: [
-              'createdAt',
-              'updatedAt',
-              'userId',
-              'description',
-              'avaliability',
-              'price',
-              'facilities',
-              'capacity',
-              'location'
-            ]
-          }
-        },
-        {
-          model: Event,
-          as: 'events',
-          attributes: {
-            exclude: [
-              'createdAt',
-              'updatedAt',
-              'userId',
-            ]
-          }
-        }
-        ],
+        // include: [{
+        //   model: Center,
+        //   as: 'centers',
+        //   attributes: {
+        //     exclude: [
+        //       'createdAt',
+        //       'updatedAt',
+        //       'userId',
+        //       'description',
+        //       'avaliability',
+        //       'price',
+        //       'facilities',
+        //       'capacity',
+        //       'location'
+        //     ]
+        //   }
+        // },
+        // {
+        //   model: Event,
+        //   as: 'events',
+        //   attributes: {
+        //     exclude: [
+        //       'createdAt',
+        //       'updatedAt',
+        //       'userId',
+        //     ]
+        //   }
+        // }
+        // ],
       })
       .then((users) => {
         if (!users) {
@@ -200,7 +221,9 @@ class userController {
           status: 'Success',
           message: 'These are all user details',
           data: {
-            users
+            users: users.rows,
+            count: users.count,
+            limit
           }
         });
       })

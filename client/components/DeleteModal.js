@@ -21,12 +21,12 @@ class DeleteModal extends Component {
         <div className="container">            
           {/*<!--remove center Modal -->*/}
           <div className="modal fade top" id={`${this.props.i}`} role="dialog">
-            <div className="modal-dialog modal-sm">               
+            <div className="modal-dialog modal-sm modal-notify modal-danger">               
               {/*<!-- Modal content-->*/}
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header d-flex justify-content-center">
                   <h4 className="modal-title">{this.props.title}</h4>
-                  <button type="button" className="close" data-dismiss="modal">&times;</button>
+                  <button type="button" className="close white" data-dismiss="modal">&times;</button>
                 </div>
                 <div className="modal-body">
                   {/*<!--Warning message-->*/}

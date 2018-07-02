@@ -1,18 +1,99 @@
 import axios from 'axios';
 // import { history } from '../routes';
 
-const getAllCenters = () => dispatch => axios({
+/**
+* Get centers action
+*
+* @method
+* @param {object} page - The page query
+* @param {object} res - The response object
+* @return {object} All centers action payload
+* @memberof CenterActions
+*/
+const getCenters = page => dispatch => axios({
   method: 'get',
   url: '/api/v1/centers',
+  params: { page },
+})
+  .then((res) => {
+    dispatch({ type: 'PAGE_CENTERS' });
+    dispatch({ type: 'PAGE_CENTERS_RESOLVED', payload: res.data });
+  })
+  .catch((err) => {
+    dispatch({ type: 'PAGE_CENTERS_REJECTED', payload: err });
+    // history.push('/');
+  });
+
+
+/**
+* Get all centers action
+*
+* @method
+* @param {object} res - The response object
+* @return {object} All centers action payload
+* @memberof CenterActions
+*/
+const getAllCenters = () => dispatch => axios({
+  method: 'get',
+  url: '/api/v1/admin/centers',
+  headers: { 'x-access-token': localStorage.getItem('x-access-token') }
 })
   .then((res) => {
     dispatch({ type: 'ALL_CENTERS' });
-    dispatch({ type: 'ALL_CENTERS_RESOLVED', payload: res.data });
+    dispatch({
+      type: 'ALL_CENTERS_RESOLVED',
+      payload: res.data
+    });
   })
   .catch((err) => {
-    dispatch({ type: 'ALL_CENTERS_REJECTED', payload: err });
-    // history.push('/');
+    dispatch({
+      type: 'ALL_CENTERS_REJECTED',
+      payload: err.respose.data
+    });
   });
+
+
+/**
+* Search center action
+*
+* @method
+* @param {object} searchParameter - The search body
+* @param {object} res - The response object
+* @return {object} All centers action payload
+* @memberof CenterActions
+*/
+const searchForCenters = searchParameter => (dispatch) => {
+  dispatch({
+    type: 'SEARCH_CENTERS',
+  });
+  return axios({
+    method: 'post',
+    url: '/api/v1/search',
+    data: searchParameter
+  })
+    .then((res) => {
+      dispatch({
+        type: 'SEARCH_CENTERS_RESOLVED',
+        payload: res.data
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'SEARCH_CENTERS_REJECTED',
+        payload: err.response.data
+      });
+    });
+};
+
+/**
+* Add center action
+*
+* @method
+* @param {object} centerInfo - Event details
+* @param {object} res - The response object
+* @return {object} Add center action payload
+* @memberof EventActions
+*/
 const addCenter = centerInfo => (dispatch) => {
   dispatch({
     type: 'ADD_CENTER',
@@ -32,10 +113,20 @@ const addCenter = centerInfo => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'ADD_CENTER_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
+
+/**
+* Delete center action
+*
+* @method
+* @param {object} id - Center id
+* @param {object} res - The response object
+* @return {object} Delete center action payload
+* @memberof CenterActions
+*/
 const deleteCenter = id => (dispatch) => {
   dispatch({ type: 'DELETE_CENTER' });
   return axios({
@@ -58,6 +149,16 @@ const deleteCenter = id => (dispatch) => {
     });
 };
 
+/**
+* Modify center action
+*
+* @method
+* @param {object} centerInfo - Center details
+* @param {object} id - Center id
+* @param {object} res - The response object
+* @return {object} Modify center action payload
+* @memberof EventActions
+*/
 const modifyCenter = (centerInfo, id) => (dispatch) => {
   dispatch({ type: 'MODIFY_CENTER' });
   return axios({
@@ -76,11 +177,20 @@ const modifyCenter = (centerInfo, id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'MODIFY_CENTER_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
 
+/**
+* Get one center action
+*
+* @method
+* @param {object} id - Center id
+* @param {object} res - The response object
+* @return {object} Get one center action payload
+* @memberof CenterActions
+*/
 const getOneCenter = id => (dispatch) => {
   dispatch({ type: 'GET_CENTERDETAILS' });
   return axios({
@@ -103,9 +213,11 @@ const getOneCenter = id => (dispatch) => {
     });
 };
 export {
-  getAllCenters,
+  getCenters,
   addCenter,
   deleteCenter,
   modifyCenter,
-  getOneCenter
+  getOneCenter,
+  searchForCenters,
+  getAllCenters
 };

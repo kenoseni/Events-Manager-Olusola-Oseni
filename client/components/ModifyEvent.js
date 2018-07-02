@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import SubmitButton from './SubmitButton'
 import * as centerActions from '../actions/CenterActions';
-import { getAllCenters } from '../actions/CenterActions';
+import { getCenters } from '../actions/CenterActions';
+
 
 class ModifyEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       event: this.props.event,
-      centers: this.props.eventCenters.centers
+      allCenters: this.props.eventCenters.allCenters
     }
   
     this.submit = this.submit.bind(this)
     this.getInput = this.getInput.bind(this)
   }
   componentWillReceiveProps (nextProps) {
-    this.setState({centers: nextProps.eventCenters.centers})
+    this.setState({allCenters: nextProps.eventCenters.allCenters})
   }
   
   getInput(e) {
@@ -39,17 +40,16 @@ class ModifyEvent extends Component {
   }
 
   render () {
-    const { event, i, centers} = this.state
+    const { event, i, allCenters} = this.state
     const {id} = this.props
-    const center = centers.filter(center => center.id === event.centerId)
+    const center = allCenters.filter(center => center.id === event.centerId)
     const [centerName] = center
-    console.log(centerName)
     return (
       <div>
-        <div className="container">            
+        <div className="container modify-event-height">            
           {/*<!-- Add Events Modal -->*/}
-          <div className="modal fade" id={`${id}`} role="dialog">
-            <div className="modal-dialog modal-lg">      
+          <div className="modal fade right" id={`${id}`} role="dialog">
+            <div className="modal-dialog modal-full-height modal-right">      
               {/*<!-- Modal content-->*/}
               <div className="modal-content">
                 <div className="modal-header">
@@ -58,41 +58,47 @@ class ModifyEvent extends Component {
                 </div>
                 <div className="modal-body">
                   <form action="" method="" role="form" onSubmit={this.submit}>       
-                    <div className="card">
-                      <div className="card-header text-center">
-                        <div className="container-fluid">
-                          <div className="row">
-                            <div className="input-group input-group-sm">
-                              <span className="input-group-addon" id="sizing-addon1">Name</span>
-                              <input type="text" name='name' value={(event.name) ? event.name.toUpperCase(): ''} onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
-                          </div>
+                    <div className="">
+                      <div className="">
+                        <div className="">
+                          <div className="input-group mb-3">
                           </div>
                         </div>  
                       </div>
-                      <div className="card-body">
+                      <div className="">
                         <div className="container-fluid">
                           <div className="row">
-                            <div className="col-xs-12 col-md-4">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Venue</span>
+                            <div className="col-12">
+                              <span className="" id="sizing-addon1">Event Name:</span>
+                              <input type="text" name='name' value={(event.name) ? event.name.toUpperCase(): ''} onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="">
+                                <span className="" id="sizing-addon1">Venue</span>
                                 <select className="form-control" name="centerId" onChange={this.getInput}>
                                   <option value={event.centerId}> {(centerName) ? centerName.name: ''} </option>
                                   {
-                                    centers.map(center => <option key={center.id} value={center.id}> {center.name} </option>)
+                                    allCenters.map(center => <option key={center.id} value={center.id}> {center.name} </option>)
                                   }
                                 </select>
                                 {/*<input type="text" name='location' value={event.centerId} className="form-control" aria-describedby="sizing-addon1" />*/}
                               </div>
                             </div>
-                            <div className="col-xs-12 col-md-4">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Date</span>
+                          </div>
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="">
+                                <span className="" id="sizing-addon1">Date</span>
                                 <input type="date" name='date' value={event.date} onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
-                            <div className="col-xs-12 col-md-4">
-                              <div className="input-group input-group-sm">
-                                <span className="input-group-addon" id="sizing-addon1">Time</span>
+                          </div>
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="">
+                                <span className="" id="sizing-addon1">Time</span>
                                 <input type="text" name='time' value={event.time} onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
@@ -100,6 +106,7 @@ class ModifyEvent extends Component {
                         </div>
                       </div>
                     </div>
+                    <br />
                     <SubmitButton name='MODIFY EVENT'/>
                   </form>            
                 </div>

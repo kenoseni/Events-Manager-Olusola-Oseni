@@ -1,12 +1,22 @@
 import axios from 'axios';
 
-const allUserEvents = () => (dispatch) => {
+/**
+* Get all event actions
+*
+* @method
+* @param {object} page - The page query
+* @param {object} res - The response object
+* @return {object} All event action payload
+* @memberof EventActions
+*/
+const allUserEvents = page => (dispatch) => {
   dispatch({
     type: 'ALL_USER_EVENT',
   });
   return axios({
     method: 'get',
     url: '/api/v1/events',
+    params: { page },
     headers: { 'x-access-token': localStorage.getItem('x-access-token') }
   })
     .then((res) => {
@@ -15,11 +25,20 @@ const allUserEvents = () => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'ALL_USER_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
 
+/**
+* Add Event action
+*
+* @method
+* @param {object} eventInfo - Event details
+* @param {object} res - The response object
+* @return {object} Add event action payload
+* @memberof EventActions
+*/
 const addEvent = eventInfo => (dispatch) => {
   dispatch({
     type: 'ADD_EVENT',
@@ -39,11 +58,20 @@ const addEvent = eventInfo => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'ADD_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
 
+/**
+* Delete event action
+*
+* @method
+* @param {object} id - Event id
+* @param {object} res - The response object
+* @return {object} Delete event action payload
+* @memberof EventActions
+*/
 const deleteEvent = id => (dispatch) => {
   dispatch({ type: 'DELETE_EVENT' });
   return axios({
@@ -61,11 +89,21 @@ const deleteEvent = id => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'DELETE_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };
 
+/**
+* Modify Event action
+*
+* @method
+* @param {object} eventInfo - Event details
+* @param {object} id - Event id
+* @param {object} res - The response object
+* @return {object} Modify event action payload
+* @memberof EventActions
+*/
 const modifyEvent = (eventInfo, id) => (dispatch) => {
   dispatch({ type: 'MODIFY_EVENT' });
   return axios({
@@ -84,7 +122,7 @@ const modifyEvent = (eventInfo, id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: 'MODIFY_EVENT_REJECTED',
-        payload: err.response.data.data
+        payload: err.response.data
       });
     });
 };

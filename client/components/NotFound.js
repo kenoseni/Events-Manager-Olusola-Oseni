@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import NavBar from './Navbar';
 
 class NotFound extends Component {
   render () {
     return (
-      <h1>
-        <div className="container alert alert-danger" style={{marginTop:'30px'}}>
+      <div>
+        <NavBar home='Home' centers='Centers' events='Events' />
+        <h1 className="container alert alert-danger" style={{marginTop:'100px'}}>
           Not Found!
-        </div>
-      </h1>
+        </h1>
+      </div>
     )
   }
 }

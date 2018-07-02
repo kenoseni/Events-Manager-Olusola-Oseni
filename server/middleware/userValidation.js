@@ -29,38 +29,29 @@ class UserValidation {
     // Check if firstname is empty
     if (!req.body.firstname || isEmpty(req.body.firstname)) {
       return res.status(400).json({
-        data: {
-          status: 'Fail',
-          message: 'Firstname required'
-        }
-
+        status: 'Error',
+        message: 'Firstname required'
       });
     }
     // Check if lastname is empty
     if (!req.body.lastname || isEmpty(req.body.lastname)) {
       return res.status(400).json({
-        data: {
-          status: 'Fail',
-          message: 'Lastname required'
-        }
+        status: 'Error',
+        message: 'Lastname required'
       });
     }
     // Check if email is empty
     if (!req.body.email || isEmpty(req.body.email)) {
       return res.status(400).json({
-        data: {
-          status: 'Fail',
-          message: 'Email required'
-        }
+        status: 'Error',
+        message: 'Email required'
       });
     }
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
       return res.status(400).json({
-        data: {
-          status: 'Fail',
-          message: 'Password required'
-        }
+        status: 'Error',
+        message: 'Password required'
       });
     }
     return next();
@@ -81,19 +72,22 @@ class UserValidation {
     const firstname = (req.body.firstname).toLowerCase().trim();
     if (!isAlphaNumeric(firstname)) {
       return res.status(400).json({
-        data: {
-          status: 'Fail',
-          message: 'Invalid firstname, only alphabets and numbers allowed'
-        }
+        status: 'Error',
+        message: 'Invalid firstname, only alphabets and numbers allowed'
       });
     }
     const lastname = (req.body.lastname).toLowerCase().trim();
     if (!isAlphaNumeric(lastname)) {
       return res.status(400).json({
-        data: {
-          status: 'Fail',
-          message: 'Invalid lastname, only alphabets and numbers allowed'
-        }
+        status: 'Error',
+        message: 'Invalid lastname, only alphabets and numbers allowed'
+      });
+    }
+    const { email } = req.body;
+    if (!isEmail(email)) {
+      return res.status(422).json({
+        status: 'Error',
+        message: 'Email not valid'
       });
     }
     return next();
@@ -111,11 +105,11 @@ class UserValidation {
    * @memberof UserValidation
    */
   static emailExist(req, res, next) {
-    // const { email } = req.body.email;
+    const { email } = req.body;
     return User
       .findOne({
         where: {
-          email: req.body.email
+          email
         }
       })
       .then((user) => {
@@ -123,17 +117,15 @@ class UserValidation {
           next();
         } else {
           res.status(409).json({
-            data: {
-              status: 'Fail',
-              message: 'Email already exist'
-            }
+            status: 'Error',
+            message: 'Email already exist'
           });
         }
       })
       .catch(error => res.status(500).json({
         data: {
-          status: 'Fail',
-          message: error.message,
+          status: 'Error',
+          error: error.message,
         }
       }));
   }
@@ -152,11 +144,9 @@ class UserValidation {
   static checkPassWord(req, res, next) {
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
-      return res.status(401).json({
-        data: {
-          status: 'Fail',
-          message: 'Password required'
-        }
+      return res.status(400).json({
+        status: 'Error',
+        message: 'Password required'
       });
     }
     return next();
@@ -175,11 +165,9 @@ class UserValidation {
   static checkEmail(req, res, next) {
     // Check if password is empty
     if (!req.body.email || isEmpty(req.body.email)) {
-      return res.status(401).json({
-        data: {
-          status: 'Fail',
-          message: 'Email required'
-        }
+      return res.status(400).json({
+        status: 'Error',
+        message: 'Email required'
       });
     }
     return next();
@@ -202,10 +190,8 @@ class UserValidation {
       .then((user) => {
         if (!user) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'User does not exist'
-            }
+            status: 'Error',
+            message: 'User does not exist'
           });
         }
         next();

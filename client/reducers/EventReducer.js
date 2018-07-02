@@ -26,13 +26,16 @@ class eventReducer {
       }
       case 'ALL_USER_EVENT_RESOLVED': {
         const {
-          status, message, events
+          events, count, limit
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
           message,
-          events
+          events,
+          count,
+          limit
         };
       }
       case 'ALL_USER_EVENT_REJECTED': {
@@ -52,8 +55,9 @@ class eventReducer {
       }
       case 'ADD_EVENT_RESOLVED': {
         const {
-          event, status, message
+          event
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           events: [
@@ -88,7 +92,7 @@ class eventReducer {
       case 'DELETE_EVENT_RESOLVED': {
         const {
           status, message
-        } = action.payload.data;
+        } = action.payload;
         return {
           ...state,
           events: [
@@ -115,8 +119,9 @@ class eventReducer {
       }
       case 'MODIFY_EVENT_RESOLVED': {
         const {
-          status, message, event
+          event
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           events: [

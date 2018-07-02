@@ -6,7 +6,9 @@ import jwtDecode from 'jwt-decode';
 import  { Routes, history } from './routes';
 import store from './store';
 import setAuthorizationToken from './utils/setAuthorizationToken';
-import './components/css/style2.css'
+import './scss/style2.scss'
+// import './components/css/style2.css'
+
 
 const app = document.getElementById('root')
 

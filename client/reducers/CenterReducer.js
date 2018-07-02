@@ -16,9 +16,40 @@ class centerReducer {
     status: '',
     message: '',
     centers: [],
+    allCenters: [],
+    searchedCenters: [],
     center: {}
   }, action) {
     switch (action.type) {
+      case 'PAGE_CENTERS': {
+        return {
+          ...state
+        };
+      }
+      case 'PAGE_CENTERS_RESOLVED': {
+        const {
+          status, message
+        } = action.payload;
+        const { centers, count, limit } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message,
+          centers,
+          count,
+          limit
+        };
+      }
+      case 'PAGE_CENTERS_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
       case 'ALL_CENTERS': {
         return {
           ...state
@@ -26,16 +57,46 @@ class centerReducer {
       }
       case 'ALL_CENTERS_RESOLVED': {
         const {
-          status, message, centers
+          status, message
+        } = action.payload;
+        const { allCenters } = action.payload.data;
+        return {
+          ...state,
+          allCenters,
+          status,
+          message,
+        };
+      }
+      case 'ALL_CENTERS_REJECTED': {
+        const {
+          status, message
         } = action.payload;
         return {
           ...state,
           status,
-          message,
-          centers
+          message
         };
       }
-      case 'ALL_CENTERS_REJECTED': {
+      case 'SEARCH_CENTERS': {
+        return {
+          ...state
+        };
+      }
+      case 'SEARCH_CENTERS_RESOLVED': {
+        const {
+          status, message
+        } = action.payload;
+        const { searchedCenters, count, limit } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message,
+          searchedCenters,
+          count,
+          limit
+        };
+      }
+      case 'SEARCH_CENTERS_REJECTED': {
         const {
           status, message
         } = action.payload;
@@ -52,8 +113,9 @@ class centerReducer {
       }
       case 'ADD_CENTER_RESOLVED': {
         const {
-          center, status, message
+          center
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           centers: [
@@ -75,13 +137,10 @@ class centerReducer {
         };
       }
       case 'ADD_CENTER_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const error = action.payload;
         return {
           ...state,
-          status,
-          message
+          error
         };
       }
       case 'DELETE_CENTER': {
@@ -92,7 +151,7 @@ class centerReducer {
       case 'DELETE_CENTER_RESOLVED': {
         const {
           status, message
-        } = action.payload.data;
+        } = action.payload;
         return {
           ...state,
           centers: [
@@ -119,8 +178,9 @@ class centerReducer {
       }
       case 'MODIFY_CENTER_RESOLVED': {
         const {
-          status, message, center
+          center
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           centers: [
@@ -136,7 +196,8 @@ class centerReducer {
                 price: center.price,
                 facilities: center.facilities,
                 capacity: center.capacity,
-                avaliability: center.avaliability
+                avaliability: center.avaliability,
+                image: center.image
               };
             })
           ],
@@ -162,8 +223,9 @@ class centerReducer {
       }
       case 'GET_CENTERDETAILS_RESOLVED': {
         const {
-          status, message, center
+          center
         } = action.payload.data;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -174,7 +236,7 @@ class centerReducer {
       case 'GET_CENTERDETAILS_REJECTED': {
         const {
           status, message
-        } = action.payload.data;
+        } = action.payload;
         return {
           ...state,
           status,

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+import Search from './Search';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ export default class Navbar extends Component {
   }
 
   render () {
+    const { searchForCenters } = this.props;
     let navItemClass = ["nav-item"];
 
     switch(this.props.page) {
@@ -51,7 +54,7 @@ export default class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark indigo smooth-scroll fixed-top">
-        <div className="container">
+        <div className="container-fluid">
           <Link to={`/`}>
             <button className="navbar-brand" ><i className="" aria-hidden="true"></i> <i>Encore </i></button>
           </Link>
@@ -83,9 +86,11 @@ export default class Navbar extends Component {
                 </li>
               </Link>
               { this.isAdmin &&
+                <Link to={`/admin`}>
                 <li className={(this.props.page === 'Admin') ? navItemClass.join(' ') : 'nav-item'}>
                   <button className="nav-link">{this.props.admin}</button>
                 </li>
+                </Link>
               }
               { this.isLoggedIn &&
                 <Link to={`/centers/${this.props.id}`}>
@@ -96,10 +101,7 @@ export default class Navbar extends Component {
               }
               
             </ul>
-            <form className="form-inline">
-              <i className="fa fa-search fa-lg "></i>
-              <input className="form-control mr-sm-2" type="text" placeholder="Search for event centers" aria-label="Search" />
-            </form>
+            <Search searchForCenters={searchForCenters}/>
             <ul className="nav navbar-nav">
               { !this.isLoggedIn &&
                 <li className="nav-item">
@@ -124,4 +126,7 @@ export default class Navbar extends Component {
       </nav>
     );
   }
+}
+Navbar.propTypes = {
+  searchForCenters: PropTypes.func
 }

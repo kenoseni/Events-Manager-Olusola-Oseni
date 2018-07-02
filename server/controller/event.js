@@ -31,11 +31,9 @@ class eventController {
       })
       .then((result) => {
         if (result) {
-          return res.status(400).json({
-            data: {
-              status: 'Fail',
-              message: 'Date already taken,please choose another date'
-            }
+          return res.status(401).json({
+            status: 'Error',
+            message: 'Date already taken,please choose another date'
           });
         }
         Event
@@ -47,17 +45,15 @@ class eventController {
             centerId: req.body.centerId,
           })
           .then(event => res.status(201).json({
+            status: 'Success',
+            message: 'Event was successfully created',
             data: {
-              status: 'Success',
-              message: 'Event was successfully created',
               event
             }
           }))
           .catch(error => res.status(500).json({
-            data: {
-              status: 'Error',
-              message: error.message
-            }
+            status: 'Error',
+            message: error.message
           }));
       })
       .catch(error => res.status(500).json({ message: error.message }));
@@ -77,40 +73,30 @@ class eventController {
       .then((event) => {
         if (!event) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'Event not Found'
-            }
+            status: 'Error',
+            message: 'Event not Found'
           });
         }
         if (req.decoded.userid !== event.userId) {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'User cannot delete this event'
-            }
+            status: 'Error',
+            message: 'User cannot delete this event'
           });
         }
         event
           .destroy()
           .then(() => res.status(200).json({
-            data: {
-              status: 'Success',
-              message: 'Event has been successfully deleted'
-            }
+            status: 'Success',
+            message: 'Event has been successfully deleted'
           }))
           .catch(error => res.status(500).json({
-            data: {
-              status: 'Fail',
-              message: error.message
-            }
+            status: 'Error',
+            message: error.message
           }));
       })
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Fail',
-          message: error.message
-        }
+        status: 'Error',
+        message: error.message
       }));
   }
   /**
@@ -130,10 +116,8 @@ class eventController {
         }
         if (req.decoded.userid !== event.userId) {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'User cannot modify this event'
-            }
+            status: 'Fail',
+            message: 'User cannot modify this event'
           });
         }
         event.updateAttributes({
@@ -143,14 +127,15 @@ class eventController {
           centerId: req.body.centerId || event.centerId,
         });
         return res.status(200).json({
+          status: 'Success',
+          message: 'Event was successfully modified',
           data: {
-            status: 'Success',
-            message: 'Event was successfully modified',
             event
           }
         });
       })
       .catch(error => res.status(500).json({
+        status: 'Error',
         message: error.message
       }));
   }
@@ -174,25 +159,21 @@ class eventController {
       .then((event) => {
         if (!event) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'No such event available'
-            }
+            status: 'Error',
+            message: 'No such event available'
           });
         }
         return res.status(200).json({
+          status: 'Success',
+          message: 'Event available',
           data: {
-            status: 'Success',
-            message: 'Event available',
             event
           }
         });
       })
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Fail',
-          message: error.message
-        }
+        status: 'Error',
+        message: error.message
       }));
   }
   /**
@@ -205,30 +186,39 @@ class eventController {
   * @memberof eventController
   */
   static userEvents(req, res) {
+    const { page } = req.query;
+    const limit = 6;
+    const offset = (page === undefined || page < 1) ?
+      0 : (parseInt(page, 10) - 1) * limit;
     return Event
-      .findAll({
+      .findAndCountAll({
         where: {
           userId: req.decoded.userid,
-        }
+        },
+        limit,
+        order: ['id'],
+        offset,
+        attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
       })
       .then((events) => {
         if (!events) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'Events not found'
-            }
+            status: 'Error',
+            message: 'Events not found'
           });
         }
         res.status(200).json({
+          status: 'Success',
+          message: 'These are your events',
           data: {
-            status: 'Success',
-            message: 'These are your events',
-            events
+            events: events.rows,
+            count: events.count,
+            limit
           }
         });
       })
       .catch(error => res.status(500).json({
+        status: 'Error',
         message: error.message
       }));
   }

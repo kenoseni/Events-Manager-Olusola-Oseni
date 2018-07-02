@@ -8,12 +8,14 @@
     "npm": "5.4.2"
   },
   "scripts": {
-    "start": "babel-node ./server/app.js",
+    "start": "npm run build && node ./lib/app.js",
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js",
     "start:dev": "nodemon ./server/app --exec babel-node",
     "test": "nyc mocha --timeout 250000 tests/test.js --require babel-register --exit",
     "test:client": "./node_modules/.bin/jest --coverage __tests__/ ",
     "test:client:watch": "npm run test:client -- --watch",
+    "build": "babel server -d lib --source-maps inline --copy-files",
+    "heroku-postbuild": "npm run build",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "nyc": "nyc report",
     "compile-component": "babel client/components --presets es2015 --out-dir client/public --source-maps",
@@ -76,6 +78,7 @@
     "sequelize-cli": "^3.1.0",
     "shortid": "^2.2.8",
     "style-loader": "^0.19.0",
+    "swagger-ui-express": "^3.0.9",
     "volleyball": "^1.4.1",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.2",

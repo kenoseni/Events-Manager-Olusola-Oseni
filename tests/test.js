@@ -82,21 +82,53 @@ const validSignupSeed = [{
   validEventSeed = [
     {
       name: 'wedding',
-      date: new Date('2017-12-25').toISOString(),
-      time: '5:00 pm',
+      date: '2017-12-25',
+      time: '5 pm',
       centerId: 1
     },
     {
       name: 'Birthday',
-      date: new Date('2018-12-25').toISOString(),
-      time: '4:00 pm',
+      date: '2018-12-25',
+      time: '4 pm',
       centerId: 2
     },
     {
       name: 'Seminar',
-      date: new Date('2018-12-30').toISOString(),
-      time: '4:00 pm',
+      date: '2018-12-30',
+      time: '4 pm',
       centerId: 2
+    }
+  ],
+  invalidEventSeed = [
+    {
+      name: '',
+      date: '2017-12-25',
+      time: '5 pm',
+      centerId: 1
+    },
+    {
+      name: 'Birthday',
+      date: '',
+      time: '4 pm',
+      centerId: 2
+    },
+    {
+      name: 'Seminar',
+      date: '2018-12-30',
+      time: '',
+      centerId: 2
+    },
+    {
+      name: 'Seminar',
+      date: '2018-12-30',
+      time: '4 pm',
+      centerId: ''
+    },
+    {
+      name: 'Seminar',
+      date: '2018-12-30',
+      time: '4 pm',
+      centerId: 'good'
     }
   ],
   validCenterSeed = [
@@ -199,6 +231,8 @@ describe('Event Manager', () => {
           .send(invalidSignupSeed[0])
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
+            expect(res.body.status).to.equal('Error');
+            expect(res.body.message).to.equal('Firstname required');
             done();
           });
       });
@@ -211,7 +245,8 @@ describe('Event Manager', () => {
           .send(invalidSignupSeed[1])
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
-            expect(res.body.data.message).to.equal('Lastname required');
+            expect(res.body.status).to.equal('Error');
+            expect(res.body.message).to.equal('Lastname required');
             done();
           });
       });
@@ -224,7 +259,8 @@ describe('Event Manager', () => {
           .send(invalidSignupSeed[2])
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
-            expect(res.body.data.message).to.equal('Password required');
+            expect(res.body.status).to.equal('Error');
+            expect(res.body.message).to.equal('Password required');
             done();
           });
       });
@@ -237,7 +273,8 @@ describe('Event Manager', () => {
           .send(invalidSignupSeed[3])
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
-            expect(res.body.data.message).to.equal('Email required');
+            expect(res.body.status).to.equal('Error');
+            expect(res.body.message).to.equal('Email required');
             done();
           });
       });
@@ -250,9 +287,12 @@ describe('Event Manager', () => {
           .send(validSignupSeed[0])
           .end((err, res) => {
             userToken[0] = res.body.data.token;
-            // expect(res.statusCode).to.equal(201);
-            expect(res.body.data.message).to
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.message).to
               .equal('User successfully signed up');
+            expect(res.body.status).to
+              .equal('Success');
+            expect(res.body.data.token).to.equal(userToken[0]);
             done();
           });
       });
@@ -265,9 +305,13 @@ describe('Event Manager', () => {
           .type('form')
           .send(validSignupSeed[1])
           .end((err, res) => {
+            userToken[1] = res.body.data.token;
             expect(res.statusCode).to.equal(201);
-            expect(res.body.data.message).to
+            expect(res.body.message).to
               .equal('User successfully signed up');
+            expect(res.body.status).to
+              .equal('Success');
+            expect(res.body.data.token).to.equal(userToken[1]);
             done();
           });
       });
@@ -283,9 +327,10 @@ describe('Event Manager', () => {
           .end((err, res) => {
             userToken[0] = res.body.data.token;
             expect(res.statusCode).to.equal(200);
-            expect(res.body.data.status).to.equal('Success');
-            expect(res.body.data.message).to
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to
               .equal('User successfully logged in');
+            expect(res.body.data.token).to.equal(userToken[0]);
             done();
           });
       });
@@ -299,9 +344,10 @@ describe('Event Manager', () => {
           .end((err, res) => {
             userToken[1] = res.body.data.token;
             expect(res.statusCode).to.equal(200);
-            expect(res.body.data.status).to.equal('Success');
-            expect(res.body.data.message).to
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to
               .equal('User successfully logged in');
+            expect(res.body.data.token).to.equal(userToken[1]);
             done();
           });
       });
@@ -315,9 +361,10 @@ describe('Event Manager', () => {
           .end((err, res) => {
             adminToken[0] = res.body.data.token;
             expect(res.statusCode).to.equal(200);
-            expect(res.body.data.status).to.equal('Success');
-            expect(res.body.data.message).to
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to
               .equal('User successfully logged in');
+            expect(res.body.data.token).to.equal(adminToken[0]);
             done();
           });
       });
@@ -329,9 +376,9 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidLoginSeed[0])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
-            expect(res.body.data.status).to.equal('Fail');
-            expect(res.body.data.message).to.equal('Email required');
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.status).to.equal('Error');
+            expect(res.body.message).to.equal('Email required');
             done();
           });
       });
@@ -343,9 +390,9 @@ describe('Event Manager', () => {
           .type('form')
           .send(invalidLoginSeed[1])
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
-            expect(res.body.data.status).to.equal('Fail');
-            expect(res.body.data.message).to.equal('Password required');
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.status).to.equal('Error');
+            expect(res.body.message).to.equal('Password required');
             done();
           });
       });
@@ -362,8 +409,8 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('User successfully upgraded to admin');
               done();
             });
@@ -378,9 +425,10 @@ describe('Event Manager', () => {
             .end((err, res) => {
               adminToken[1] = res.body.data.token;
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('User successfully logged in');
+              expect(res.body.data.token).to.equal(adminToken[1]);
               done();
             });
         });
@@ -398,9 +446,10 @@ describe('Event Manager', () => {
             .send(validCenterSeed[0])
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('Center created successfully');
+              expect(res.body.data).to.equal(res.body.data);
               done();
             });
         });
@@ -414,9 +463,10 @@ describe('Event Manager', () => {
             .send(validCenterSeed[1])
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('Center created successfully');
+              expect(res.body.data).to.equal(res.body.data);
               done();
             });
         });
@@ -432,8 +482,8 @@ describe('Event Manager', () => {
               .send()
               .end((err, res) => {
                 expect(res.statusCode).to.equal(401);
-                expect(res.body.data.status).to.equal('Fail');
-                expect(res.body.data.message).to
+                expect(res.body.status).to.equal('Error');
+                expect(res.body.message).to
                   .equal('Access denied, no token provided');
                 done();
               });
@@ -449,8 +499,8 @@ describe('Event Manager', () => {
             .send(invalidCenterSeed[0])
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
                 .equal('Center name is required');
               done();
             });
@@ -465,8 +515,8 @@ describe('Event Manager', () => {
             .send(invalidCenterSeed[1])
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
                 .equal('Description field required');
               done();
             });
@@ -481,8 +531,8 @@ describe('Event Manager', () => {
             .send(invalidCenterSeed[2])
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
                 .equal('Center location is required');
               done();
             });
@@ -497,8 +547,8 @@ describe('Event Manager', () => {
             .send(invalidCenterSeed[3])
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
                 .equal('Center price is required');
               done();
             });
@@ -513,8 +563,8 @@ describe('Event Manager', () => {
             .send(invalidCenterSeed[4])
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
                 .equal('Center facilities is required');
               done();
             });
@@ -529,8 +579,8 @@ describe('Event Manager', () => {
             .send(invalidCenterSeed[5])
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
                 .equal('Center capacity is required');
               done();
             });
@@ -545,8 +595,8 @@ describe('Event Manager', () => {
             .send(validCenterSeed[0])
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to.equal('Center updated');
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to.equal('Center updated');
               done();
             });
         });
@@ -560,8 +610,8 @@ describe('Event Manager', () => {
             .send(validCenterSeed[1])
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to.equal('Center updated');
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to.equal('Center updated');
               done();
             });
         });
@@ -575,8 +625,8 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('Center has been successfully deleted');
               done();
             });
@@ -591,11 +641,29 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(401);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('User unauthorized');
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to.equal('User unauthorized');
               done();
             });
         });
+        it(
+          'should return an error when center to be deleted is not found',
+          (done) => {
+            request
+              .delete('/api/v1/centers/7')
+              .set('Connection', 'keep alive')
+              .set('x-access-token', adminToken[0])
+              .set('Content-Type', 'application/json')
+              .type('form')
+              .send()
+              .end((err, res) => {
+                expect(res.statusCode).to.equal(404);
+                expect(res.body.status).to.equal('Error');
+                expect(res.body.message).to.equal('Center not found');
+                done();
+              });
+          }
+        );
         it('should allow admin get all centers', (done) => {
           request
             .get('/api/v1/centers')
@@ -607,7 +675,7 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
               expect(res.body.status).to.equal('Success');
-              expect(res.body.message).to.equal('List of all centers');
+              expect(res.body.message).to.equal('These are the centers');
               done();
             });
         });
@@ -615,6 +683,86 @@ describe('Event Manager', () => {
     });
     describe('Events', () => {
       describe('Event API', () => {
+        it('should return an error when no name is provided', (done) => {
+          request
+            .post('/api/v1/events')
+            .set('Connection', 'keep alive')
+            .set('x-access-token', userToken[0])
+            .set('Content-Type', 'application/json')
+            .type('form')
+            .send(invalidEventSeed[0])
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
+                .equal('Event name required');
+              done();
+            });
+        });
+        it('should return an error when no date is provided', (done) => {
+          request
+            .post('/api/v1/events')
+            .set('Connection', 'keep alive')
+            .set('x-access-token', userToken[0])
+            .set('Content-Type', 'application/json')
+            .type('form')
+            .send(invalidEventSeed[1])
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
+                .equal('Date field required');
+              done();
+            });
+        });
+        it('should return an error when no time is provided', (done) => {
+          request
+            .post('/api/v1/events')
+            .set('Connection', 'keep alive')
+            .set('x-access-token', userToken[0])
+            .set('Content-Type', 'application/json')
+            .type('form')
+            .send(invalidEventSeed[2])
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
+                .equal('Time required');
+              done();
+            });
+        });
+        it('should return an error when no centerId is provided', (done) => {
+          request
+            .post('/api/v1/events')
+            .set('Connection', 'keep alive')
+            .set('x-access-token', userToken[0])
+            .set('Content-Type', 'application/json')
+            .type('form')
+            .send(invalidEventSeed[3])
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
+                .equal('CenterId required');
+              done();
+            });
+        });
+        it('should return an error when centerId is not numeric', (done) => {
+          request
+            .post('/api/v1/events')
+            .set('Connection', 'keep alive')
+            .set('x-access-token', userToken[0])
+            .set('Content-Type', 'application/json')
+            .type('form')
+            .send(invalidEventSeed[4])
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
+                .equal('CenterId must be an integer');
+              done();
+            });
+        });
         it('should allow a user to create an event', (done) => {
           request
             .post('/api/v1/events')
@@ -625,8 +773,8 @@ describe('Event Manager', () => {
             .send(validEventSeed[1])
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('Event was successfully created');
               done();
             });
@@ -641,8 +789,8 @@ describe('Event Manager', () => {
             .send(validEventSeed[2])
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('Event was successfully modified');
               done();
             });
@@ -657,8 +805,8 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to.equal('Event available');
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to.equal('Event available');
               done();
             });
         });
@@ -672,8 +820,8 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to.equal('These are your events');
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to.equal('These are your events');
               done();
             });
         });
@@ -687,8 +835,8 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(401);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to
                 .equal('Access denied, no token provided');
               done();
             });
@@ -703,8 +851,8 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.data.status).to.equal('Success');
-              expect(res.body.data.message).to
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to
                 .equal('Event has been successfully deleted');
               done();
             });
@@ -719,8 +867,8 @@ describe('Event Manager', () => {
             .send()
             .end((err, res) => {
               expect(res.statusCode).to.equal(404);
-              expect(res.body.data.status).to.equal('Fail');
-              expect(res.body.data.message).to.equal('No such event available');
+              expect(res.body.status).to.equal('Error');
+              expect(res.body.message).to.equal('No such event available');
               done();
             });
         });

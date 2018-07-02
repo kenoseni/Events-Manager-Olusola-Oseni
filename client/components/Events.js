@@ -12,23 +12,26 @@ import EventList from './EventList';
 import AddEventModalButton from './AddEventModalButton';
 import AddEvent from './AddEvent';
 import flashMessage from '../reducers'
+import Pages from './Pages';
+
 
 class Events extends Component {
   constructor(props) {
     super(props)
   }
-  componentWillMount() {
-    this.props.allUserEvents();
+  componentDidMount() {
+    const page = this.props.history.location.search.split('=')[1];
+    this.props.allUserEvents(page);
     this.props.getAllCenters()
   }
-
   render() {
-    const { events } = this.props.userEvents;
+    const { events, count, limit } = this.props.userEvents;
     const { addEvent,
        deleteEvent,
        modifyEvent,
        messages,
-       deleteFlashMessage
+       deleteFlashMessage,
+       history
      } = this.props;
     
     return (
@@ -42,6 +45,7 @@ class Events extends Component {
         />
         <AddEventModalButton />
         <AddEvent title={'ADD EVENT'} addEvent={addEvent} {...this.props} />
+        {count !== undefined && <Pages count={count} history={history} limit={limit} />}
       </div>
     )
   }

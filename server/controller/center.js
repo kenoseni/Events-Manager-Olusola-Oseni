@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import db from '../models';
 
 /**
@@ -28,21 +29,19 @@ class centerController {
         image: req.body.image
       })
       .then(center => res.status(201).json({
+        status: 'Success',
+        message: 'Center created successfully',
         data: {
-          status: 'Success',
-          message: 'Center created successfully',
           center
         }
       }))
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Error',
-          message: error.message
-        }
+        status: 'Error',
+        message: error.message
       }));
   }
   /**
-  * Create new center on the platform
+  * Get the first set of centers based on their Id
   *
   * @static
   * @param {object} req - The request object
@@ -51,20 +50,67 @@ class centerController {
   * @memberof centerController
   */
   static getCenters(req, res) {
+    const { page } = req.query;
+    const limit = 6;
+    const offset = (page === undefined || page < 1) ?
+      0 : (parseInt(page, 10) - 1) * limit;
     return db.Center
-      .findAll({
+      .findAndCountAll({
+        limit,
+        order: [['id', 'DESC']],
+        offset,
         attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
       })
       .then(centers => res.status(200).json({
         status: 'Success',
-        message: 'List of all centers',
-        centers
+        message: 'These are the centers',
+        data: {
+          centers: centers.rows,
+          count: centers.count,
+          limit
+        }
       }))
       .catch(error => res.status(500).json({
         status: 'Error',
         message: error.message
       }));
   }
+
+  /**
+  * Get all centers based on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the center created or error message
+  * @memberof centerController
+  */
+  static getAllCenters(req, res) {
+    return db.Center
+      .findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      })
+      .then(((allCenters) => {
+        if (!allCenters) {
+          return res.status(400).json({
+            status: 'Error',
+            message: 'No centers found'
+          });
+        }
+        return res.status(200).json({
+          status: 'Success',
+          message: 'List of all centers',
+          data: {
+            allCenters
+          }
+        });
+      }))
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
+  }
+
   /**
   * Create get one center on the platform
   *
@@ -86,16 +132,14 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(400).json({
-            data: {
-              status: 'Fail',
-              message: 'No center found'
-            }
+            status: 'Error',
+            message: 'No center found'
           });
         }
         res.status(200).json({
+          status: 'Success',
+          message: 'List of one center',
           data: {
-            status: 'Success',
-            message: 'List of one center',
             center
           }
         });
@@ -120,18 +164,14 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'No center found'
-            }
+            status: 'Error',
+            message: 'No center found'
           });
         }
         if (req.decoded.userid !== center.userId) {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'User cannot modify this center'
-            }
+            status: 'Error',
+            message: 'User cannot modify this center'
           });
         }
         center
@@ -148,21 +188,22 @@ class centerController {
           .then((value) => {
             if (!value) {
               return res.status(400).json({
-                data: {
-                  status: 'Fail',
-                  message: 'Center not updated'
-                }
+                status: 'Error',
+                message: 'Center not updated'
               });
             }
             res.status(200).json({
+              status: 'Success',
+              message: 'Center updated',
               data: {
-                status: 'Success',
-                message: 'Center updated',
                 center
               }
             });
           })
-          .catch(error => res.status(500).json({ error: error.message }));
+          .catch(error => res.status(500).json({
+            status: 'Error',
+            message: error.message
+          }));
       })
       .catch(error => res.status(500).json({ error: error.message }));
   }
@@ -181,40 +222,69 @@ class centerController {
       .then((center) => {
         if (!center) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'Center not found'
-            }
+            status: 'Error',
+            message: 'Center not found'
           });
         }
         if (req.decoded.userid !== center.userId) {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'User cannot delete this center'
-            }
+            status: 'Error',
+            message: 'User cannot delete this center'
           });
         }
         center
           .destroy()
           .then(() => res.status(200).json({
-            data: {
-              status: 'Success',
-              message: 'Center has been successfully deleted'
-            }
+            status: 'Success',
+            message: 'Center has been successfully deleted'
           }))
           .catch(error => res.status(500).json({
-            data: {
-              status: 'Fail',
-              message: error.message
-            }
+            status: 'Error',
+            message: error.message
           }));
       })
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Fail',
-          message: error.message
+        status: 'Error',
+        message: error.message
+      }));
+  }
+  /**
+  * Create new center on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the center created or error message
+  * @memberof centerController
+  */
+  static searchForCenters(req, res) {
+    const { Op } = Sequelize;
+    const limit = 6;
+    return db.Center
+      .findAndCountAll({
+        where: {
+          [Op.or]: [{ name: req.body.name }, { location: req.body.location }]
+        },
+        limit,
+        order: [['id', 'DESC']],
+        attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
+      })
+      .then((center) => {
+        if (center) {
+          return res.status(200).json({
+            status: 'Success',
+            message: 'These are the results of your search',
+            data: {
+              count: center.count,
+              searchedCenters: center.rows,
+              limit
+            }
+          });
         }
+      })
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
       }));
   }
 }

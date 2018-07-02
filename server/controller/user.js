@@ -31,9 +31,9 @@ class userController {
       .then((user) => {
         const token = auth.tokenController.createToken(user);
         return res.status(201).json({
+          status: 'Success',
+          message: 'User successfully signed up',
           data: {
-            status: 'Success',
-            message: 'User successfully signed up',
             firstname: user.firstname,
             lastname: user.lastname,
             role: user.role,
@@ -63,40 +63,38 @@ class userController {
         }
       })
       .then((user) => {
+        const encrypted = user.password;
+        const token = auth.tokenController.createToken(user);
         if (!user) {
-          return res.status(400).json({
-            data: {
-              status: 'Fail',
-              message: 'Email not found'
-            }
+          return res.status(401).json({
+            status: 'Error',
+            message: 'Email or password incorrect'
           });
         }
-        const encrypted = user.password;
         bcrypt.compare(req.body.password, encrypted)
           .then((correct) => {
             if (!correct) {
-              res.status(401).json({
-                data: {
-                  status: 'Fail',
-                  message: 'Email or password incorrect'
-                }
+              return res.status(401).json({
+                status: 'Error',
+                message: 'Email or password incorrect'
               });
             }
-            const token = auth.tokenController.createToken(user);
             return res.status(200).json({
+              status: 'Success',
+              message: 'User successfully logged in',
               data: {
-                status: 'Success',
-                message: 'User successfully logged in',
                 token
               }
             });
-          });
+          })
+          .catch(error => res.status(500).json({
+            status: 'Error',
+            message: error.message
+          }));
       })
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Error',
-          message: error.message
-        }
+        status: 'Error',
+        message: error.message
       }));
   }
   /**
@@ -117,43 +115,47 @@ class userController {
         }
         if (req.decoded.userrole !== 'superadmin') {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'You are not authorised to modify this user'
-            }
+            status: 'Fail',
+            message: 'You are not authorised to modify this user'
+          });
+        }
+        if (user.role === 'admin') {
+          return res.status(401).json({
+            status: 'Fail',
+            message: 'User is already an admin'
           });
         }
         if (req.decoded.userid === Number(req.params.userId)) {
           return res.status(403).json({
-            data: {
-              status: 'Fail',
-              message: 'Super Admin cannot be modified'
-            }
+            status: 'Fail',
+            message: 'Super Admin cannot be modified'
           });
         }
         user
           .update({
             isAdmin: true,
-            role: 'admin'
+            role: 'admin',
           })
           .then(() => res.status(200).json({
+            status: 'Success',
+            message: 'User successfully upgraded to admin',
             data: {
-              status: 'Success',
-              message: 'User successfully upgraded to admin'
+              id: user.id,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              email: user.email,
+              role: user.role,
+              isAdmin: user.isAdmin
             }
           }))
           .catch(error => res.status(500).json({
-            data: {
-              status: 'Error',
-              message: error.message
-            }
+            status: 'Error',
+            message: error.message
           }));
       })
       .catch(error => res.status(500).json({
-        data: {
-          status: 'Error',
-          message: error.message
-        }
+        status: 'Error',
+        message: error.message
       }));
   }
   /**
@@ -166,67 +168,87 @@ class userController {
   * @memberof userController
   */
   static getAllUsers(req, res) {
+    const { page } = req.query;
+    const limit = 10;
+    const offset = (page === undefined || page < 1) ?
+      0 : (parseInt(page, 10) - 1) * limit;
     return db.User
-      .findAll({
+      .findAndCountAll({
+        limit,
+        // order: ['id'],
+        offset,
         attributes: { exclude: ['createdAt', 'updatedAt', 'password'] },
-        include: [{
-          model: Center,
-          as: 'centers',
-          attributes: {
-            exclude: [
-              'createdAt',
-              'updatedAt',
-              'userId',
-              'description',
-              'avaliability',
-              'price',
-              'facilities',
-              'capacity',
-              'location'
-            ]
-          }
-        },
-        {
-          model: Event,
-          as: 'events',
-          attributes: {
-            exclude: [
-              'createdAt',
-              'updatedAt',
-              'userId',
-            ]
-          }
-        }
-        ],
+        // include: [{
+        //   model: Center,
+        //   as: 'centers',
+        //   attributes: {
+        //     exclude: [
+        //       'createdAt',
+        //       'updatedAt',
+        //       'userId',
+        //       'description',
+        //       'avaliability',
+        //       'price',
+        //       'facilities',
+        //       'capacity',
+        //       'location'
+        //     ]
+        //   }
+        // },
+        // {
+        //   model: Event,
+        //   as: 'events',
+        //   attributes: {
+        //     exclude: [
+        //       'createdAt',
+        //       'updatedAt',
+        //       'userId',
+        //     ]
+        //   }
+        // }
+        // ],
       })
       .then((users) => {
         if (!users) {
           return res.status(404).json({
-            data: {
-              status: 'Fail',
-              message: 'user not found'
-            }
+            status: 'Error',
+            message: 'user not found'
           });
         }
         if (!req.decoded.isadmin) {
           return res.status(401).json({
-            data: {
-              status: 'Fail',
-              message: 'You are not authorised to view this information'
-            }
+            status: 'Error',
+            message: 'You are not authorised to view this information'
           });
         }
-        res.status(200).json({
+        return res.status(200).json({
+          status: 'Success',
+          message: 'These are all user details',
           data: {
-            status: 'Success',
-            message: 'These are all user details',
-            users
+            users: users.rows,
+            count: users.count,
+            limit
           }
         });
       })
       .catch(error => res.status(500).json({
         message: error.message
       }));
+  }
+  /**
+  * Get all Users from the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Not found message
+  * @memberof userController
+  */
+  static notFound(req, res) {
+    return res.status(404).json({
+      status: 'Error',
+      message: 'Not Found'
+    });
   }
 }
 export default userController;

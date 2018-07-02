@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AdminCenter from './AdminCenter';
-import NavBar from './NavBar';
+import NavBar from './Navbar';
 
 class AdminCenterList extends Component {
   constructor(props) {
@@ -9,10 +9,10 @@ class AdminCenterList extends Component {
   }
   
   render () {
-    const { centers, match } = this.props;
+    const { centers, match, searchForCenters } = this.props;
     return (
       <div style={{paddingTop: '90px'}}>
-        <NavBar home='Home' centers='Centers' events='Events' page='Centers' logout='Log Out' match={match} />
+        <NavBar home='Home' centers='Centers' events='Events' page='Centers' logout='Log Out' admin='Admin' match={match} searchForCenters={searchForCenters} />
         <div className="container">
           <div className="row" id="centers">
             {(centers.length > 0) ?
@@ -26,7 +26,7 @@ class AdminCenterList extends Component {
   }
 }
 AdminCenterList.propTypes = {
-  centers: PropTypes.array.isRequired,
+  centers: PropTypes.array,
   match: PropTypes.object.isRequired
 }
 

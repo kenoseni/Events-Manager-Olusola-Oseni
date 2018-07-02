@@ -2,7 +2,15 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-// Create User
+/**
+* User signup action
+*
+* @method
+* @param {object} userDetails - The user sign up details
+* @param {object} res - The response object
+* @return {object} Sign Up action payload
+* @memberof UserActions
+*/
 const createUser = userDetails => (dispatch) => {
   dispatch({ type: 'SIGNUP_USER' });
   return axios.post('/api/v1/users', userDetails)
@@ -18,7 +26,15 @@ const createUser = userDetails => (dispatch) => {
     });
 };
 
-// User Login action
+/**
+* User Login action
+*
+* @method
+* @param {object} loginDetails - The user sign in details
+* @param {object} res - The response object
+* @return {object} Login action payload
+* @memberof UserActions
+*/
 const userLogin = loginDetails => (dispatch) => {
   dispatch({ type: 'LOGIN_USER' });
   return axios.post('/api/v1/users/login', loginDetails)
@@ -33,16 +49,62 @@ const userLogin = loginDetails => (dispatch) => {
       dispatch({ type: 'LOGIN_REJECTED', payload: err.response.data });
     });
 };
+/**
+* Upgrade user to admin action
+*
+* @method
+* @param {number} id - Id of user to be upgraded
+* @return {object} dispatch user property as empty onject
+* @memberof UserActions
+*/
+const upgradeUserToAdmin = id => (dispatch) => {
+  dispatch({ type: 'UPGRADING_USER' });
+  return axios({
+    method: 'put',
+    url: `/api/v1/users/${id}`,
+    headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+  })
+    .then((res) => {
+      dispatch({
+        type: 'UPGRADING_USER_RESOLVED',
+        payload: res.data,
+        id
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'UPGRADING_USER_REJECTED',
+        payload: err.response.data
+      });
+    });
+};
 
+/**
+* User Signout action
+*
+* @method
+* @return {object} dispatch user property as empty onject
+* @memberof UserActions
+*/
 const signout = () => (dispatch) => {
   localStorage.removeItem('x-access-token');
   setAuthorizationToken(false);
   dispatch({ type: 'SET_CURRENT_USER', user: {} });
 };
 
-const getAllUsers = () => dispatch => axios({
+/**
+* Get all user action
+*
+* @method
+* @param {object} page - The page query
+* @param {object} res - The response object
+* @return {object} all users action payload
+* @memberof UserActions
+*/
+const getAllUsers = page => dispatch => axios({
   method: 'get',
   url: '/api/v1/users',
+  params: { page },
   headers: { 'x-access-token': localStorage.getItem('x-access-token') }
 })
   .then((res) => {
@@ -58,9 +120,11 @@ const getAllUsers = () => dispatch => axios({
       payload: err.response.data.data
     });
   });
+
 export {
   createUser,
   userLogin,
+  upgradeUserToAdmin,
   signout,
   getAllUsers
 };

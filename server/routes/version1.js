@@ -31,14 +31,20 @@ router.get(
   // middleware.tokenController.confirmToken,
   controller.centerController.getCenters
 );
+
+router.get(
+  '/admin/centers',
+  middleware.tokenController.confirmToken,
+  controller.centerController.getAllCenters
+);
 // Get One Event Center
 router.get(
-  '/centers/:centerId',
+  '/centers/:centerId([0-9]+)',
   controller.centerController.getOne
 );
 // Modify Event Center
 router.put(
-  '/centers/:centerId',
+  '/centers/:centerId([0-9]+)',
   middleware.tokenController.confirmToken,
   middleware.adminValidation,
   middleware.centerValidation.centerInputs,
@@ -46,7 +52,7 @@ router.put(
 );
 // Delete an Event
 router.delete(
-  '/centers/:centerId',
+  '/centers/:centerId([0-9]+)',
   middleware.tokenController.confirmToken,
   middleware.adminValidation,
   controller.centerController.deleteCenter
@@ -54,7 +60,7 @@ router.delete(
 
 // create admin route
 router.put(
-  '/users/:userId',
+  '/users/:userId([0-9]+)',
   middleware.tokenController.confirmToken,
   controller.userController.createAdmin
 );
@@ -68,6 +74,11 @@ router.post(
   controller.centerController.addCenter
 );
 
+router.post(
+  '/search',
+  controller.centerController.searchForCenters
+);
+
 // Create an Event
 router.post(
   '/events',
@@ -77,20 +88,20 @@ router.post(
 );
 // Delete an Event
 router.delete(
-  '/events/:eventId',
+  '/events/:eventId([0-9]+)',
   middleware.tokenController.confirmToken,
   controller.eventController.deleteEvent
 );
 // Modify an Event
 router.put(
-  '/events/:eventId',
+  '/events/:eventId([0-9]+)',
   middleware.tokenController.confirmToken,
   middleware.eventValidation.eventInputs,
   controller.eventController.modifyEvent
 );
 // Get an Event
 router.get(
-  '/events/:eventId',
+  '/events/:eventId([0-9]+)',
   middleware.tokenController.confirmToken,
   controller.eventController.getOneEvent
 );
@@ -98,6 +109,14 @@ router.get(
   '/events',
   middleware.tokenController.confirmToken,
   controller.eventController.userEvents
+);
+router.get(
+  '*',
+  controller.userController.notFound
+);
+router.post(
+  '*',
+  controller.userController.notFound
 );
 
 export default router;

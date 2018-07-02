@@ -675,7 +675,7 @@ describe('Event Manager', () => {
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
               expect(res.body.status).to.equal('Success');
-              expect(res.body.message).to.equal('List of all centers');
+              expect(res.body.message).to.equal('These are the centers');
               done();
             });
         });

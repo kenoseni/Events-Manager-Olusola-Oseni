@@ -9,13 +9,14 @@ class EventList extends Component {
     super(props)
   }
   render() {
-    const { events, messages, deleteFlashMessage, match, location} = this.props;
+    const { events, messages, deleteFlashMessage, match, location, searchForCenters} = this.props;
     return (
       <div style={{paddingTop: '60px'}}>
         <NavBar home='Home' centers='Centers' 
-          events='Events' page='Events' 
+          events='Events' page='Events' admin='Admin' 
           logout='Log Out' match={match} 
-          location={location} 
+          location={location}
+          searchForCenters={searchForCenters} 
         />
         {
           (messages.length > 0) ? <FlashMessageList messages={messages} deleteFlashMessage={deleteFlashMessage}  /> : null

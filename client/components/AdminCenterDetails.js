@@ -28,12 +28,12 @@ class AdminCenterDetails extends Component {
   }
   render () {
     const { center } = this.state;
-    const { getOneCenter} = this.props;
+    const { getOneCenter, searchForCenters} = this.props;
     const { id } = this.props.match.params;
     
     return (
       <div>
-        {center !== {} && <AdminCenterDetail center={center} getOneCenter={getOneCenter} id={id} />}
+        {center !== {} && <AdminCenterDetail center={center} getOneCenter={getOneCenter} id={id} searchForCenters={searchForCenters} />}
       </div>
     )
   }

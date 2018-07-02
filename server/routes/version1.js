@@ -31,6 +31,12 @@ router.get(
   // middleware.tokenController.confirmToken,
   controller.centerController.getCenters
 );
+
+router.get(
+  '/admin/centers',
+  middleware.tokenController.confirmToken,
+  controller.centerController.getAllCenters
+);
 // Get One Event Center
 router.get(
   '/centers/:centerId([0-9]+)',
@@ -66,6 +72,11 @@ router.post(
   middleware.adminValidation,
   middleware.centerValidation.centerInputs,
   controller.centerController.addCenter
+);
+
+router.post(
+  '/search',
+  controller.centerController.searchForCenters
 );
 
 // Create an Event

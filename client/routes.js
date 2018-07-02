@@ -7,6 +7,7 @@ import AdminCenters from './components/AdminCenters';
 import AdminPanels from './components/AdminPanels';
 import SignOut from './components/SignOut';
 import AdminCenterDetails from './components/AdminCenterDetails';
+import SearchPage from './components/SearchPage';
 import Events from './components/Events';
 import NotFound from './components/NotFound';
 import checkAuth from './utils/checkAuthentication';
@@ -22,6 +23,7 @@ export const Routes = () => {
       <Route exact path='/events' component={checkAuth(Events)}/>
       <Route exact path='/admin' component={checkAuth(AdminPanels)}/>
       <Route exact path='/logout' component={SignOut}/>
+      <Route exact path='/search' component={SearchPage}/>
       <Route exact path='*' component={NotFound}/>
     </Switch>
   )

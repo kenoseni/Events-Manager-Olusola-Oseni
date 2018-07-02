@@ -10,7 +10,8 @@ class AddCenter extends Component {
     super(props)
     this.state = {
       center: {},
-      image: ''
+      image: '',
+      error: {}
     }
     this.submit = this.submit.bind(this)
     this.getInput = this.getInput.bind(this)
@@ -19,6 +20,14 @@ class AddCenter extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.image.image !== this.props.image.image) {
       this.setState({image: nextProps.image.image})
+    }
+    if(nextProps.eventCenters.error) {
+      this.setState({
+        error: nextProps.eventCenters.error
+      })
+    }
+    if (this.state.center !== false) {
+      $('#addCenter').modal('hide')
     }
   }
 
@@ -32,9 +41,9 @@ class AddCenter extends Component {
   
   submit(e) {
     e.preventDefault();
+    this.setState({error: {}})
     const {name, description, location, price, facilities, capacity} = this.state.center
     const { image } = this.state
-    $('#addCenter').modal('hide')
     this.props.addCenter({
       name, 
       description, 
@@ -47,6 +56,7 @@ class AddCenter extends Component {
   }
   
   render() {
+    const {error} = this.state
     const {addImage} = this.props
     return (
       <div>
@@ -66,10 +76,11 @@ class AddCenter extends Component {
                       <div className="input-group mb-3">
                         <CenterImage addImage={addImage} />
                       </div>
+                      {error.message && <div className="alert alert-danger">{error.message}</div>}
                       <div className="">
                         <div className="container-fluid">
                           <div className="row">
-                            <div className="col-sm-12">
+                            <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Name:</span>
                                 <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
@@ -77,7 +88,7 @@ class AddCenter extends Component {
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-12">
+                            <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Description:</span>
                                 <input type="text" name='description' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
@@ -85,7 +96,7 @@ class AddCenter extends Component {
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-12">
+                            <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Location:</span>
                                 <input type="text" name='location' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
@@ -93,7 +104,7 @@ class AddCenter extends Component {
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-12">
+                            <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Price:</span>
                                 <input type="text" name='price' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
@@ -101,7 +112,7 @@ class AddCenter extends Component {
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-12">
+                            <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Facilities:</span>
                                 <input type="text" name='facilities' onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
@@ -109,7 +120,7 @@ class AddCenter extends Component {
                             </div>
                           </div>
                           <div className="row">
-                            <div className="col-sm-12">
+                            <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Capacity:</span>
                                 <input type="text" name= 'capacity' onChange={this.getInput} className="form-control" placeholder="" aria-describedby="sizing-addon1" />

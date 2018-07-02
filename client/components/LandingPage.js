@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
 import * as userActions from '../actions/UserActions';
+import * as centerActions from '../actions/CenterActions';
 import { addFlashMessage } from '../actions/FlashMessageActions';
 import user from '../reducers'
 import NavBar from './Navbar';
@@ -11,11 +12,13 @@ import SignIn from './SignIn'
 
 class LandingPage extends Component {
   render () {
-    const {createUser, userLogin, addFlashMessage, match} = this.props
+    const {createUser, userLogin, addFlashMessage, match, searchForCenters } = this.props
     return (
       <div>
       <NavBar home='Home' centers='Centers' events='Events'
-       login='Log In' signup='Sign Up' admin='Admin' page='Home' logout='Log Out' match={match}/>
+       login='Log In' signup='Sign Up' admin='Admin' page='Home' logout='Log Out' match={match}
+       searchForCenters={searchForCenters}
+       />
         <div  id="intro" className="view hm-black-light">
           <div className="container-fluid full-bg-img d-flex align-items-center justify-content-center">
             <div className="row d-flex justify-content-center">
@@ -31,14 +34,15 @@ class LandingPage extends Component {
           </div>
         </div>
         <SignUp  createUser={createUser} addFlashMessage={addFlashMessage} {...this.props}/>
-        <SignIn userLogin={userLogin} {...this.props} />
+        <SignIn userLogin={userLogin} {...this.props} toggleModal={this.toggleModal} />
       </div>
     );
   }
 }
 LandingPage.propTypes = {
   createUser: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  addFlashMessage: PropTypes.func.isRequired,
+  searchForCenters: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -47,6 +51,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     ...userActions,
+    ...centerActions,
     addFlashMessage 
   }, dispatch
 );

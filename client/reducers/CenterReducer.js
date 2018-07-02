@@ -16,15 +16,17 @@ class centerReducer {
     status: '',
     message: '',
     centers: [],
+    allCenters: [],
+    searchedCenters: [],
     center: {}
   }, action) {
     switch (action.type) {
-      case 'ALL_CENTERS': {
+      case 'PAGE_CENTERS': {
         return {
           ...state
         };
       }
-      case 'ALL_CENTERS_RESOLVED': {
+      case 'PAGE_CENTERS_RESOLVED': {
         const {
           status, message
         } = action.payload;
@@ -38,7 +40,63 @@ class centerReducer {
           limit
         };
       }
+      case 'PAGE_CENTERS_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
+      case 'ALL_CENTERS': {
+        return {
+          ...state
+        };
+      }
+      case 'ALL_CENTERS_RESOLVED': {
+        const {
+          status, message
+        } = action.payload;
+        const { allCenters } = action.payload.data;
+        return {
+          ...state,
+          allCenters,
+          status,
+          message,
+        };
+      }
       case 'ALL_CENTERS_REJECTED': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          status,
+          message
+        };
+      }
+      case 'SEARCH_CENTERS': {
+        return {
+          ...state
+        };
+      }
+      case 'SEARCH_CENTERS_RESOLVED': {
+        const {
+          status, message
+        } = action.payload;
+        const { searchedCenters, count, limit } = action.payload.data;
+        return {
+          ...state,
+          status,
+          message,
+          searchedCenters,
+          count,
+          limit
+        };
+      }
+      case 'SEARCH_CENTERS_REJECTED': {
         const {
           status, message
         } = action.payload;
@@ -79,13 +137,10 @@ class centerReducer {
         };
       }
       case 'ADD_CENTER_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const error = action.payload;
         return {
           ...state,
-          status,
-          message
+          error
         };
       }
       case 'DELETE_CENTER': {

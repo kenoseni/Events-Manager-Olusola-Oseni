@@ -1,12 +1,26 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import DeleteModal from './DeleteModal';
+import jwtDecode from 'jwt-decode';
 import ModifyCenter from './ModifyCenter'
 
 
 class AdminCenter extends Component {
   constructor(props) {
     super(props); 
+  }
+
+  componentWillMount() {
+    let token = localStorage.getItem('x-access-token');
+    if (token) {
+      let decodedToken = jwtDecode(token);
+      let isAdmin = decodedToken.isadmin;
+      let role = decodedToken.userrole
+
+      if(isAdmin) {
+      this.isAdmin = true
+      }
+    }  
   }
   render () {
     const {center, i} = this.props
@@ -33,20 +47,22 @@ class AdminCenter extends Component {
               } 
             </p>                                            
           </div>
-          <div className="card-footer bg-transparent">
-            <ul className="nav">
-              <li>
-                <button data-toggle="modal" data-target={`#${center.id}`}>
-                  <i className="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i>
-                </button>
-              </li>
-              <li>
-                <button data-toggle="modal" data-target={`#${i}`}>
-                  <i className="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i>
-                </button>
-              </li>
-            </ul>
-          </div>
+          {this.isAdmin &&
+            <div className="card-footer bg-transparent">
+              <ul className="nav">
+                <li>
+                  <button data-toggle="modal" data-target={`#${center.id}`}>
+                    <i className="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i>
+                  </button>
+                </li>
+                <li>
+                  <button data-toggle="modal" data-target={`#${i}`}>
+                    <i className="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          }
         </div>
         <ModifyCenter title='Modify Center' i={i} center={center} {...this.props} />
         <DeleteModal 

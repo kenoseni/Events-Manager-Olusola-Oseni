@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { user } from '../reducers';
 import * as userActions from '../actions/UserActions';
+import * as centerActions  from '../actions/CenterActions'
 import AdminPanelList from './AdminPanelList';
 
 class AdminPanels extends Component {
@@ -24,7 +25,7 @@ class AdminPanels extends Component {
     if (this.props.isAdmin) {
       return (
         <div>
-          <AdminPanelList users={users} {...this.props}  />
+          <AdminPanelList users={users} {...this.props} />
         </div>
       )
     }else {
@@ -47,7 +48,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  ...userActions, 
+  ...userActions,
+  ...centerActions 
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminPanels)

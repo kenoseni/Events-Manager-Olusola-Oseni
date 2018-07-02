@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SubmitButton from './SubmitButton'
 import * as centerActions from '../actions/CenterActions';
-import { getAllCenters } from '../actions/CenterActions';
+import { getCenters } from '../actions/CenterActions';
 
 
 class ModifyEvent extends Component {
@@ -9,14 +9,14 @@ class ModifyEvent extends Component {
     super(props);
     this.state = {
       event: this.props.event,
-      centers: this.props.eventCenters.centers
+      allCenters: this.props.eventCenters.allCenters
     }
   
     this.submit = this.submit.bind(this)
     this.getInput = this.getInput.bind(this)
   }
   componentWillReceiveProps (nextProps) {
-    this.setState({centers: nextProps.eventCenters.centers})
+    this.setState({allCenters: nextProps.eventCenters.allCenters})
   }
   
   getInput(e) {
@@ -40,11 +40,10 @@ class ModifyEvent extends Component {
   }
 
   render () {
-    const { event, i, centers} = this.state
+    const { event, i, allCenters} = this.state
     const {id} = this.props
-    const center = centers.filter(center => center.id === event.centerId)
+    const center = allCenters.filter(center => center.id === event.centerId)
     const [centerName] = center
-    console.log(centerName)
     return (
       <div>
         <div className="container modify-event-height">            
@@ -81,7 +80,7 @@ class ModifyEvent extends Component {
                                 <select className="form-control" name="centerId" onChange={this.getInput}>
                                   <option value={event.centerId}> {(centerName) ? centerName.name: ''} </option>
                                   {
-                                    centers.map(center => <option key={center.id} value={center.id}> {center.name} </option>)
+                                    allCenters.map(center => <option key={center.id} value={center.id}> {center.name} </option>)
                                   }
                                 </select>
                                 {/*<input type="text" name='location' value={event.centerId} className="form-control" aria-describedby="sizing-addon1" />*/}

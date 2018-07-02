@@ -9,14 +9,14 @@ class AddEvent extends Component {
     this.state = {
       value: 'Choose a Center',
       event: {},
-      centers: []
+      allCenters: []
     }
     this.submit = this.submit.bind(this)
     this.getInput = this.getInput.bind(this)
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.eventCenters.centers !== this.props.eventCenters.centers) {
-      this.setState({centers: nextProps.eventCenters.centers})
+    if (nextProps.eventCenters.allCenters !== this.props.eventCenters.allCenters) {
+      this.setState({allCenters: nextProps.eventCenters.allCenters})
     }
   }
   
@@ -40,7 +40,8 @@ class AddEvent extends Component {
     })
   }
   render() {
-    const {centers} = this.state
+    const {allCenters} = this.state
+    console.log(allCenters)
     return (
       <div>
         <div className="container">            
@@ -62,29 +63,31 @@ class AddEvent extends Component {
                       </div>
                       <div className="container-fluid">
                         <div className="row">
-                          <span className="" id="sizing-addon1">Event Name:</span>
-                          <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                          <div className="col-12">
+                            <span className="" id="sizing-addon1">Event Name:</span>
+                            <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                          </div>
                         </div>
                           <div className="">
                             <div className="row">
-                              <div className="col-xs-12">
+                              <div className="col-12">
                                 <span className="" id="sizing-addon1">Location:</span>
                                 <select className="form-control" name="centerId" onChange={this.getInput}>
                                   <option value={this.state.value}>Choose a Center</option>
                                   {
-                                    centers.map(center => <option key={center.id} value={center.id}> {(center) ? center.name.toUpperCase(): ''} </option>)
+                                    allCenters.map(center => <option key={center.id} value={center.id}> {(center) ? center.name.toUpperCase(): ''} </option>)
                                   }
                                 </select>
                               </div>
                             </div>
                             <div className="row">
-                              <div className="col-xs-12">
+                              <div className="col-12">
                                 <span className="" id="sizing-addon1">Date:</span>
                                 <input type="date" name="date" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>
                             </div>
                             <div className="row">
-                              <div className="col-xs-12">
+                              <div className="col-12">
                                 <span className="" id="sizing-addon1">Time:</span>
                                 <input type="text" name="time" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
                               </div>

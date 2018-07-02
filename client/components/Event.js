@@ -11,7 +11,8 @@ class Event extends Component {
   render() {
     const {event, i} = this.props
     const { id } = this.props.event
-    const center = this.props.eventCenters.centers.filter(center => center.id === event.centerId)
+    const center = this.props.eventCenters.allCenters.filter(center => center.id === event.centerId)
+    console.log(center);
     const [centerName] = center
     return (
       <div className="col-md-4">

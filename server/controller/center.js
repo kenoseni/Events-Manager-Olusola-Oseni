@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import db from '../models';
 
 /**
@@ -40,7 +41,7 @@ class centerController {
       }));
   }
   /**
-  * Create new center on the platform
+  * Get the first set of centers based on their Id
   *
   * @static
   * @param {object} req - The request object
@@ -56,13 +57,13 @@ class centerController {
     return db.Center
       .findAndCountAll({
         limit,
-        order: ['id'],
+        order: [['id', 'DESC']],
         offset,
         attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
       })
       .then(centers => res.status(200).json({
         status: 'Success',
-        message: 'List of all centers',
+        message: 'These are the centers',
         data: {
           centers: centers.rows,
           count: centers.count,
@@ -74,6 +75,42 @@ class centerController {
         message: error.message
       }));
   }
+
+  /**
+  * Get all centers based on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the center created or error message
+  * @memberof centerController
+  */
+  static getAllCenters(req, res) {
+    return db.Center
+      .findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      })
+      .then(((allCenters) => {
+        if (!allCenters) {
+          return res.status(400).json({
+            status: 'Error',
+            message: 'No centers found'
+          });
+        }
+        return res.status(200).json({
+          status: 'Success',
+          message: 'List of all centers',
+          data: {
+            allCenters
+          }
+        });
+      }))
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
+  }
+
   /**
   * Create get one center on the platform
   *
@@ -205,6 +242,45 @@ class centerController {
             status: 'Error',
             message: error.message
           }));
+      })
+      .catch(error => res.status(500).json({
+        status: 'Error',
+        message: error.message
+      }));
+  }
+  /**
+  * Create new center on the platform
+  *
+  * @static
+  * @param {object} req - The request object
+  * @param {object} res - The response object
+  * @return {object} Success message with the center created or error message
+  * @memberof centerController
+  */
+  static searchForCenters(req, res) {
+    const { Op } = Sequelize;
+    const limit = 6;
+    return db.Center
+      .findAndCountAll({
+        where: {
+          [Op.or]: [{ name: req.body.name }, { location: req.body.location }]
+        },
+        limit,
+        order: [['id', 'DESC']],
+        attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] }
+      })
+      .then((center) => {
+        if (center) {
+          return res.status(200).json({
+            status: 'Success',
+            message: 'These are the results of your search',
+            data: {
+              count: center.count,
+              searchedCenters: center.rows,
+              limit
+            }
+          });
+        }
       })
       .catch(error => res.status(500).json({
         status: 'Error',

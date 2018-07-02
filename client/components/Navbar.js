@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+import Search from './Search';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ export default class Navbar extends Component {
   }
 
   render () {
+    const { searchForCenters } = this.props;
     let navItemClass = ["nav-item"];
 
     switch(this.props.page) {
@@ -98,10 +101,7 @@ export default class Navbar extends Component {
               }
               
             </ul>
-            <form className="form-inline">
-              <i className="fa fa-search fa-lg "></i>
-              <input className="form-control mr-sm-2" type="text" placeholder="Search for centers" aria-label="Search" />
-            </form>
+            <Search searchForCenters={searchForCenters}/>
             <ul className="nav navbar-nav">
               { !this.isLoggedIn &&
                 <li className="nav-item">
@@ -126,4 +126,7 @@ export default class Navbar extends Component {
       </nav>
     );
   }
+}
+Navbar.propTypes = {
+  searchForCenters: PropTypes.func
 }

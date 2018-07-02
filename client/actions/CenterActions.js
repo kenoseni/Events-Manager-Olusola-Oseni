@@ -2,7 +2,7 @@ import axios from 'axios';
 // import { history } from '../routes';
 
 /**
-* Get all center action
+* Get centers action
 *
 * @method
 * @param {object} page - The page query
@@ -10,19 +10,80 @@ import axios from 'axios';
 * @return {object} All centers action payload
 * @memberof CenterActions
 */
-const getAllCenters = page => dispatch => axios({
+const getCenters = page => dispatch => axios({
   method: 'get',
   url: '/api/v1/centers',
   params: { page },
 })
   .then((res) => {
-    dispatch({ type: 'ALL_CENTERS' });
-    dispatch({ type: 'ALL_CENTERS_RESOLVED', payload: res.data });
+    dispatch({ type: 'PAGE_CENTERS' });
+    dispatch({ type: 'PAGE_CENTERS_RESOLVED', payload: res.data });
   })
   .catch((err) => {
-    dispatch({ type: 'ALL_CENTERS_REJECTED', payload: err });
+    dispatch({ type: 'PAGE_CENTERS_REJECTED', payload: err });
     // history.push('/');
   });
+
+
+/**
+* Get all centers action
+*
+* @method
+* @param {object} res - The response object
+* @return {object} All centers action payload
+* @memberof CenterActions
+*/
+const getAllCenters = () => dispatch => axios({
+  method: 'get',
+  url: '/api/v1/admin/centers',
+  headers: { 'x-access-token': localStorage.getItem('x-access-token') }
+})
+  .then((res) => {
+    dispatch({ type: 'ALL_CENTERS' });
+    dispatch({
+      type: 'ALL_CENTERS_RESOLVED',
+      payload: res.data
+    });
+  })
+  .catch((err) => {
+    dispatch({
+      type: 'ALL_CENTERS_REJECTED',
+      payload: err.respose.data
+    });
+  });
+
+
+/**
+* Search center action
+*
+* @method
+* @param {object} searchParameter - The search body
+* @param {object} res - The response object
+* @return {object} All centers action payload
+* @memberof CenterActions
+*/
+const searchForCenters = searchParameter => (dispatch) => {
+  dispatch({
+    type: 'SEARCH_CENTERS',
+  });
+  return axios({
+    method: 'post',
+    url: '/api/v1/search',
+    data: searchParameter
+  })
+    .then((res) => {
+      dispatch({
+        type: 'SEARCH_CENTERS_RESOLVED',
+        payload: res.data
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'SEARCH_CENTERS_REJECTED',
+        payload: err.response.data
+      });
+    });
+};
 
 /**
 * Add center action
@@ -152,9 +213,11 @@ const getOneCenter = id => (dispatch) => {
     });
 };
 export {
-  getAllCenters,
+  getCenters,
   addCenter,
   deleteCenter,
   modifyCenter,
-  getOneCenter
+  getOneCenter,
+  searchForCenters,
+  getAllCenters
 };

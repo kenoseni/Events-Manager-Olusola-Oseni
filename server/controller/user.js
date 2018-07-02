@@ -63,22 +63,22 @@ class userController {
         }
       })
       .then((user) => {
+        const encrypted = user.password;
+        const token = auth.tokenController.createToken(user);
         if (!user) {
           return res.status(401).json({
             status: 'Error',
             message: 'Email or password incorrect'
           });
         }
-        const encrypted = user.password;
         bcrypt.compare(req.body.password, encrypted)
           .then((correct) => {
             if (!correct) {
-              res.status(401).json({
+              return res.status(401).json({
                 status: 'Error',
                 message: 'Email or password incorrect'
               });
             }
-            const token = auth.tokenController.createToken(user);
             return res.status(200).json({
               status: 'Success',
               message: 'User successfully logged in',
@@ -86,7 +86,11 @@ class userController {
                 token
               }
             });
-          });
+          })
+          .catch(error => res.status(500).json({
+            status: 'Error',
+            message: error.message
+          }));
       })
       .catch(error => res.status(500).json({
         status: 'Error',
@@ -217,7 +221,7 @@ class userController {
             message: 'You are not authorised to view this information'
           });
         }
-        res.status(200).json({
+        return res.status(200).json({
           status: 'Success',
           message: 'These are all user details',
           data: {
@@ -241,7 +245,7 @@ class userController {
   * @memberof userController
   */
   static notFound(req, res) {
-    res.status(404).json({
+    return res.status(404).json({
       status: 'Error',
       message: 'Not Found'
     });

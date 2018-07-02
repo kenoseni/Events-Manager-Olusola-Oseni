@@ -22,7 +22,7 @@ class AdminPanelTable extends Component {
         <td>{user.isAdmin.toString()}</td>
         <td>{user.role}</td>
         <td>{user.email}</td>
-        <td><button onClick={this.upgradeUserToAdmin} type="button" className="btn btn-primary btn-sm my-0">UPGRADE</button></td>
+        <td>{!user.isAdmin && <button onClick={this.upgradeUserToAdmin} type="button" className="btn btn-primary btn-sm my-0">UPGRADE</button>}</td>
       </tr>
     )
   }

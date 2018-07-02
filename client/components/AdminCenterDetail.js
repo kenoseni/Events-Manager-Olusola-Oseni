@@ -13,12 +13,12 @@ class AdminCenterDetail extends Component {
   }
 
   render () {
-    const { center, id } = this.props;
+    const { center, id, searchForCenters } = this.props;
     const { events } = this.props.center
 
     return (
       <div>
-        <NavBar home='Home' centers='Centers' events='Events' centerDetails='CenterDetails' page='CenterDetails' id={id} />
+        <NavBar home='Home' centers='Centers' events='Events' centerDetails='CenterDetails' page='CenterDetails' id={id} searchForCenters={searchForCenters} />
         <main>
           <div className="container">
             <div className="row" id="info">
@@ -26,7 +26,7 @@ class AdminCenterDetail extends Component {
                 <div className="card w-40">  
                   {/*<!--Card image-->*/}
                   <div className="view overlay hm-white-slight">
-                    <img src="./img2.jpg" className="img-fluid" alt={center.name} style={{width: '100%', height: '250px'}} />
+                    <img src={center.image} className="img-fluid" alt={center.name} style={{width: '100%', height: '250px'}} />
                   </div>   
                   {/*<!--Card content-->*/}
                   <div className="card-body">
@@ -67,7 +67,7 @@ class AdminCenterDetail extends Component {
                 <div className="card w-40">  
                   {/*<!--Card image-->*/}
                   <div className="view overlay hm-white-slight">
-                    <img src="./img1.jpg" className="img-fluid" alt={center.name} style={{width: '100%', height: '250px'}} />
+                    <img src={center.image} className="img-fluid" alt={center.name} style={{width: '100%', height: '250px'}} />
                   </div>   
                 </div>
                 {/*<!--/.Card-->*/}

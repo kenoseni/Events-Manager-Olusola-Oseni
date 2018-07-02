@@ -1,0 +1,136 @@
+//colors
+$color_guardsman_red_approx: #cc0000;
+$color_dark_blue_approx: rgb(31, 0, 204);
+$caribbean_green: #0c9;
+$white: #fff;
+$color_mountain_mist_approx: #999;
+
+//fonts
+$font_0: Gill Sans;
+$font_1: Gill Sans MT;
+$font_2: Calibri;
+$font_3: Trebuchet MS;
+$font_4: sans-serif;
+
+//urls
+$url_0: url(../components/img/img1.jpg);
+
+* {
+	border: 0;
+}
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+}
+header {
+	height: 100%;
+}
+#intro {
+	height: 803px;
+	background: $url_0 no-repeat center center fixed;
+	background-size: cover;
+}
+#centerlogin {
+	margin-top: 7%;
+}
+#event {
+	margin-top: 10%;
+}
+#info {
+	margin-top: 5%;
+	margin-top: 10%;
+}
+.fa-trash-o {
+	cursor: pointer;
+	color: $color_guardsman_red_approx;
+}
+.fa-pencil-square-o {
+	cursor: pointer;
+	color: $color_dark_blue_approx;
+}
+.close {
+	cursor: pointer;
+}
+.modal-dialog {
+	margin-top: 5%;
+}
+button {
+	padding: 0;
+	border: none;
+	background: none;
+	&:hover {
+		opacity: 0.5;
+	}
+}
+.float {
+	position: fixed;
+	width: 50px;
+	height: 50px;
+	bottom: 30px;
+	right: 30px;
+	background-color: $caribbean_green;
+	color: $white;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 50px;
+	cursor: pointer;
+	text-align: center;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 8px 16px 0 $color_mountain_mist_approx;
+}
+.my-float {
+	margin-top: 12px;
+}
+@media screen and(max-width: 768px) {
+	#event {
+		margin-top: 10%;
+	}
+	#centers {
+		margin-top: 5%;
+	}
+	#info {
+		padding-top: 10%;
+	}
+	#paradise {
+		padding-top: 10%;
+	}
+	#etable {
+		padding-top: 10%;
+	}
+}
+#centers {
+	margin-top: 5%;
+}
+#space {
+	margin-top: 5%;
+}
+#space2 {
+	margin-top: 5%;
+}
+li {
+	display: inline-block;
+}
+.table-wrapper-2 {
+	display: block;
+	max-height: 300px;
+	overflow-y: auto;
+}
+.input-group-addon {
+	height: 45px;
+}
+.form-control {
+	height: 10px;
+}
+.pagination {
+	position: relative;
+	bottom: -30px;
+}
+.count {
+	position: relative;
+	bottom: -30px;
+}
+img:hover {
+	opacity: 0.8;
+}

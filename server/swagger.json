@@ -8,7 +8,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8000",
+      "url": "https://emanager1980.herokuapp.com",
       "variables": {}
     }
   ],
@@ -38,7 +38,63 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully found all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "These are all user details",
+                    "data": {
+                      "allCenters": []
+                    }
+                  }
+                }
+              }
+            } 
+          },
+          "401": {
+            "description": "Users not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "You are not authorised to view this information"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Users not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "users not found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -136,6 +192,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -148,7 +218,7 @@
         }
       }
     },
-    "/api/v1//users/login": {
+    "/api/v1/users/login": {
       "post": {
         "tags": [
           "Users/Admin"
@@ -197,7 +267,49 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "User successfully signed in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "User successfully logged in",
+                    "data": {
+                      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Email or password incorrect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Email or password incorrect"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -210,7 +322,7 @@
         }
       }
     },
-    "/api/v1//centers": {
+    "/api/v1/centers": {
       "get": {
         "tags": [
           "Admin"
@@ -235,7 +347,46 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully gets all centers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "List of all Centers"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Centers not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "No centers found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -332,8 +483,33 @@
           "required": false
         },
         "responses": {
-          "200": {
-            "description": ""
+          "201": {
+            "description": "Successfully created a center",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "Center created successfully"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -371,7 +547,46 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully gets one center",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "List of one center"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Center not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "No center found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -469,7 +684,60 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully modified one center",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "Center updated"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User not authorised to modify center",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "User cannot modify this center"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Center not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Center not found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -505,7 +773,60 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "Center has been successfully deleted"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User not authorised to delete center",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "User cannot delete this center"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Center not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Center not found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -556,7 +877,60 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully found events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "These are your events"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User not authorised to delete center",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "User cannot delete this center"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Events not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Events not found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -623,9 +997,13 @@
                     "type": "string",
                     "example": "2"
                   },
-                  "date": {
+                  "startDate": {
                     "type": "string",
                     "example": "2018-12-31"
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "example": "2019-01-01"
                   },
                   "time": {
                     "type": "string",
@@ -639,7 +1017,60 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully created an event",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "Event was successfully created"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User not authorised to choose the date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Date already taken,please choose another date"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Invalid date entered, enter a date from the current date"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -677,7 +1108,46 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Event successfully found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "Event available"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "No such event available"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -760,7 +1230,60 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully modified event",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "Event was successfully modified"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User cannot modify this event",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Fail",
+                    "message": "User cannot modify this event"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "No such event available"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -809,7 +1332,60 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Event was successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "Event has been successfully deleted"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User cannot delete this event",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "User cannot delete this event"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Event not Found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -847,7 +1423,60 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "User successfully upgraded to admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Success",
+                    "message": "User successfully upgraded to admin"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Admin cannot be upgraded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "fail",
+                    "message": "User is already an admin"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Super Admin cannot be modified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Fail",
+                    "message": "Super Admin cannot be modified"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "status": "Error",
+                    "message": "Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false,
@@ -860,81 +1489,6 @@
         }
       }
     }
-  },
-  "components": {
-    "schemas": {
-      "SignUp": {
-        "title": "Sign Up",
-        "required": [
-          "status",
-          "message",
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "Success"
-          },
-          "message": {
-            "type": "string",
-            "example": "User successfully signed up"
-          },
-          "data": {
-            "example": {
-              "firstname": "kunle",
-              "lastname": "williams",
-              "role": "user",
-              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
-            },
-            "$ref": "#/components/schemas/Data"
-          }
-        },
-        "example": {
-          "status": "Success",
-          "message": "User successfully signed up",
-          "data": {
-            "firstname": "kunle",
-            "lastname": "williams",
-            "role": "user",
-            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
-          }
-        }
-      },
-      "Data": {
-        "title": "Data",
-        "required": [
-          "firstname",
-          "lastname",
-          "role",
-          "token"
-        ],
-        "type": "object",
-        "properties": {
-          "firstname": {
-            "type": "string",
-            "example": "kunle"
-          },
-          "lastname": {
-            "type": "string",
-            "example": "williams"
-          },
-          "role": {
-            "type": "string",
-            "example": "user"
-          },
-          "token": {
-            "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
-          }
-        },
-        "example": {
-          "firstname": "kunle",
-          "lastname": "williams",
-          "role": "user",
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
-        }
-      }
-    }
   }
+  
 }

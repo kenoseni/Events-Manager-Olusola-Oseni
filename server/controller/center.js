@@ -92,7 +92,7 @@ class centerController {
       })
       .then(((allCenters) => {
         if (!allCenters) {
-          return res.status(400).json({
+          return res.status(404).json({
             status: 'Error',
             message: 'No centers found'
           });
@@ -131,7 +131,7 @@ class centerController {
       })
       .then((center) => {
         if (!center) {
-          return res.status(400).json({
+          return res.status(404).json({
             status: 'Error',
             message: 'No center found'
           });

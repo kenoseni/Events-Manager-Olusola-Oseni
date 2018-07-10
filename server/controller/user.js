@@ -2,9 +2,6 @@ import bcrypt from 'bcrypt';
 import db from '../models';
 import auth from '../middleware';
 
-const { Event } = db;
-const { Center } = db;
-
 /**
 * Class representing controller
 *
@@ -176,44 +173,14 @@ class userController {
     return db.User
       .findAndCountAll({
         limit,
-        // order: ['id'],
         offset,
         attributes: { exclude: ['createdAt', 'updatedAt', 'password'] },
-        // include: [{
-        //   model: Center,
-        //   as: 'centers',
-        //   attributes: {
-        //     exclude: [
-        //       'createdAt',
-        //       'updatedAt',
-        //       'userId',
-        //       'description',
-        //       'avaliability',
-        //       'price',
-        //       'facilities',
-        //       'capacity',
-        //       'location'
-        //     ]
-        //   }
-        // },
-        // {
-        //   model: Event,
-        //   as: 'events',
-        //   attributes: {
-        //     exclude: [
-        //       'createdAt',
-        //       'updatedAt',
-        //       'userId',
-        //     ]
-        //   }
-        // }
-        // ],
       })
       .then((users) => {
         if (!users) {
           return res.status(404).json({
             status: 'Error',
-            message: 'user not found'
+            message: 'users not found'
           });
         }
         if (!req.decoded.isadmin) {

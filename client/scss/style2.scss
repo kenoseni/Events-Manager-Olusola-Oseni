@@ -24,6 +24,7 @@ html {
 body {
 	height: 100%;
 	font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+	line-height: unset !important;
 }
 header {
 	height: 100%;
@@ -60,7 +61,8 @@ header {
 button {
 	padding: 0;
 	border: none;
-	background: none;
+  background: none;
+  cursor: pointer;
 	&:hover {
 		opacity: 0.5;
 	}
@@ -131,4 +133,10 @@ li {
 }
 img:hover {
 	opacity: 0.8;
+}
+.modal-title {
+	line-height: 2.5 !important;
+}
+.image-upload > input {
+ display: inline-flex;
 }

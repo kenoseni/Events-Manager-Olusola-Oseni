@@ -6,8 +6,7 @@ import Pages from './Pages';
 class AdminPanel extends Component {
   
   render () {
-    const {users, match, history, count, limit} = this.props
-    console.log(users);
+    const {users, match, history, count, limit, userDetails} = this.props
     return (
       <div className="container">
         <div className="row" id="">
@@ -28,7 +27,12 @@ class AdminPanel extends Component {
                           <th className="th-lg">ISADMIN</th>
                           <th className="th-lg">ROLE</th>
                           <th className="th-lg">EMAIL</th>
-                          <th className="th-lg">ACTION</th>
+                          {userDetails.userrole === 'superadmin' &&
+                            <th className="th-lg">ACTION</th>
+                          }
+                          {userDetails.userrole === 'admin' &&
+                            <th className="th-lg"></th>
+                          }
                         </tr>
                       </thead>
                       <tbody>

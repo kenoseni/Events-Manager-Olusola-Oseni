@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {signout} from '../actions/UserActions';
 
-class SignOut extends Component {
+export class SignOut extends Component {
 
   componentWillMount() {
     this.props.signout();   

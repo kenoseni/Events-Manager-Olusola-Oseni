@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import SubmitButton from './SubmitButton'
 import * as centerActions from '../actions/CenterActions';
 import { getCenters } from '../actions/CenterActions';
-
+import { validateEventInput } from './Validations';
 
 class ModifyEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      event: this.props.event,
-      allCenters: this.props.eventCenters.allCenters
+      event: {
+        ...this.props.event,
+        centerId: `${this.props.event.centerId}`
+      },
+      allCenters: this.props.eventCenters.allCenters,
+      error: {}
     }
   
     this.submit = this.submit.bind(this)
@@ -19,6 +23,14 @@ class ModifyEvent extends Component {
     this.setState({allCenters: nextProps.eventCenters.allCenters})
   }
   
+  isValid() {
+    const { error, isValid } = validateEventInput(this.state);
+    if (!isValid) {
+      this.setState({ error })
+    }
+    return isValid;
+  }
+
   getInput(e) {
     this.setState({ event: {
       ...this.state.event,
@@ -29,18 +41,30 @@ class ModifyEvent extends Component {
 
   submit(e) {
     e.preventDefault();
-    const {name, centerId, date, time, id} = this.state.event
-    $('#id').modal('hide')
-    this.props.modifyEvent({
-      name, 
-      centerId, 
-      date, 
-      time
-    }, id)
+    this.setState({error: {}})
+    const {name, 
+      centerId,
+      startDate,
+      endDate,
+      time,
+      id} = this.state.event
+    if (this.isValid()) {
+      this.props.modifyEvent({
+        name, 
+        centerId, 
+        startDate,
+        endDate,
+        time
+      }, id)
+      .then(
+        (res) => this.props.history.push('/events'), $(`#${id}`).modal('hide'),
+        (err) => this.setState({error: err.data})
+      )
+    }
   }
 
   render () {
-    const { event, i, allCenters} = this.state
+    const { event, i, allCenters, error} = this.state
     const {id} = this.props
     const center = allCenters.filter(center => center.id === event.centerId)
     const [centerName] = center
@@ -65,20 +89,25 @@ class ModifyEvent extends Component {
                           </div>
                         </div>  
                       </div>
+                      {error.message && <div className="alert alert-danger">{error.message}</div>}
                       <div className="">
                         <div className="container-fluid">
                           <div className="row">
                             <div className="col-12">
                               <span className="" id="sizing-addon1">Event Name:</span>
-                              <input type="text" name='name' value={(event.name) ? event.name.toUpperCase(): ''} onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                              <input type="text" name='name'
+                               value={(event.name) ? event.name.toUpperCase(): ''}
+                               onChange={this.getInput}
+                               className="form-control" aria-describedby="sizing-addon1"
+                              />
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Venue</span>
-                                <select className="form-control" name="centerId" onChange={this.getInput}>
-                                  <option value={event.centerId}> {(centerName) ? centerName.name: ''} </option>
+                                <select className="form-control" name="centerId" onChange={this.getInput} value={event.centerId}>
+                                <option>select option</option>
                                   {
                                     allCenters.map(center => <option key={center.id} value={center.id}> {center.name} </option>)
                                   }
@@ -90,8 +119,24 @@ class ModifyEvent extends Component {
                           <div className="row">
                             <div className="col-12">
                               <div className="">
-                                <span className="" id="sizing-addon1">Date</span>
-                                <input type="date" name='date' value={event.date} onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                                <span className="" id="sizing-addon1">Start Date</span>
+                                <input type="date" name='startDate' 
+                                  defaultValue={event.startDate} 
+                                  onChange={this.getInput} 
+                                  className="form-control" aria-describedby="sizing-addon1" 
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="">
+                                <span className="" id="sizing-addon1">End Date</span>
+                                <input type="date" name='endDate' 
+                                  defaultValue={event.endDate}
+                                  onChange={this.getInput}
+                                  className="form-control" aria-describedby="sizing-addon1"
+                                />
                               </div>
                             </div>
                           </div>
@@ -99,7 +144,11 @@ class ModifyEvent extends Component {
                             <div className="col-12">
                               <div className="">
                                 <span className="" id="sizing-addon1">Time</span>
-                                <input type="text" name='time' value={event.time} onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                                <input type="text" name='time'
+                                  defaultValue={event.time}
+                                  onChange={this.getInput}
+                                  className="form-control" aria-describedby="sizing-addon1"
+                                />
                               </div>
                             </div>
                           </div>
@@ -107,7 +156,7 @@ class ModifyEvent extends Component {
                       </div>
                     </div>
                     <br />
-                    <SubmitButton name='MODIFY EVENT'/>
+                    <SubmitButton id='modify' name='MODIFY EVENT'/>
                   </form>            
                 </div>
               </div> 

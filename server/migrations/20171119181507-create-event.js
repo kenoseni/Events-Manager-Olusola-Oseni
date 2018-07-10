@@ -9,7 +9,10 @@ module.exports = {
     name: {
       type: Sequelize.STRING
     },
-    date: {
+    startDate: {
+      type: Sequelize.DATEONLY
+    },
+    endDate: {
       type: Sequelize.DATEONLY
     },
     time: {

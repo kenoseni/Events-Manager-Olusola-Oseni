@@ -9,8 +9,8 @@ class AdminCenterEvents extends Component {
   render () {
     const {events} = this.props
     return (
-      <div className="col-xs-12 col-md-6" id="etable">
-        <div className="card w-40">
+      <div className="col-xs-12 col-md-8" id="etable">
+        <div className="card w-70">
           <div className="card-body">
             <div className="table-wrapper-2">
               {/*<!--Table-->*/}
@@ -19,7 +19,8 @@ class AdminCenterEvents extends Component {
                   <tr>
                     <th>#</th>
                     <th className="th-lg">Event Type</th>
-                    <th className="th-lg">Date</th>
+                    <th className="th-lg">Start Date</th>
+                    <th className="th-lg">End Date</th>
                     <th className="th-lg">Time</th>
                   </tr>
                 </thead>

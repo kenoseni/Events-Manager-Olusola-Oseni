@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 
-const uniqueId = shortid.generate();
+let uniqueId = shortid.generate(); // eslint-disable-line
 /**
 * Add flash message action
 *

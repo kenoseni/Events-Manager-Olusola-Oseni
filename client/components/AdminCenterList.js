@@ -12,7 +12,11 @@ class AdminCenterList extends Component {
     const { centers, match, searchForCenters } = this.props;
     return (
       <div style={{paddingTop: '90px'}}>
-        <NavBar home='Home' centers='Centers' events='Events' page='Centers' logout='Log Out' admin='Admin' match={match} searchForCenters={searchForCenters} />
+        <NavBar home='Home' centers='Centers'
+          events='Events' page='Centers'
+          logout='Log Out' admin='Admin'
+          match={match} searchForCenters={searchForCenters}
+        />
         <div className="container">
           <div className="row" id="centers">
             {(centers.length > 0) ?

@@ -10,7 +10,7 @@ import AddCenterModalButton from './AddCenterModalButton'
 import AddCenter from './AddCenter';
 import Pages from './Pages';
 
-class AdminCenters extends Component {
+export class AdminCenters extends Component {
   constructor(props) {
     super(props);
   }
@@ -20,17 +20,43 @@ class AdminCenters extends Component {
       const page = this.props.history.location.search.split('=')[1];
       this.props.getCenters(page);
     }
+    if (!this.props.isAuthenticated) {
+      this.props.getCenters();
+    }
   }
   
   render () {
     const { centers, count, limit } = this.props.eventCenters;
-    const { addCenter, deleteCenter, modifyCenter, addImage, history, getCenters, searchForCenters } = this.props;
+    const { addCenter,
+      deleteCenter,
+      modifyCenter,
+      addImage, 
+      history,
+      getCenters,
+      searchForCenters 
+    } = this.props;
     return (
       <div>
-        <AdminCenterList centers={centers} deleteCenter={deleteCenter} modifyCenter={modifyCenter} {...this.props}  />
+        <AdminCenterList 
+          centers={centers}
+          deleteCenter={deleteCenter}
+          modifyCenter={modifyCenter}
+          {...this.props}  
+        />
         {this.props.isAdmin&&<AddCenterModalButton />}
-        {this.props.isAdmin&&<AddCenter  title='Add Center' addCenter={addCenter} addImage={addImage} {...this.props} />}
-        {count !== undefined && <Pages count={count} history={history} limit={limit} />}
+        {this.props.isAdmin&&
+          <AddCenter  title='Add Center'
+            addCenter={addCenter}
+            addImage={addImage}
+            {...this.props}
+          />
+        }
+        {count !== undefined &&
+          <Pages count={count}
+            history={history}
+            limit={limit}
+          />
+        }
       </div>
       )
   }

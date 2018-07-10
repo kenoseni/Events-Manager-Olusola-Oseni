@@ -18,7 +18,11 @@ class AdminCenterDetail extends Component {
 
     return (
       <div>
-        <NavBar home='Home' centers='Centers' events='Events' centerDetails='CenterDetails' page='CenterDetails' id={id} searchForCenters={searchForCenters} />
+        <NavBar 
+          home='Home' centers='Centers' 
+          events='Events' centerDetails='CenterDetails' 
+          page='CenterDetails' id={id} searchForCenters={searchForCenters} 
+        />
         <main>
           <div className="container">
             <div className="row" id="info">
@@ -26,12 +30,16 @@ class AdminCenterDetail extends Component {
                 <div className="card w-40">  
                   {/*<!--Card image-->*/}
                   <div className="view overlay hm-white-slight">
-                    <img src={center.image} className="img-fluid" alt={center.name} style={{width: '100%', height: '250px'}} />
+                    <img src={center.image} className="img-fluid" 
+                      alt={center.name} style={{width: '100%', height: '250px'}} 
+                    />
                   </div>   
                   {/*<!--Card content-->*/}
                   <div className="card-body">
                     {/*<!--Title-->*/}
-                    <h5 className="card-title font-weight-bold text-center">{(center.name === undefined ? null: center.name.toUpperCase())}</h5>
+                    <h5 className="card-title font-weight-bold text-center">
+                      {(center.name === undefined ? null: center.name.toUpperCase())}
+                    </h5>
                     {/*<!--Text-->*/}
                     <p className="card-text"></p>
                   </div>     
@@ -64,13 +72,6 @@ class AdminCenterDetail extends Component {
             </div>
             <div className="row" id="space">
               <div className="col-xs-12 col-md-4" id="space2">
-                <div className="card w-40">  
-                  {/*<!--Card image-->*/}
-                  <div className="view overlay hm-white-slight">
-                    <img src={center.image} className="img-fluid" alt={center.name} style={{width: '100%', height: '250px'}} />
-                  </div>   
-                </div>
-                {/*<!--/.Card-->*/}
               </div>
               <AdminCenterEvents events={events}/>
             </div>

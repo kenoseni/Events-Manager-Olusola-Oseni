@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import db from '../models';
 
 const { Event } = db;
@@ -19,14 +20,39 @@ class eventController {
   */
   static addEvent(req, res) {
     const {
-      date,
-      centerId
+      name, startDate, endDate, time, centerId
     } = req.body;
+
+    if (startDate < new Date().toISOString()) {
+      return res.status(422).json({
+        status: 'Fail',
+        message: `Invalid date entered, enter a date from the current date,
+         ${new Date().toISOString()}`
+      });
+    }
+    const { Op } = Sequelize;
     return Event
       .find({
         where: {
-          date: new Date(date).toISOString(),
           centerId,
+          [Op.or]: [
+            {
+              startDate: {
+                [Op.between]: [startDate, endDate]
+              },
+              endDate: {
+                [Op.between]: [startDate, endDate]
+              },
+            },
+            {
+              startDate: {
+                [Op.lte]: startDate
+              },
+              endDate: {
+                [Op.gte]: endDate
+              }
+            }
+          ]
         }
       })
       .then((result) => {
@@ -36,13 +62,14 @@ class eventController {
             message: 'Date already taken,please choose another date'
           });
         }
-        Event
+        return Event
           .create({
             userId: req.decoded.userid,
-            name: req.body.name,
-            date: req.body.date,
-            time: req.body.time,
-            centerId: req.body.centerId,
+            name,
+            startDate,
+            endDate,
+            time,
+            centerId
           })
           .then(event => res.status(201).json({
             status: 'Success',
@@ -122,7 +149,8 @@ class eventController {
         }
         event.updateAttributes({
           name: req.body.name || event.name,
-          date: req.body.date || event.date,
+          startDate: req.body.startDate || event.startDate,
+          endDate: req.body.endDate || event.endDate,
           time: req.body.time || event.time,
           centerId: req.body.centerId || event.centerId,
         });

@@ -12,7 +12,6 @@ class Event extends Component {
     const {event, i} = this.props
     const { id } = this.props.event
     const center = this.props.eventCenters.allCenters.filter(center => center.id === event.centerId)
-    console.log(center);
     const [centerName] = center
     return (
       <div className="col-md-4">
@@ -21,10 +20,21 @@ class Event extends Component {
             <h4>{event.name.toUpperCase()}</h4>
           </div>
           <div className="card-body">
-            <p className="card-text font-weight-bold">Location: {(centerName) ? centerName.name.toUpperCase() : null}</p>
-            <p className="card-text font-weight-bold">Address: {(centerName) ? centerName.location : null}</p>
-            <p className="card-text font-weight-bold">Date: {event.date}</p>
-            <p className="card-text font-weight-bold">Time: {event.time}</p>
+            <p className="card-text font-weight-bold">
+              Location: {(centerName) ? centerName.name.toUpperCase() : null}
+            </p>
+            <p className="card-text font-weight-bold">
+              Address: {(centerName) ? centerName.location : null}
+            </p>
+            <p className="card-text font-weight-bold">
+              Start Date: {event.startDate}
+            </p>
+            <p className="card-text font-weight-bold">
+              End Date: {event.endDate}
+            </p>
+            <p className="card-text font-weight-bold">
+              Time: {event.time}
+            </p>
           </div>
           <div className="card-footer bg-transparent">
             <ul className="nav">

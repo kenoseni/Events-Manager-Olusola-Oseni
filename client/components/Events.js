@@ -15,7 +15,7 @@ import flashMessage from '../reducers'
 import Pages from './Pages';
 
 
-class Events extends Component {
+export class Events extends Component {
   constructor(props) {
     super(props)
   }

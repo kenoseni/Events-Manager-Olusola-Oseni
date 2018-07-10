@@ -34,6 +34,7 @@ class userController {
           status: 'Success',
           message: 'User successfully signed up',
           data: {
+            id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
             role: user.role,

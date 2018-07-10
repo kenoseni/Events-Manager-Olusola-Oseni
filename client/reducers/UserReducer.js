@@ -22,7 +22,7 @@ class userReducer {
       }
       case 'SIGNUP_USER_RESOLVED': {
         const {
-          firstname, lastname, role, token
+          firstname, lastname, role, token, id
         } = action.payload.data;
         const { status, message } = action.payload;
         return {
@@ -31,6 +31,7 @@ class userReducer {
           lastname,
           role,
           token,
+          id,
           status,
           message
         };

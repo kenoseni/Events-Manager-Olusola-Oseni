@@ -9,11 +9,15 @@ class DeleteModal extends Component {
   }
   handleDeleteEvent() {
     const {i, id} = this.props
-    this.props.deleteEvent(id)
+    this.props.deleteEvent(id).then(
+      (res) => this.props.history.push('/events')
+    )
   } 
   handleDeleteCenter() {
     const {i, center} = this.props
-    this.props.deleteCenter(center.id)
+    this.props.deleteCenter(center.id).then(
+      (res) => this.props.history.push('/centers')
+    )
   }
   render () {
     return (
@@ -26,11 +30,18 @@ class DeleteModal extends Component {
               <div className="modal-content">
                 <div className="modal-header d-flex justify-content-center">
                   <h4 className="modal-title">{this.props.title}</h4>
-                  <button type="button" className="close white" data-dismiss="modal">&times;</button>
+                  <button type="button"
+                   className="close white"
+                    data-dismiss="modal">&times;
+                  </button>
                 </div>
                 <div className="modal-body">
                   {/*<!--Warning message-->*/}
-                  <button className="btn btn-danger" onClick={(this.props.event)? this.handleDeleteEvent: this.handleDeleteCenter} data-dismiss="modal">DELETE</button>
+                  <button className="btn btn-danger"
+                    id='deleteButtion'
+                   onClick={(this.props.event)? this.handleDeleteEvent: this.handleDeleteCenter}
+                    data-dismiss="modal">DELETE
+                  </button>
                 </div>
               </div>
             </div>

@@ -66,7 +66,8 @@ class eventReducer {
               id: event.id,
               name: event.name,
               centerId: event.centerId,
-              date: event.date,
+              startDate: event.startDate,
+              endDate: event.endDate,
               time: event.time,
             }
           ],
@@ -133,7 +134,8 @@ class eventReducer {
                 id: event.id,
                 name: event.name,
                 centerId: event.centerId,
-                date: event.date,
+                startDate: event.startDate,
+                endDate: event.endDate,
                 time: event.time,
               };
             })

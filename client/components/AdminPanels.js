@@ -39,12 +39,14 @@ class AdminPanels extends Component {
 AdminPanels.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
-  isAdmin: PropTypes.bool
+  isAdmin: PropTypes.bool,
+  userDetails: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
   user: state.user,
   isAuthenticated: state.auth.isAuthenticated,
   isAdmin: state.auth.user.isadmin,
+  userDetails: state.auth.user
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

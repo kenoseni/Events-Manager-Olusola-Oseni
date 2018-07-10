@@ -6,8 +6,8 @@ class SignIn extends Component {
   constructor() {
     super();
     this.state = {
-      email: '' ,
-      password: '',
+      mail: '' ,
+      pswd: '',
       error: {},
       hideModal: false,
       isOpen: false
@@ -26,11 +26,11 @@ class SignIn extends Component {
     e.preventDefault()
     this.setState({error: {}})
     const {
-      email, password
+      mail, pswd
     } = this.state;
     this.props.userLogin({
-      email,
-      password,
+      email: mail,
+      password: pswd,
     });
   }
 
@@ -58,26 +58,43 @@ class SignIn extends Component {
             {/*Modal content*/}
             <div className="modal-content">
               <div className="modal-header">
-                <h4 id="signin" className="modal-title font-weight-bold">Log In</h4>
+                <h4 id="signinTitle" className="modal-title font-weight-bold">Log In</h4>
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
               </div>
               <div className="modal-body">            
-                <form  method="POST" role="form">         
-                  <div className="form-group"> 
+                <form id='loginform' method="POST" role="form">         
+                  <div id="formgroup" className="form-group"> 
                     {error.message && <div className="alert alert-danger">{error.message}</div>}
-                    <label className="control-label font-weight-bold" htmlFor="email"><i className="fa fa-envelope" aria-hidden="true"></i> Email: </label>
-                    <input type="email" name='email' onChange={this.getLoginInput} className="form-control" id="email" placeholder="username@domain.com" autoFocus />     
+                    <label htmlFor="l-email" className="font-weight-bold" >
+                      <i className="fa fa-envelope" aria-hidden="true"></i> Email: 
+                    </label>
+                    <input id='l-email' type="email"
+                      name='mail' onChange={this.getLoginInput} 
+                      className="form-control eeemail" id="email" 
+                      placeholder="username@domain.com"
+                    />     
                   </div>
-                  <div className="form-group">
-                    <label className="control-label font-weight-bold" htmlFor="password"><i className="fa fa-lock" aria-hidden="true"></i> Password: </label>
-                    <input type="password" name='password' onChange={this.getLoginInput} className="form-control" id="password" />
+                  <div id='lpswd' className="form-group">
+                    <label htmlFor="l-password" className="font-weight-bold">
+                      <i className="fa fa-lock" aria-hidden="true"></i> Password: 
+                    </label>
+                    <input id='l-password' type="password" name='pswd'
+                      onChange={this.getLoginInput}
+                      className="form-control pwd" id="password"
+                    />
                   </div>                 
-                  <button className="btn btn-success" onClick={this.loginInput} >Log In</button>
+                  <button id='l-button' className="btn btn-success" onClick={this.loginInput}>
+                    Log In
+                  </button>
                 </form>                      
               </div> 
               <div className="modal-footer">
-                <span id="join">Not a member? <a data-toggle="modal" data-target="#signUp" data-dismiss="modal">Sign Up</a></span> 
-                <span>Forgot <a data-toggle="modal" data-target="">Password?</a></span>
+                <span id="join">Not a member? 
+                  <a data-toggle="modal" data-target="#signUp" data-dismiss="modal">
+                    Sign Up
+                  </a>
+                </span> 
+                {/**<span>Forgot <a data-toggle="modal" data-target="">Password?</a></span>**/}
               </div>    
             </div>
           </div>               

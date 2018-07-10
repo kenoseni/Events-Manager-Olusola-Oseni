@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SubmitButton from './SubmitButton';
+import { validateEventInput } from './Validations';
 
 class AddEvent extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class AddEvent extends Component {
     this.state = {
       value: 'Choose a Center',
       event: {},
-      allCenters: []
+      allCenters: [],
+      error: {}
     }
     this.submit = this.submit.bind(this)
     this.getInput = this.getInput.bind(this)
@@ -18,6 +20,14 @@ class AddEvent extends Component {
     if (nextProps.eventCenters.allCenters !== this.props.eventCenters.allCenters) {
       this.setState({allCenters: nextProps.eventCenters.allCenters})
     }
+  }
+
+  isValid() {
+    const { error, isValid } = validateEventInput(this.state);
+    if (!isValid) {
+      this.setState({ error })
+    }
+    return isValid;
   }
   
   getInput(e) {
@@ -30,18 +40,25 @@ class AddEvent extends Component {
   
   submit(e) {
     e.preventDefault();
-    const {name, centerId, date, time} = this.state.event
-    $('#addEvent').modal('hide')
-    this.props.addEvent({
-      name,  
-      centerId, 
-      date, 
-      time
-    })
+    this.setState({error: {}})
+    const { name, centerId, startDate, endDate, time } = this.state.event
+    if (this.isValid()) {
+      this.props.addEvent({
+        name, 
+        centerId,
+        startDate,
+        endDate,
+        time
+      })
+      .then(
+        (res) => this.props.history.push('/events'), $('#addEvent').modal('hide'),
+        (err) => this.setState({error: err.data})
+      )
+
+    }
   }
   render() {
-    const {allCenters} = this.state
-    console.log(allCenters)
+    const {allCenters, error} = this.state
     return (
       <div>
         <div className="container">            
@@ -61,11 +78,16 @@ class AddEvent extends Component {
                         <div className="input-group mb-3">
                         </div>
                       </div>
+                      {error.message && <div className="alert alert-danger">{error.message}</div>}
                       <div className="container-fluid">
                         <div className="row">
                           <div className="col-12">
                             <span className="" id="sizing-addon1">Event Name:</span>
-                            <input type="text" name="name" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                            <input type="text" name="name"
+                              onChange={this.getInput}
+                              className="form-control"
+                              aria-describedby="sizing-addon1"
+                            />
                           </div>
                         </div>
                           <div className="">
@@ -82,14 +104,35 @@ class AddEvent extends Component {
                             </div>
                             <div className="row">
                               <div className="col-12">
-                                <span className="" id="sizing-addon1">Date:</span>
-                                <input type="date" name="date" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                                <span className="" id="sizing-addon1">Start Date:</span>
+                                <input type="date" 
+                                  name="startDate"
+                                  onChange={this.getInput}
+                                  className="form-control"
+                                  aria-describedby="sizing-addon1"
+                                />
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-12">
+                                <span className="" id="sizing-addon1">End Date:</span>
+                                <input type="date" 
+                                  name="endDate"
+                                  onChange={this.getInput}
+                                  className="form-control"
+                                  aria-describedby="sizing-addon1"
+                                />
                               </div>
                             </div>
                             <div className="row">
                               <div className="col-12">
                                 <span className="" id="sizing-addon1">Time:</span>
-                                <input type="text" name="time" onChange={this.getInput} className="form-control" aria-describedby="sizing-addon1" />
+                                <input type="text"
+                                  name="time"
+                                  onChange={this.getInput}
+                                  className="form-control"
+                                  aria-describedby="sizing-addon1"
+                                />
                               </div>
                             </div>
                           </div>

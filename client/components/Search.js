@@ -35,7 +35,6 @@ class Search extends Component {
   submitForm(e) {
     e.preventDefault();
     const {searchText} = this.state;
-    console.log(this.state.searchText);
     this.setState({
       searchText: ''
     })

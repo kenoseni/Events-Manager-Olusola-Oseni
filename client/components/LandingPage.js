@@ -10,7 +10,7 @@ import NavBar from './Navbar';
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 
-class LandingPage extends Component {
+export class LandingPage extends Component {
   render () {
     const {createUser, userLogin, addFlashMessage, match, searchForCenters } = this.props
     return (

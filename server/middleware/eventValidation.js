@@ -33,7 +33,7 @@ class EventValidation {
       });
     }
     // Check if date is empty
-    if (!req.body.date || isEmpty(req.body.date)) {
+    if (!req.body.startDate || isEmpty(req.body.startDate)) {
       return res.status(400).json({
         status: 'Error',
         message: 'Date field required'
@@ -75,7 +75,13 @@ class EventValidation {
       });
     }
     // check if event date is alphanumeric
-    if (!isDateFormat(req.body.date)) {
+    if (!isDateFormat(req.body.startDate)) {
+      return res.status(400).json({
+        status: 'Error',
+        message: 'Date format is invalid, use YYYY-MM-DD'
+      });
+    }
+    if (!isDateFormat(req.body.endDate)) {
       return res.status(400).json({
         status: 'Error',
         message: 'Date format is invalid, use YYYY-MM-DD'

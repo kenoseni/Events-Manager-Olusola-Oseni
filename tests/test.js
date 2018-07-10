@@ -82,19 +82,22 @@ const validSignupSeed = [{
   validEventSeed = [
     {
       name: 'wedding',
-      date: '2017-12-25',
+      startDate: '2017-12-25',
+      endDate: '2017-12-26',
       time: '5 pm',
       centerId: 1
     },
     {
       name: 'Birthday',
-      date: '2018-12-25',
+      startDate: '2018-12-25',
+      endDate: '2018-12-26',
       time: '4 pm',
       centerId: 2
     },
     {
       name: 'Seminar',
-      date: '2018-12-30',
+      startDate: '2018-12-30',
+      endDate: '2017-12-31',
       time: '4 pm',
       centerId: 2
     }
@@ -102,31 +105,36 @@ const validSignupSeed = [{
   invalidEventSeed = [
     {
       name: '',
-      date: '2017-12-25',
+      startDate: '2017-12-25',
+      endDate: '2017-12-26',
       time: '5 pm',
       centerId: 1
     },
     {
       name: 'Birthday',
-      date: '',
+      startDate: '',
+      endDate: '2017-12-28',
       time: '4 pm',
       centerId: 2
     },
     {
       name: 'Seminar',
-      date: '2018-12-30',
+      startDate: '2018-12-31',
+      endDate: '2019-01-01',
       time: '',
       centerId: 2
     },
     {
       name: 'Seminar',
-      date: '2018-12-30',
+      startDate: '2019-01-30',
+      endDate: '2019-01-31',
       time: '4 pm',
       centerId: ''
     },
     {
       name: 'Seminar',
-      date: '2018-12-30',
+      startDate: '2019-03-30',
+      endDate: '2019-03-31',
       time: '4 pm',
       centerId: 'good'
     }

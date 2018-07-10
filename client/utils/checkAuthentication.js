@@ -5,7 +5,7 @@ import { history } from '../routes';
 
 export default function(ComposedComponent) {
   class Authenticate extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
       if(!this.props.isAuthenticated) {
         history.push('/');
       }

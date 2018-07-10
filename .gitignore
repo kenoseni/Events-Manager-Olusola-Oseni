@@ -17,3 +17,5 @@ template/sass
 .vscode
 /coverage
 /lib
+/selenium-debug.log
+/reports

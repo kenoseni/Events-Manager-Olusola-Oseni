@@ -69,25 +69,25 @@ export default class Navbar extends Component {
                 </li>
               </Link>
               <Link to={`/centers`}>
-                <li className={(this.props.page === 'Centers') ? navItemClass.join(' ') : 'nav-item'}>
+                <li id='center' className={(this.props.page === 'Centers') ? navItemClass.join(' ') : 'nav-item'}>
                   <button className="nav-link" >{this.props.centers}</button>
                 </li>
               </Link>
               { this.isLoggedIn &&
                 <Link to={`/events`}>
-                  <li className={(this.props.page === 'Events') ? navItemClass.join(' ') : 'nav-item'}>
+                  <li id='events' className={(this.props.page === 'Events') ? navItemClass.join(' ') : 'nav-item'}>
                     <button className="nav-link" >{this.props.events}</button>
                   </li>
                 </Link>
               }
               <Link to={`/about`}>
-                <li className={(this.props.page === 'About') ? navItemClass.join(' ') : 'nav-item'}>
+                <li id='about' className={(this.props.page === 'About') ? navItemClass.join(' ') : 'nav-item'}>
                   <button className="nav-link">About</button>
                 </li>
               </Link>
               { this.isAdmin &&
                 <Link to={`/admin`}>
-                <li className={(this.props.page === 'Admin') ? navItemClass.join(' ') : 'nav-item'}>
+                <li id='admin' className={(this.props.page === 'Admin') ? navItemClass.join(' ') : 'nav-item'}>
                   <button className="nav-link">{this.props.admin}</button>
                 </li>
                 </Link>
@@ -104,12 +104,12 @@ export default class Navbar extends Component {
             <Search searchForCenters={searchForCenters}/>
             <ul className="nav navbar-nav">
               { !this.isLoggedIn &&
-                <li className="nav-item">
+                <li id='signin' className="nav-item">
                   <button className="nav-link" data-toggle="modal" data-target="#logIn">{this.props.login}</button>
                 </li>
               }
               { !this.isAdmin &&
-                <li className="nav-item">
+                <li id='signup' className="nav-item">
                   <button className="nav-link" data-toggle="modal" data-target="#signUp">{this.props.signup}</button>
                 </li>
               }

@@ -29,23 +29,39 @@ class AdminCenter extends Component {
         <div className="card w-40">
           <div className="view overlay hm-white-slight">
             <Link to={`/centers/${center.id}`}>
-              <img src={center.image} className="img-fluid" alt={center.name} id="img-preview" style={{width:'100%', height:'250px'}} />
+              <img src={center.image} className="img-fluid" 
+                alt={center.name} 
+                id="img-preview" 
+                style={{width:'100%', height:'250px'}} 
+              />
             </Link>
           </div>
           <div className="card-body">
-            <h5 className="card-title font-weight-bold text-center">{center.name.toUpperCase()}</h5>
-            <p className="card-text font-weight-bold ">Description: {center.description}</p>
-            <p className="card-text font-weight-bold">Location: {center.location}</p>
-            <p className="card-text font-weight-bold">Price: {center.price}</p>
-            <p className="card-text font-weight-bold">Facilities: {center.facilities}</p>
-            <p className="card-text font-weight-bold">Capacity: {center.capacity} guests</p>
+            <h5 className="card-title font-weight-bold text-center">
+              {center.name.toUpperCase()}
+            </h5>
+            <p className="card-text font-weight-bold ">
+              Description: {center.description}
+            </p>
             <p className="card-text font-weight-bold">
+              Location: {center.location}
+            </p>
+            <p className="card-text font-weight-bold">
+              Price: {center.price}
+            </p>
+            <p className="card-text font-weight-bold">
+              Facilities: {center.facilities}
+            </p>
+            <p className="card-text font-weight-bold">
+              Capacity: {center.capacity} guests
+            </p>
+            {/* <p className="card-text font-weight-bold">
               Availability: 
               {(center.avaliability === true) ? 
                 ' Center Available': 
                 ' Currently not Available'
               } 
-            </p>                                            
+            </p>*/}
           </div>
           {this.isAdmin &&
             <div className="card-footer bg-transparent">

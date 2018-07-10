@@ -33,7 +33,13 @@ class AdminCenterDetails extends Component {
     
     return (
       <div>
-        {center !== {} && <AdminCenterDetail center={center} getOneCenter={getOneCenter} id={id} searchForCenters={searchForCenters} />}
+        {center !== {} && 
+          <AdminCenterDetail 
+            center={center} 
+            getOneCenter={getOneCenter} 
+            id={id} searchForCenters={searchForCenters} 
+          />
+        }
       </div>
     )
   }

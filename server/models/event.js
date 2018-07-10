@@ -13,10 +13,9 @@ export default (sequelize, DataTypes) => {
         this.setDataValue('name', value.toString().toLowerCase().trim());
       }
     },
-    date: {
+    startDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      isDate: true,
       unique: {
         args: true,
         msg: 'An event has been slated for this date'
@@ -28,7 +27,25 @@ export default (sequelize, DataTypes) => {
         },
         isDate: {
           args: true,
-          msg: 'Insert the correct date format'
+          msg: 'Enter a valid date'
+        }
+      }
+    },
+    endDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+      unique: {
+        args: true,
+        msg: 'An event has been slated for this date'
+      },
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Event date cannot be empty'
+        },
+        isDate: {
+          args: true,
+          msg: 'Enter a valid date'
         }
       }
     },

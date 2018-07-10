@@ -11,7 +11,8 @@ class AdminCenterEventsTable extends Component {
       <tr>
         <th scope="row">{i}</th> 
         <td>{event.name.toUpperCase()}</td>
-        <td>{event.date}</td>
+        <td>{event.startDate}</td>
+        <td>{event.endDate}</td>
         <td>{event.time}</td>
       </tr>
     )

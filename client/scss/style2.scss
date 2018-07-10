@@ -61,11 +61,11 @@ header {
 button {
 	padding: 0;
 	border: none;
-	background: none;
+  background: none;
+  cursor: pointer;
 	&:hover {
 		opacity: 0.5;
 	}
-	cursor: pointer;
 }
 .float {
 	position: fixed;
@@ -137,10 +137,6 @@ img:hover {
 .modal-title {
 	line-height: 2.5 !important;
 }
-// #file-upload {
-// 	margin-top: 30px !important;
-// 	margin-bottom: 30px !important;
-// }
 .image-upload > input {
  display: inline-flex;
 }

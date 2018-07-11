@@ -2,6 +2,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
+
 /**
 * User signup action
 *
@@ -46,6 +47,7 @@ const userLogin = loginDetails => (dispatch) => {
       dispatch({ type: 'LOGIN_RESOLVED', payload: res.data });
     })
     .catch((err) => {
+      console.log("***", err.message, err.toString())
       dispatch({ type: 'LOGIN_REJECTED', payload: err.response.data });
     });
 };

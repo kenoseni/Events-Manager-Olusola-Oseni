@@ -20,11 +20,11 @@ class AddEvent extends Component {
     if (nextProps.eventCenters.allCenters !== this.props.eventCenters.allCenters) {
       this.setState({allCenters: nextProps.eventCenters.allCenters})
     }
-    if(this.props.userEvents.error) {
-      this.setState({
-        error: nextProps.userEvents.error
-      })
-    }
+    // if(this.props.userEvents.error) {
+    //   this.setState({
+    //     error: nextProps.userEvents.error
+    //   })
+    // }
   }
 
   isValid() {
@@ -42,10 +42,7 @@ class AddEvent extends Component {
     },
    })
   }
-  
-  submit(e) {
-    e.preventDefault();
-    this.setState({error: {}})
+  addUserEvent () {
     const { name, centerId, startDate, endDate, time } = this.state.event
     if (this.isValid() ) {
       this.props.addEvent({
@@ -56,13 +53,19 @@ class AddEvent extends Component {
         time
       })
       .then(() => {
-          if(this.props.userEvents.error){
-            this.setState({error: this.props.userEvents.error})
-          }else{
-             $('#addEvent').modal('hide'), this.props.history.push('/events')
-          }
+        if(this.props.userEvents.error.message !== undefined){
+          this.setState({error: this.props.userEvents.error})
+        }else{
+          this.props.history.push('/events'), $('#addEvent').modal('hide')
+        }
       })
     }
+  }
+  submit(e) {
+    e.preventDefault();
+    this.setState({error: {}})
+    this.addUserEvent()
+    
   }
   render() {
     const {allCenters, error} = this.state

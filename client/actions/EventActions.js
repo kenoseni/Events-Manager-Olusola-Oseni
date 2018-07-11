@@ -54,6 +54,10 @@ const addEvent = eventInfo => (dispatch) => {
         type: 'ADD_EVENT_RESOLVED',
         payload: res.data
       });
+      dispatch({
+        type: 'ADD_EVENT_REJECTED',
+        payload: {}
+      });
     })
     .catch((err) => {
       dispatch({

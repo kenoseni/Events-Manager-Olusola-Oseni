@@ -1,26 +1,27 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
   entry: [
-    'webpack-hot-middleware/client?reload=true',
     path.resolve(__dirname, './client/index.js'),
   ],
   output: {
-    path: path.resolve(__dirname, './client/dist'),
+    path: path.resolve(__dirname, 'client/dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devServer: {
-    hot: true,
-    contentBase: path.resolve(__dirname, './client'),
-    historyApiFallback: true
-  },
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new UglifyJSPlugin({
+      sourceMap: true
+    })
   ],
-  devtool: 'eval-source-map',
   module: {
     loaders: [
       {

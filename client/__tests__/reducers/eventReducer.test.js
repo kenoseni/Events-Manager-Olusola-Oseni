@@ -121,8 +121,10 @@ describe('event Reducer', () => {
     const results = reducer.userEvents(state, action);
     expect(results).toEqual({
       ...initialState,
-      status: 'Fail',
-      message: 'No event added'
+      error: {
+        status: 'Fail',
+        message: 'No event added'
+      }
     });
   });
   it('should handle DELETE_EVENT', () => {

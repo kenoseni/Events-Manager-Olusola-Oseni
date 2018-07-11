@@ -81,8 +81,10 @@ class eventReducer {
         } = action.payload;
         return {
           ...state,
-          status,
-          message
+          error: {
+            status,
+            message
+          }
         };
       }
       case 'DELETE_EVENT': {

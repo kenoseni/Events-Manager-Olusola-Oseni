@@ -68,11 +68,13 @@ export default class Navbar extends Component {
                   <button className="nav-link">{this.props.home}<span className="sr-only">(current)</span></button>
                 </li>
               </Link>
+              { this.isLoggedIn &&
               <Link to={`/centers`}>
                 <li id='center' className={(this.props.page === 'Centers') ? navItemClass.join(' ') : 'nav-item'}>
                   <button className="nav-link" >{this.props.centers}</button>
                 </li>
               </Link>
+              }
               { this.isLoggedIn &&
                 <Link to={`/events`}>
                   <li id='events' className={(this.props.page === 'Events') ? navItemClass.join(' ') : 'nav-item'}>
@@ -80,11 +82,11 @@ export default class Navbar extends Component {
                   </li>
                 </Link>
               }
-              <Link to={`/about`}>
+              {/* <Link to={`/about`}>
                 <li id='about' className={(this.props.page === 'About') ? navItemClass.join(' ') : 'nav-item'}>
                   <button className="nav-link">About</button>
                 </li>
-              </Link>
+              </Link> */}
               { this.isAdmin &&
                 <Link to={`/admin`}>
                 <li id='admin' className={(this.props.page === 'Admin') ? navItemClass.join(' ') : 'nav-item'}>

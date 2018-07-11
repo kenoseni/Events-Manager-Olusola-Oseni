@@ -7,19 +7,6 @@
 Event Manager is an application where users who are managed by admin can create events and choose a center where they want the event to take place
 
 
-# Table of Contents
-- [Getting Started](#getting-started)
-- [Dependencies](#dependencies)
-- [Installation](#installation)
-- [Tests](#tests)
-- [Usage](#usage)
-- [API Documentation](#api-documentation)
-- [Models](#models)
-- [Testing](#testing)
-- [Express Routes](#express-routes)
-- [License](#license)
-- [Current state](#current-state)
-
 ## Getting Started
 This is a javascript application built with [**Express**](https://expressjs.com/) framework on the nodejs platform. Authentication of users is done via [**JSON Web Tokens**](https://jwt.io/). To view the Events Manager web application, you should click on this here [**Events-Manager**](https://emanager1980.herokuapp.com/)
 
@@ -51,9 +38,9 @@ To download and install Postgres on your machine please follow this link https:/
 
 4. Create a `.env` file in the root directory of the application. Use a different database for your testing and development.          Example of the content of a .env file is shown in the .env.sample
 - In the root directory of the project, run `npm install` in the terminal to install all Dependencies
-1. [**cd**] into the root of the **project directory**.
-1. Run `npm install` on the terminal to install Dependecies
-1. Install sequelize-cli, Create Postgresql database, Navigate to server directory and run migrations:
+    a. [**cd**] into the root of the **project directory**.
+    b. Run `npm install` on the terminal to install Dependecies
+    c. Install sequelize-cli, Create Postgresql database, Navigate to server directory and run migrations:
 ```
 npm install -g seqeulize-cli
 cd server

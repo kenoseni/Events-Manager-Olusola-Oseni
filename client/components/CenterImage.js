@@ -19,13 +19,15 @@ class CenterImage extends Component {
 
   render() {
     return (
-      <div className="file-field">
+      <div className="file-field input-group mb-3">
           <div className="btn btn-outline-info waves-effect btn-sm float-left image-upload">
-            <span>Choose files</span>
-            <input type="file" name="file" id="file-upload"
-              onChange={this.uploadImage} className="form-control-file"
-              aria-describedby="sizing-addon1"
-            />
+            <div className="" >
+              <input type="file" name="file" id="file-upload"
+                onChange={this.uploadImage} className="form-control-file"
+                aria-describedby="sizing-addon1"
+              />
+              
+            </div>
           </div>
       </div>
     ) 

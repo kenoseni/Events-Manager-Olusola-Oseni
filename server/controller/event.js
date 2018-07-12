@@ -136,6 +136,15 @@ class eventController {
   * @memberof eventController
   */
   static modifyEvent(req, res) {
+    const {
+      startDate, endDate, centerId
+    } = req.body;
+    if (startDate < new Date().toISOString()) {
+      return res.status(422).json({
+        status: 'Fail',
+        message: 'Invalid date entered, enter a date from the current date'
+      });
+    }
     Event.findById(req.params.eventId)
       .then((event) => {
         if (!event) {
@@ -147,20 +156,63 @@ class eventController {
             message: 'User cannot modify this event'
           });
         }
-        event.updateAttributes({
-          name: req.body.name || event.name,
-          startDate: req.body.startDate || event.startDate,
-          endDate: req.body.endDate || event.endDate,
-          time: req.body.time || event.time,
-          centerId: req.body.centerId || event.centerId,
-        });
-        return res.status(200).json({
-          status: 'Success',
-          message: 'Event was successfully modified',
-          data: {
-            event
-          }
-        });
+        if (startDate && endDate) {
+          const { Op } = Sequelize;
+          return Event
+            .find({
+              where: {
+                centerId,
+                [Op.or]: [
+                  {
+                    startDate: {
+                      [Op.between]: [startDate, endDate]
+                    },
+                    endDate: {
+                      [Op.between]: [startDate, endDate]
+                    },
+                  },
+                  {
+                    startDate: {
+                      [Op.lte]: startDate
+                    },
+                    endDate: {
+                      [Op.gte]: endDate
+                    }
+                  }
+                ]
+              }
+            })
+            .then((result) => {
+              if (result) {
+                return res.status(401).json({
+                  status: 'Error',
+                  message: 'Date already taken,please choose another date'
+                });
+              }
+              return event.updateAttributes({
+                name: req.body.name || event.name,
+                startDate: req.body.startDate || event.startDate,
+                endDate: req.body.endDate || event.endDate,
+                time: req.body.time || event.time,
+                centerId: req.body.centerId || event.centerId,
+              })
+                .then(() => res.status(200).json({
+                  status: 'Success',
+                  message: 'Event was successfully modified',
+                  data: {
+                    event
+                  }
+                }))
+                .catch(error => res.status(500).json({
+                  status: 'Error',
+                  message: error.message
+                }));
+            })
+            .catch(error => res.status(500).json({
+              status: 'Error',
+              message: error.message
+            }));
+        }
       })
       .catch(error => res.status(500).json({
         status: 'Error',

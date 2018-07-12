@@ -39,28 +39,31 @@ class ModifyEvent extends Component {
    })
   }
 
-  submit(e) {
-    e.preventDefault();
-    this.setState({error: {}})
-    const {name, 
-      centerId,
-      startDate,
-      endDate,
-      time,
-      id} = this.state.event
-    if (this.isValid()) {
+  modifyUserEvent () {
+    const { name, centerId, startDate, endDate, time, id } = this.state.event
+    if (this.isValid() ) {
       this.props.modifyEvent({
         name, 
-        centerId, 
+        centerId,
         startDate,
         endDate,
         time
       }, id)
-      .then(
-        (res) => this.props.history.push('/events'), $(`#${id}`).modal('hide'),
-        (err) => this.setState({error: err.data})
-      )
+      .then(() => {
+        if(this.props.userEvents.error.message !== undefined){
+          this.setState({error: this.props.userEvents.error})
+        }else{
+          $(`#${id}`).modal('hide')
+          this.props.history.push('/events')
+        }
+      })
     }
+  }
+
+  submit(e) {
+    e.preventDefault();
+    this.setState({error: {}})
+    this.modifyUserEvent()
   }
 
   render () {

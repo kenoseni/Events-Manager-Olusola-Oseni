@@ -19,3 +19,5 @@ template/sass
 /lib
 /selenium-debug.log
 /reports
+/client/coverage
+/client/dist

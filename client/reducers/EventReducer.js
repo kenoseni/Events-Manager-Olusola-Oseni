@@ -75,6 +75,18 @@ class eventReducer {
           message
         };
       }
+      case 'CLEAR_ERROR_PROPS': {
+        const {
+          status, message
+        } = action.payload;
+        return {
+          ...state,
+          error: {
+            status,
+            message
+          }
+        };
+      }
       case 'ADD_EVENT_REJECTED': {
         const {
           status, message
@@ -153,8 +165,10 @@ class eventReducer {
         } = action.payload;
         return {
           ...state,
-          status,
-          message
+          error: {
+            status,
+            message
+          }
         };
       }
       default: {

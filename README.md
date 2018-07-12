@@ -2,8 +2,7 @@
 [![Build Status](https://travis-ci.org/kenoseni/Events-Manager-Olusola-Oseni.svg?branch=develop)](https://travis-ci.org/kenoseni/Events-Manager-Olusola-Oseni)
 [![Coverage Status](https://coveralls.io/repos/github/kenoseni/Events-Manager-Olusola-Oseni/badge.svg?branch=chore-158763881-e2e)](https://coveralls.io/github/kenoseni/Events-Manager-Olusola-Oseni?branch=chore-158763881-e2e)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ffa0db640ea996e30e9e/maintainability)]
-[![Coverage](https://codeclimate.com/github/kenoseni/Events-Manager-Olusola-Oseni/maintainability)]
-
+[![codecov](https://codecov.io/gh/kenoseni/Events-Manager-Olusola-Oseni/branch/develop/graph/badge.svg)](https://codecov.io/gh/kenoseni/Events-Manager-Olusola-Oseni)
 
 
 Event Manager is an application where users who are managed by admin can create events and choose a center where they want the event to take place
@@ -12,9 +11,6 @@ Event Manager is an application where users who are managed by admin can create 
 ## Getting Started
 This is a javascript application built with [**Express**](https://expressjs.com/) framework on the nodejs platform. Authentication of users is done via [**JSON Web Tokens**](https://jwt.io/). To view the Events Manager web application, you should click on this here [**Events-Manager**](https://emanager1980.herokuapp.com/)
 
-## Dependencies
-* Postgres
-* Node
 
 ## Installation & Starting
 

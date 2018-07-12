@@ -24,7 +24,7 @@
     "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "unseed": "node_modules/.bin/sequelize db:seed:undo:all",
-    "compile": "NODE_ENV=production webpack --config ./webpack.config.prod.js",
+    "compile": "webpack --config ./webpack.config.prod.js",
     "clean": "rm -rf ./client/dist/bundle.js"
   },
   "repository": {

@@ -133,7 +133,6 @@
       "/.github/",
       "/.nyc_output/",
       "/coverage/",
-      "/lib/",
       "<rootDir>/coverage/",
       "<rootDir>/public"
     ],

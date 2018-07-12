@@ -97,10 +97,10 @@ const validSignupSeed = [{
     {
       name: 'Seminar',
       startDate: '2018-12-30',
-      endDate: '2017-12-31',
+      endDate: '2018-12-31',
       time: '4 pm',
       centerId: 2
-    }
+    },
   ],
   invalidEventSeed = [
     {

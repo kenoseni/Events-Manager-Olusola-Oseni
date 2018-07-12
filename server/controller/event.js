@@ -26,8 +26,7 @@ class eventController {
     if (startDate < new Date().toISOString()) {
       return res.status(422).json({
         status: 'Fail',
-        message: `Invalid date entered, enter a date from the current date,
-         ${new Date().toISOString()}`
+        message: 'Invalid date entered, enter a date from the current date'
       });
     }
     const { Op } = Sequelize;

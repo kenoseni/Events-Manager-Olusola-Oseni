@@ -8,9 +8,9 @@ class SignIn extends Component {
     this.state = {
       mail: '' ,
       pswd: '',
-      error: {},
+      loginError: undefined,
       hideModal: false,
-      isOpen: false
+      isOpen: false,
     }
     this.getLoginInput = this.getLoginInput.bind(this);
     this.loginInput = this.loginInput.bind(this);
@@ -35,9 +35,9 @@ class SignIn extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if (nextProps.user.error) {
+    if (nextProps.user.loginError) {
       this.setState({
-        error: nextProps.user.error
+        loginError: nextProps.user.loginError
       })
     }
     if (nextProps.user.status == 'Success') {
@@ -49,7 +49,7 @@ class SignIn extends Component {
     }
   }
   render () {
-    const {error, email, password} = this.state
+    const {loginError, email, password} = this.state
     return (
       <div>
         {/*Sign in Modal*/}
@@ -64,7 +64,7 @@ class SignIn extends Component {
               <div className="modal-body">            
                 <form id='loginform' method="POST" role="form">         
                   <div id="formgroup" className="form-group"> 
-                    {error.message && <div className="alert alert-danger">{error.message}</div>}
+                    {loginError && <div className="alert alert-danger">{loginError.error.message}</div>}
                     <label htmlFor="l-email" className="font-weight-bold" >
                       <i className="fa fa-envelope" aria-hidden="true"></i> Email: 
                     </label>
@@ -90,7 +90,7 @@ class SignIn extends Component {
               </div> 
               <div className="modal-footer">
                 <span id="join">Not a member? 
-                  <a data-toggle="modal" data-target="#signUp" data-dismiss="modal">
+                  <a data-toggle="modal" data-target="#signUp" >
                     Sign Up
                   </a>
                 </span> 

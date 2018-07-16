@@ -1,25 +1,28 @@
 /**
-* Class representing center reducer
-*
-* @class centerReducer
-*/
+ * Class representing center reducer
+ *
+ * @class centerReducer
+ */
 class centerReducer {
   /**
-  *
-  * @static
-  * @param {object} state - The initial state of the store
-  * @param {object} action - The action to be dispatched
-  * @return {object} new state of the store
-  * @memberof centerReducer
-  */
-  static eventCenters(state = {
-    status: '',
-    message: '',
-    centers: [],
-    allCenters: [],
-    searchedCenters: [],
-    center: {}
-  }, action) {
+   *
+   * @static
+   * @param {object} state - The initial state of the store
+   * @param {object} action - The action to be dispatched
+   * @return {object} new state of the store
+   * @memberof centerReducer
+   */
+  static eventCenters(
+    state = {
+      status: '',
+      message: '',
+      centers: [],
+      allCenters: [],
+      searchedCenters: [],
+      center: {}
+    },
+    action
+  ) {
     switch (action.type) {
       case 'PAGE_CENTERS': {
         return {
@@ -27,9 +30,7 @@ class centerReducer {
         };
       }
       case 'PAGE_CENTERS_RESOLVED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         const { centers, count, limit } = action.payload.data;
         return {
           ...state,
@@ -41,9 +42,7 @@ class centerReducer {
         };
       }
       case 'PAGE_CENTERS_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -56,21 +55,17 @@ class centerReducer {
         };
       }
       case 'ALL_CENTERS_RESOLVED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         const { allCenters } = action.payload.data;
         return {
           ...state,
           allCenters,
           status,
-          message,
+          message
         };
       }
       case 'ALL_CENTERS_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -83,9 +78,7 @@ class centerReducer {
         };
       }
       case 'SEARCH_CENTERS_RESOLVED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         const { searchedCenters, count, limit } = action.payload.data;
         return {
           ...state,
@@ -97,9 +90,7 @@ class centerReducer {
         };
       }
       case 'SEARCH_CENTERS_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -112,9 +103,7 @@ class centerReducer {
         };
       }
       case 'ADD_CENTER_RESOLVED': {
-        const {
-          center
-        } = action.payload.data;
+        const { center } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
@@ -136,6 +125,16 @@ class centerReducer {
           message
         };
       }
+      case 'CLEAR_ERROR_PROPS': {
+        const { status, message } = action.payload;
+        return {
+          ...state,
+          error: {
+            status,
+            message
+          }
+        };
+      }
       case 'ADD_CENTER_REJECTED': {
         const error = action.payload;
         return {
@@ -149,22 +148,16 @@ class centerReducer {
         };
       }
       case 'DELETE_CENTER_RESOLVED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
-          centers: [
-            ...state.centers.filter(center => center.id !== action.id)
-          ],
+          centers: [...state.centers.filter(center => center.id !== action.id)],
           status,
-          message,
+          message
         };
       }
       case 'DELETE_CENTER_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -177,9 +170,7 @@ class centerReducer {
         };
       }
       case 'MODIFY_CENTER_RESOLVED': {
-        const {
-          center
-        } = action.payload.data;
+        const { center } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
@@ -207,13 +198,13 @@ class centerReducer {
         };
       }
       case 'MODIFY_CENTER_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
-          status,
-          message
+          error: {
+            status,
+            message
+          }
         };
       }
       case 'GET_CENTERDETAILS': {
@@ -222,9 +213,7 @@ class centerReducer {
         };
       }
       case 'GET_CENTERDETAILS_RESOLVED': {
-        const {
-          center
-        } = action.payload.data;
+        const { center } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
@@ -234,9 +223,7 @@ class centerReducer {
         };
       }
       case 'GET_CENTERDETAILS_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,

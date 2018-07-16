@@ -22,10 +22,6 @@ module.exports = {
       .pause(2000)
       .assert.visible('.nav-item')
       .assert.containsText('.nav-link', 'Home')
-      .assert.visible('#center')
-      .assert.containsText('#center', 'Centers')
-      .assert.visible('#about')
-      .assert.containsText('#about', 'About')
       .assert.visible('#signin')
       .assert.containsText('#signin', 'Log In')
       .assert.visible('#signup')
@@ -40,9 +36,7 @@ module.exports = {
       .pause(4000);
   },
   'User should be able to see the intro on the sign-up page': (browser) => {
-    browser
-      .assert.visible('#signUp')
-      .assert.containsText('#signUp', 'Sign Up');
+    browser.assert.visible('#signUp').assert.containsText('#signUp', 'Sign Up');
   },
   'User should be able to see the elements of the signup form': (browser) => {
     browser
@@ -65,7 +59,10 @@ module.exports = {
       .assert.visible('div> label[for=email]')
       .assert.containsText('div> label[for=email]', 'Email:')
       .assert.visible('div > input[name=email]')
-      .setValue('div > input[name=email]', 'megan@gmail.com')
+      .setValue(
+        'div > input[name=email]',
+        `${Math.floor(Math.random() * 100)}@example.com`
+      )
       .pause('1000')
 
       .assert.visible('#pswd')

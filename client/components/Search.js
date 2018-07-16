@@ -4,7 +4,7 @@ import { history } from '../routes';
 
 class Search extends Component {
   static propTypes = {
-    // onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func,
     searchVisible: PropTypes.bool
   }
   constructor(props) {

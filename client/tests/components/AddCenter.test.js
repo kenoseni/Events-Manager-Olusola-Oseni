@@ -6,96 +6,72 @@ import CenterImage from '../../components/CenterImage';
 
 configure({ adapter: new Adapter() });
 
-describe('<AddCenter />', () => {
-  const mockaddCenter = jest.fn();
-  let props = {
-    center: {
-      id: 1
-    },
-    title: 'Add Center',
-    id: 'submitButton',
-    i: 1
-  }
-  
-  it('should render a <AddCenter /> element', () => {
-    const wrapper = shallow(<AddCenter
-      addCenter={mockaddCenter}
-      id={props.center.id}
-      {...props} />
-    );
-    //console.log(wrapper.instance())
-    expect(wrapper.instance().state).toEqual({ center: {}, image: '', error: {} })
-  });
-  it('should render a <AddCenter /> title', () => {
-    const wrapper = shallow(<AddCenter
-      addCenter={mockaddCenter}
-      title={props.title}
-      id={props.center.id}
-      i={props.i}
-      {...props} />
-    );
-    expect(wrapper.find('h4').length).toBe(1);
-    expect(wrapper.find('h4').at(0).text()).toBe('Add Center');
-  });
-  it('should render a <CenterImage /> element', () => {
-    const mockaddImage = jest.fn();
-    const wrapper = shallow(<CenterImage
-      addImage={mockaddImage}
-      />
-    );
-    expect(wrapper.instance().state).toEqual(null)
-  });
-  it('should call onChange function', () => {
-    const wrapper = shallow(<AddCenter
-      addCenter={mockaddCenter}
-      title={props.title}
-      id={props.center.id}
-      i={props.i}
-      {...props}
-      />);
-      //console.log(wrapper.debug())
+let props = {
+  center: {},
+  title: 'Add Center',
+  id: 'submitButton',
+  i: 1
+};
+const mockaddCenter = jest.fn();
+const wrapper = shallow(<AddCenter {...props} />);
 
-    wrapper.find('#addCenterName').simulate(
-      'change', 
-      {target: 
-        {name: 'centerName', value: 'baltic'}
-      },
-    );
-    wrapper.find('#addCenterDescription').simulate(
-      'change', 
-      {target: 
-        {name: 'centerDescription', value: 'Amazing'}
-      },
-    );
-    wrapper.find('#addCenterLocation').simulate(
-      'change', 
-      {target: 
-        {name: 'centerLocation', value: 'Abuja'}
-      },
-    );
-    wrapper.find('#addCenterPrice').simulate(
-      'change', 
-      {target: 
-        {name: 'centerPrice', value: '2000'}
-      },
-    );
-    wrapper.find('#addCenterFacilities').simulate(
-      'change', 
-      {target: 
-        {name: 'centerFacilities', value: 'Gen'}
-      },
-    );
-    wrapper.find('#addCenterCapacity').simulate(
-      'change', 
-      {target: 
-        {name: 'centerCapacity', value: 1000 }
-      },
-    );
-    wrapper.find('#addForm').simulate(
-      'submit', 
-     {preventDefault() {}},
-    );
-    expect(mockaddCenter.mock.calls.length).toBe(0)
+describe('<AddCenter />', () => {
+  it('user should see the form', () => {
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('should render a get the initial state', () => {
+    expect(wrapper.instance().state).toEqual({
+      center: {},
+      image: '',
+      error: {}
+    });
+  });
+  it('user should see the title of the form', () => {
+    expect(wrapper.find('h4').length).toBe(1);
+    expect(
+      wrapper
+        .find('h4')
+        .at(0)
+        .text()
+    ).toBe('Add Center');
+  });
+  it('should render a <CenterImage /> component', () => {
+    const mockaddImage = jest.fn();
+    const wrapper = shallow(<CenterImage addImage={mockaddImage} />);
+    expect(wrapper.length).toEqual(1);
+  });
+  it('user should be able to upload image'),
+    () => {
+      const mockaddImage = jest.fn();
+      const wrapper = shallow(<CenterImage addImage={mockaddImage} />);
+      // wrapper.find('#addCenter #file-upload').simulate(
+      //   'click',
+      // )
+      expect(mockaddImage.mock.calls.length).toBe(1);
+    };
+  it();
+  it('user should be able to create a center', () => {
+    wrapper.find('#addCenterName').simulate('change', {
+      target: { name: 'centerName', value: 'baltic' }
+    });
+    wrapper.find('#addCenterDescription').simulate('change', {
+      target: { name: 'centerDescription', value: 'Amazing' }
+    });
+    wrapper.find('#addCenterLocation').simulate('change', {
+      target: { name: 'centerLocation', value: 'Abuja' }
+    });
+    wrapper.find('#addCenterPrice').simulate('change', {
+      target: { name: 'centerPrice', value: '2000' }
+    });
+    wrapper.find('#addCenterFacilities').simulate('change', {
+      target: { name: 'centerFacilities', value: 'Gen' }
+    });
+    wrapper.find('#addCenterCapacity').simulate('change', {
+      target: { name: 'centerCapacity', value: 1000 }
+    });
+    wrapper.find('#addForm').simulate('submit', { preventDefault() {} });
+    expect(mockaddCenter.mock.calls.length).toBe(0);
   });
 });
 // describe('When the form is submitted', () => {
@@ -117,7 +93,7 @@ describe('<AddCenter />', () => {
 //   />)
 //   it('should call the mock modify function', () => {
 //    wrapper.find('#addForm').simulate(
-//      'submit', 
+//      'submit',
 //      {preventDefault() {}}
 //    )
 //    expect(mockaddCenter.mock.calls.length).toBe(1)

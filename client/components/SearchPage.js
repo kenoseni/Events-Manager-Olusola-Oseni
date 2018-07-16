@@ -7,7 +7,7 @@ import AdminCenter from './AdminCenter';
 import NavBar from './Navbar';
 import Pages from './Pages';
 
-class SearchPage extends Component {
+export class SearchPage extends Component {
   constructor(props) {
     super(props); 
   }

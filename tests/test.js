@@ -767,7 +767,7 @@ describe('Event Manager', () => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
-                .equal('CenterId must be an integer');
+                .equal('Please choose a valid center');
               done();
             });
         });

@@ -13,7 +13,7 @@
     "start:dev": "nodemon ./server/app --exec babel-node",
     "test": "npm run test:server && npm run test:client",
     "test:server": "nyc --reporter=html --reporter=lcov --reporter=text mocha --timeout 250000 tests/test.js --require babel-register --exit",
-    "test:client": "jest && codecov",
+    "test:client": "jest --runInBand && codecov",
     "test:client:watch": "npm run test:client --watch",
     "build": "babel server -d lib --source-maps inline --copy-files",
     "heroku-postbuild": "npm run build",
@@ -56,6 +56,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
+    "enzyme-to-json": "^3.3.4",
     "express": "^4.16.2",
     "file-loader": "^1.1.5",
     "history": "^4.7.2",
@@ -126,7 +127,7 @@
     "setupFiles": [],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/tests/__mocks__/",
+      "<rootDir>/__tests__/__mocks__/",
       "/template/",
       "/sever/",
       "/.github/",
@@ -143,11 +144,15 @@
       "./node_modules/react"
     ],
     "testEnvironment": "jsdom",
-    "snapshotSerializers": [],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "moduleFileExtensions": [
       "js"
     ],
     "collectCoverage": true,
-    "moduleNameMapper": {}
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js"
+    }
   }
 }

@@ -1,23 +1,26 @@
 /**
-* Class representing event reducer
-*
-* @class eventReducer
-*/
+ * Class representing event reducer
+ *
+ * @class eventReducer
+ */
 class eventReducer {
   /**
-  *
-  * @static
-  * @param {object} state - The initial state of the store
-  * @param {object} action - The action to be dispatched
-  * @return {object} new state of the store
-  * @memberof eventReducer
-  */
-  static userEvents(state = {
-    status: '',
-    message: '',
-    events: [],
-    event: {}
-  }, action) {
+   *
+   * @static
+   * @param {object} state - The initial state of the store
+   * @param {object} action - The action to be dispatched
+   * @return {object} new state of the store
+   * @memberof eventReducer
+   */
+  static userEvents(
+    state = {
+      status: '',
+      message: '',
+      events: [],
+      event: {}
+    },
+    action
+  ) {
     switch (action.type) {
       case 'ALL_USER_EVENT': {
         return {
@@ -25,9 +28,7 @@ class eventReducer {
         };
       }
       case 'ALL_USER_EVENT_RESOLVED': {
-        const {
-          events, count, limit
-        } = action.payload.data;
+        const { events, count, limit } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
@@ -39,9 +40,7 @@ class eventReducer {
         };
       }
       case 'ALL_USER_EVENT_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -54,9 +53,7 @@ class eventReducer {
         };
       }
       case 'ADD_EVENT_RESOLVED': {
-        const {
-          event
-        } = action.payload.data;
+        const { event } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
@@ -68,7 +65,7 @@ class eventReducer {
               centerId: event.centerId,
               startDate: event.startDate,
               endDate: event.endDate,
-              time: event.time,
+              time: event.time
             }
           ],
           status,
@@ -76,9 +73,7 @@ class eventReducer {
         };
       }
       case 'CLEAR_ERROR_PROPS': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           error: {
@@ -88,9 +83,7 @@ class eventReducer {
         };
       }
       case 'ADD_EVENT_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           error: {
@@ -105,22 +98,16 @@ class eventReducer {
         };
       }
       case 'DELETE_EVENT_RESOLVED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
-          events: [
-            ...state.events.filter(event => event.id !== action.id)
-          ],
+          events: [...state.events.filter(event => event.id !== action.id)],
           status,
-          message,
+          message
         };
       }
       case 'DELETE_EVENT_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           status,
@@ -133,9 +120,7 @@ class eventReducer {
         };
       }
       case 'MODIFY_EVENT_RESOLVED': {
-        const {
-          event
-        } = action.payload.data;
+        const { event } = action.payload.data;
         const { status, message } = action.payload;
         return {
           ...state,
@@ -150,7 +135,7 @@ class eventReducer {
                 centerId: event.centerId,
                 startDate: event.startDate,
                 endDate: event.endDate,
-                time: event.time,
+                time: event.time
               };
             })
           ],
@@ -160,9 +145,7 @@ class eventReducer {
         };
       }
       case 'MODIFY_EVENT_REJECTED': {
-        const {
-          status, message
-        } = action.payload;
+        const { status, message } = action.payload;
         return {
           ...state,
           error: {

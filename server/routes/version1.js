@@ -34,7 +34,7 @@ router.get(
 
 router.get(
   '/admin/centers',
-  middleware.tokenController.confirmToken,
+  // middleware.tokenController.confirmToken,
   controller.centerController.getAllCenters
 );
 // Get One Event Center

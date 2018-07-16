@@ -2,7 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Event Manager",
-    "description": "Event Manager is an application where users who are managed by admin can create events and choose a center where they want the event to take place",
+    "description":
+      "Event Manager is an application where users who are managed by admin can create events and choose a center where they want the event to take place",
     "version": "1.0",
     "contact": "email: kenolusola@gmail.com"
   },
@@ -15,9 +16,7 @@
   "paths": {
     "/api/v1/users": {
       "get": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["SuperAdmin/Admin"],
         "summary": "Get All Users",
         "description": "API endpoint to get all users in the application",
         "operationId": "GetAllUsers",
@@ -31,9 +30,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
           }
         ],
         "responses": {
@@ -52,7 +53,7 @@
                   }
                 }
               }
-            } 
+            }
           },
           "401": {
             "description": "Users not found",
@@ -107,9 +108,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Sign Up, creates new users",
         "description": "Allows users of the application to sign up",
         "operationId": "SignUp",
@@ -132,29 +131,20 @@
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "required": [
-                  "firstname",
-                  "lastname",
-                  "email",
-                  "password"
-                ],
+                "required": ["firstname", "lastname", "email", "password"],
                 "type": "object",
                 "properties": {
                   "firstname": {
-                    "type": "string",
-                    "example": "Bala"
+                    "type": "string"
                   },
                   "lastname": {
-                    "type": "string",
-                    "example": "Ahmed"
+                    "type": "string"
                   },
                   "email": {
-                    "type": "string",
-                    "example": "bala@gmail.com"
+                    "type": "string"
                   },
                   "password": {
-                    "type": "string",
-                    "example": "1234567890"
+                    "type": "string"
                   }
                 }
               }
@@ -175,7 +165,8 @@
                       "firstname": "kunle",
                       "lastname": "williams",
                       "role": "user",
-                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
+                      "token":
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
                     }
                   },
                   "$ref": "#/components/schemas/SignUp"
@@ -187,7 +178,8 @@
                     "firstname": "kunle",
                     "lastname": "williams",
                     "role": "user",
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
+                    "token":
+                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
                   }
                 }
               }
@@ -220,9 +212,7 @@
     },
     "/api/v1/users/login": {
       "post": {
-        "tags": [
-          "Users/Admin"
-        ],
+        "tags": ["Users/Admin/SuperAdmin"],
         "summary": "Sign In",
         "description": "API route that allows users sign in to the application",
         "operationId": "SignIn",
@@ -245,19 +235,14 @@
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "required": [
-                  "email",
-                  "password"
-                ],
+                "required": ["email", "password"],
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string",
-                    "example": "kenolusola@gmail.com"
+                    "type": "string"
                   },
                   "password": {
-                    "type": "string",
-                    "example": "Iimpeccable1"
+                    "type": "string"
                   }
                 }
               }
@@ -276,7 +261,8 @@
                     "status": "Success",
                     "message": "User successfully logged in",
                     "data": {
-                      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
+                      "token":
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQsImlzYWRtaW4iOmZhbHNlLCJ1c2Vycm9sZSI6InVzZXIiLCJpYXQiOjE1MjY0MDgzMzMsImV4cCI6MTUyNjU4MTEzM30.ziozx4c9yxvPDeGBefawbHEzeB0dh6Kz1-2EkNyvb-4"
                     }
                   }
                 }
@@ -324,9 +310,7 @@
     },
     "/api/v1/centers": {
       "get": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["SuperAdmin/Admin"],
         "summary": "Get All Centers",
         "description": "API endpoint to get all centers",
         "operationId": "GetAllCenters",
@@ -340,9 +324,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
           }
         ],
         "responses": {
@@ -399,11 +385,10 @@
         }
       },
       "post": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["SuperAdmin/Admin"],
         "summary": "Create Center",
-        "description": "API route that allows Superadmin and Admin create a center",
+        "description":
+          "API route that allows Superadmin and Admin create a center",
         "operationId": "CreateCenter",
         "parameters": [
           {
@@ -428,9 +413,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
           }
         ],
         "requestBody": {
@@ -524,9 +511,7 @@
     },
     "/api/v1/centers/{centerId}": {
       "get": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["SuperAdmin/Admin"],
         "summary": "Get One Center",
         "description": "API endpoint to get one center",
         "operationId": "GetOneCenter",
@@ -540,9 +525,24 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwOTkxNywiZXhwIjoxNTI2NTgyNzE3fQ.vJWnidUiNieFE-tof_MiJTBWad5trZWQyrnPEY9pkbI"
+          },
+          {
+            "name": "centerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -599,11 +599,10 @@
         }
       },
       "put": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["SuperAdmin/Admin"],
         "summary": "Modify Center",
-        "description": "API endpoint to modify center by SuperAdmin or an Admin",
+        "description":
+          "API endpoint to modify center by SuperAdmin or an Admin",
         "operationId": "ModifyCenter",
         "parameters": [
           {
@@ -615,9 +614,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
           },
           {
             "name": "Content-Type",
@@ -631,6 +632,19 @@
               "example": "application/x-www-form-urlencoded"
             },
             "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "centerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "example": 1
           }
         ],
         "requestBody": {
@@ -649,32 +663,26 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string",
-                    "example": "The Gooche"
+                    "type": "string"
                   },
                   "location": {
                     "type": "string",
                     "example": "6, Aminu street Garki Abuja"
                   },
                   "description": {
-                    "type": "string",
-                    "example": "For your eyes only"
+                    "type": "string"
                   },
                   "capacity": {
-                    "type": "string",
-                    "example": "1000"
+                    "type": "number"
                   },
                   "facilities": {
-                    "type": "string",
-                    "example": "swimming pool"
+                    "type": "string"
                   },
                   "image": {
-                    "type": "string",
-                    "example": "\"\""
+                    "type": "string"
                   },
                   "price": {
-                    "type": "string",
-                    "example": "20000"
+                    "type": "string"
                   }
                 }
               }
@@ -749,10 +757,8 @@
           "IsMultiContentStreaming": false
         }
       },
-      "post": {
-        "tags": [
-          "Admin"
-        ],
+      "delete": {
+        "tags": ["SuperAdmin/Admin"],
         "summary": "Delete Center",
         "description": "API endpoint to delete centers",
         "operationId": "DeleteCenter",
@@ -766,9 +772,24 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+          },
+          {
+            "name": "centerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -841,9 +862,7 @@
     },
     "/api/v1/events": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get User Events",
         "description": "API endpoint to get events created by user/admin",
         "operationId": "GetUserEvents",
@@ -857,9 +876,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
           },
           {
             "name": "Content-Type",
@@ -943,9 +964,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Create event",
         "description": "API endpoint to create an event",
         "operationId": "CreateEvent",
@@ -959,9 +978,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
           },
           {
             "name": "Content-Type",
@@ -981,12 +1002,7 @@
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "required": [
-                  "name",
-                  "centerId",
-                  "date",
-                  "time"
-                ],
+                "required": ["name", "centerId", "date", "time"],
                 "type": "object",
                 "properties": {
                   "name": {
@@ -1052,7 +1068,8 @@
                   "type": "string",
                   "example": {
                     "status": "Error",
-                    "message": "Invalid date entered, enter a date from the current date"
+                    "message":
+                      "Invalid date entered, enter a date from the current date"
                   }
                 }
               }
@@ -1085,9 +1102,7 @@
     },
     "/api/v1/events/{eventId}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get One Event",
         "description": "API endpoint to get one event",
         "operationId": "GetOneEvent",
@@ -1101,9 +1116,24 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -1160,9 +1190,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Modify Event",
         "description": "API endpoint for users to modify their events",
         "operationId": "ModifyEvent",
@@ -1176,9 +1204,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
           },
           {
             "name": "Content-Type",
@@ -1192,35 +1222,42 @@
               "example": "application/x-www-form-urlencoded"
             },
             "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "example": 1
           }
         ],
         "requestBody": {
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "required": [
-                  "name",
-                  "centerId",
-                  "date",
-                  "time"
-                ],
+                "required": ["name", "centerId", "date", "time"],
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string",
-                    "example": "Launcheon"
+                    "type": "string"
                   },
                   "centerId": {
-                    "type": "string",
-                    "example": "2"
+                    "type": "number"
                   },
-                  "date": {
-                    "type": "string",
-                    "example": "2019-01-01"
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "endDate": {
+                    "type": "string"
                   },
                   "time": {
-                    "type": "string",
-                    "example": "12 pm"
+                    "type": "string"
                   }
                 }
               }
@@ -1296,9 +1333,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Delete Event",
         "description": "API endpoint to delete events",
         "operationId": "DeleteEvent",
@@ -1312,9 +1347,11 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
           },
           {
             "name": "Content-Type",
@@ -1328,6 +1365,19 @@
               "example": "application/x-www-form-urlencoded"
             },
             "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -1400,9 +1450,7 @@
     },
     "/api/v1/users/{userId}": {
       "put": {
-        "tags": [
-          "SuperAdmin"
-        ],
+        "tags": ["SuperAdmin"],
         "summary": "Upgrade Users to Admin",
         "description": "API endpoint to upgrade users to Admin",
         "operationId": "UpgradeUsersToAdmin",
@@ -1416,9 +1464,24 @@
             "explode": false,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+              "example":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
             },
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+            "example":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsInVzZXJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTUyNjQwNzcxNywiZXhwIjoxNTI2NTgwNTE3fQ.D2OiADSZWRBk4lZDp0Ys3nr5i354x8wfMqugKkXTJt8"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -1490,5 +1553,4 @@
       }
     }
   }
-  
 }

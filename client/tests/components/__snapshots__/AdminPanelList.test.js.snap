@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminPanelList /> should render a <AdminPanelList /> component 1`] = `
+<div
+  style={
+    Object {
+      "paddingTop": "90px",
+    }
+  }
+>
+  <Navbar
+    admin="Admin"
+    centers="Centers"
+    events="Events"
+    home="Home"
+    logout="Log Out"
+    match={Object {}}
+    page="Admin"
+  />
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+      id="users"
+    >
+      <AdminPanel
+        count={0}
+        history={
+          Object {
+            "location": Object {
+              "search": "/page=1",
+            },
+          }
+        }
+        isAdmin={true}
+        isAuthenticated={true}
+        limit={2}
+        match={Object {}}
+        user={
+          Object {
+            "count": 0,
+            "limit": 2,
+          }
+        }
+        userDetails={
+          Object {
+            "count": 0,
+          }
+        }
+        users={Array []}
+      />
+    </div>
+  </div>
+</div>
+`;

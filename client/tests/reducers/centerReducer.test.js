@@ -18,7 +18,7 @@ describe('center Reducer', () => {
   it('should handle ALL_CENTERS', () => {
     const state = initialState;
     const action = {
-      type: 'ALL_CENTERS',
+      type: 'ALL_CENTERS'
     };
     const results = reducer.eventCenters(state, action);
     expect(results).toEqual(initialState);
@@ -67,7 +67,7 @@ describe('center Reducer', () => {
   it('should handle SEARCH_CENTERS', () => {
     const state = initialState;
     const action = {
-      type: 'SEARCH_CENTERS',
+      type: 'SEARCH_CENTERS'
     };
     const results = reducer.eventCenters(state, action);
     expect(results).toEqual(initialState);
@@ -142,7 +142,7 @@ describe('center Reducer', () => {
             location: '',
             name: '',
             avaliability: true
-          },
+          }
         },
         status: 'Success',
         message: 'Center created successfully'
@@ -191,7 +191,7 @@ describe('center Reducer', () => {
   it('should handle DELETE_CENTER', () => {
     const state = initialState;
     const action = {
-      type: 'DELETE_CENTER',
+      type: 'DELETE_CENTER'
     };
     const results = reducer.eventCenters(state, action);
     expect(results).toEqual(initialState);
@@ -249,7 +249,7 @@ describe('center Reducer', () => {
   it('should handle MODIFY_CENTER', () => {
     const state = initialState;
     const action = {
-      type: 'MODIFY_CENTER',
+      type: 'MODIFY_CENTER'
     };
     const results = reducer.eventCenters(state, action);
     expect(results).toEqual(initialState);
@@ -271,7 +271,7 @@ describe('center Reducer', () => {
         }
       ],
       searchedCenters: [],
-      allCenters: [],
+      allCenters: []
     };
     const action = {
       type: 'MODIFY_CENTER_RESOLVED',
@@ -287,7 +287,7 @@ describe('center Reducer', () => {
             capacity: 1000,
             avaliability: false,
             image: ''
-          },
+          }
         },
         status: 'Success',
         message: 'Center updated'
@@ -320,7 +320,7 @@ describe('center Reducer', () => {
           capacity: 1000,
           avaliability: false,
           image: ''
-        },
+        }
       ],
       allCenters: [],
       status: 'Success',
@@ -340,8 +340,10 @@ describe('center Reducer', () => {
     const results = reducer.eventCenters(state, action);
     expect(results).toEqual({
       ...initialState,
-      status: 'Fail',
-      message: ''
+      error: {
+        status: 'Fail',
+        message: ''
+      }
     });
   });
   it('should handle GET_CENTERDETAILS_RESOLVED', () => {

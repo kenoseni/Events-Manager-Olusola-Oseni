@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminCenterDetails /> should render a <AdminCenterDetails /> component 1`] = `
+<div>
+  <AdminCenterDetail
+    center={Object {}}
+    getOneCenter={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            undefined,
+          ],
+        ],
+      }
+    }
+    searchForCenters={[MockFunction]}
+  />
+</div>
+`;

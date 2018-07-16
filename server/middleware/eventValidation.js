@@ -1,10 +1,7 @@
 import helpers from '../helpers';
 
 const {
-  isEmpty,
-  isAlphaNumeric,
-  isNumeric,
-  isDateFormat
+  isEmpty, isAlphaNumeric, isNumeric, isDateFormat
 } = helpers;
 
 /**
@@ -57,7 +54,7 @@ class EventValidation {
     if (!isNumeric(req.body.centerId)) {
       return res.status(400).json({
         status: 'Error',
-        message: 'CenterId must be an integer'
+        message: 'Please choose a valid center'
       });
     }
     // check if event name is alphanumeric

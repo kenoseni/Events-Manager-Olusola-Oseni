@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchPage /> should render a <SearchPage /> component 1`] = `
+<div
+  style={
+    Object {
+      "paddingTop": "90px",
+    }
+  }
+>
+  <Navbar
+    admin="Admin"
+    centers="Centers"
+    events="Events"
+    home="Home"
+    login="Log In"
+    logout="Log Out"
+    page="Home"
+    signup="Sign Up"
+  />
+  <h3
+    style={
+      Object {
+        "padding": "30px 0px 0px 150px",
+      }
+    }
+  >
+    Search Results for Centers:
+  </h3>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+      id="centers"
+    >
+      <h1
+        style={
+          Object {
+            "marginTop": "200px",
+            "paddingLeft": "300px",
+          }
+        }
+      >
+        Oh Snap, No Result for your Search
+      </h1>
+    </div>
+  </div>
+  <Pages
+    count={4}
+    history={Object {}}
+  />
+</div>
+`;

@@ -8,39 +8,54 @@ class DeleteModal extends Component {
     this.handleDeleteCenter = this.handleDeleteCenter.bind(this);
   }
   handleDeleteEvent() {
-    const {i, id} = this.props
-    this.props.deleteEvent(id).then(
-      (res) => this.props.history.push('/events')
-    )
-  } 
-  handleDeleteCenter() {
-    const {i, center} = this.props
-    this.props.deleteCenter(center.id).then(
-      (res) => this.props.history.push('/centers')
-    )
+    const { i, id } = this.props;
+    this.props.deleteEvent(id).then(res => this.props.history.push('/events'));
   }
-  render () {
+  handleDeleteCenter() {
+    const { i, center } = this.props;
+    this.props
+      .deleteCenter(center.id)
+      .then(res => this.props.history.push('/centers'));
+  }
+  render() {
     return (
       <div>
-        <div className="container">            
+        <div className="container">
           {/*<!--remove center Modal -->*/}
-          <div className="modal fade top" id={`${this.props.i}`} role="dialog">
-            <div className="modal-dialog modal-sm modal-notify modal-danger">               
+          <div
+            className="modal deletemodal fade top"
+            id={`${this.props.i}`}
+            role="dialog"
+          >
+            <div
+              id="deletemodal"
+              className="modal-dialog modal-sm modal-notify modal-danger"
+            >
               {/*<!-- Modal content-->*/}
-              <div className="modal-content">
+              <div id="deletemodalcontent" className="modal-content">
                 <div className="modal-header d-flex justify-content-center">
                   <h4 className="modal-title">{this.props.title}</h4>
-                  <button type="button"
-                   className="close white"
-                    data-dismiss="modal">&times;
+                  <button
+                    type="button"
+                    className="close white"
+                    data-dismiss="modal"
+                  >
+                    &times;
                   </button>
                 </div>
                 <div className="modal-body">
                   {/*<!--Warning message-->*/}
-                  <button className="btn btn-danger"
-                    id='deleteButtion'
-                   onClick={(this.props.event)? this.handleDeleteEvent: this.handleDeleteCenter}
-                    data-dismiss="modal">DELETE
+                  <button
+                    id="deleteButton"
+                    className="btn btn-danger"
+                    onClick={
+                      this.props.event
+                        ? this.handleDeleteEvent
+                        : this.handleDeleteCenter
+                    }
+                    data-dismiss="modal"
+                  >
+                    DELETE
                   </button>
                 </div>
               </div>
@@ -48,13 +63,13 @@ class DeleteModal extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 DeleteModal.propTypes = {
   i: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  deleteCenter: PropTypes.func.isRequired,
-}
+  deleteCenter: PropTypes.func.isRequired
+};
 
 export default DeleteModal;

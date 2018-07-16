@@ -25,10 +25,6 @@ module.exports = {
       .pause(2000)
       .assert.visible('.nav-item')
       .assert.containsText('.nav-link', 'Home')
-      .assert.visible('#center')
-      .assert.containsText('#center', 'Centers')
-      .assert.visible('#about')
-      .assert.containsText('#about', 'About')
       .assert.visible('#signin')
       .assert.containsText('#signin', 'Log In');
   },
@@ -41,8 +37,8 @@ module.exports = {
       .pause(2000);
   },
   'User should be able to see the intro on the sign-in page': (browser) => {
-    browser
-      .assert.visible('#logIn')
+    browser.assert
+      .visible('#logIn')
       .assert.visible('#centerlogin')
       .assert.visible('#signinTitle')
       .assert.containsText('#signinTitle', 'Log In');
@@ -57,14 +53,14 @@ module.exports = {
       .assert.containsText('div> label[for=l-email]', 'Email:')
       .waitForElementVisible('input[name=mail]', 1000)
       .assert.visible('input[name=mail]')
-      .setValue('input[name=mail]', 'megan@gmail.com')
+      .setValue('input[name=mail]', 'kenolusola@gmail.com')
       .pause('1000')
 
       .assert.visible('#lpswd')
       .assert.visible('div> label[for=l-password]')
       .assert.containsText('div> label[for=l-password]', 'Password:')
       .assert.visible('input[name=pswd]')
-      .setValue('input[name=pswd]', '1234567890')
+      .setValue('input[name=pswd]', 'Iimpeccable1')
       .pause('1000')
       .assert.visible('#l-button')
       .click('#l-button')

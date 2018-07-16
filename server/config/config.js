@@ -4,8 +4,7 @@ const environment = process.env.NODE_ENV || 'development';
 const dialect = 'postgres';
 const url = process.env.DATABASE_URL;
 
-const devMode = environment === ('development' || 'test');
-
+const devMode = environment === ('development') || environment === ('test');
 const config = {
   url,
   dialect,
@@ -15,10 +14,10 @@ const config = {
   }
 };
 
-if (!devMode) {
-  config.ssl = true;
-  config.dialectOptions.ssl = {
-    require: !devMode
-  };
-}
+// if (!devMode) {
+//   config.ssl = true;
+//   config.dialectOptions.ssl = {
+//     require: !devMode
+//   };
+// }
 module.exports = config;

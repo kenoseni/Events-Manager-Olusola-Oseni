@@ -115,7 +115,8 @@ describe('center actions', () => {
     });
     const expectedActions = [
       { type: 'ADD_CENTER' },
-      { type: 'ADD_CENTER_RESOLVED', payload: centerPayload }
+      { type: 'ADD_CENTER_RESOLVED', payload: centerPayload },
+      { type: 'CLEAR_ERROR_PROPS', payload: {} }
     ];
     // configure mock store
     const store = mockStore({ eventCenters: {} });
@@ -135,14 +136,16 @@ describe('center actions', () => {
     });
     const expectedActions = [
       { type: 'MODIFY_CENTER' },
-      { type: 'MODIFY_CENTER_RESOLVED', payload: modifyCenterPayload, id: 1 }
+      { type: 'MODIFY_CENTER_RESOLVED', payload: modifyCenterPayload, id: 1 },
+      { type: 'CLEAR_ERROR_PROPS', payload: {} }
     ];
     // configure mock store
     const store = mockStore({ eventCenters: {} });
     // call the addCenter async action creator
-    return store.dispatch(centerActions.modifyCenter(modifyCenterDetails, 1))
+    return store
+      .dispatch(centerActions.modifyCenter(modifyCenterDetails, 1))
       .then(() => {
-      // return of async actions
+        // return of async actions
         expect(store.getActions()).toEqual(expectedActions);
       });
   });

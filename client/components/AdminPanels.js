@@ -7,13 +7,16 @@ import * as userActions from '../actions/UserActions';
 import * as centerActions  from '../actions/CenterActions'
 import AdminPanelList from './AdminPanelList';
 
-class AdminPanels extends Component {
+export class AdminPanels extends Component {
   constructor(props) {
     super(props);
     
   }
   componentDidMount() {
     if (this.props.isAuthenticated) {
+      const {history} = this.props
+      const {location} = history
+      const {search} = location
       const page = this.props.history.location.search.split('=')[1];
       this.props.getAllUsers(page);
     }

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminPanels /> should render a <AdminPanelList /> component 1`] = `
+<div>
+  <AdminPanelList
+    count={0}
+    getAllUsers={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "1",
+          ],
+        ],
+      }
+    }
+    history={
+      Object {
+        "location": Object {
+          "search": "/page=1",
+        },
+      }
+    }
+    isAdmin={true}
+    isAuthenticated={true}
+    user={
+      Object {
+        "users": Object {},
+      }
+    }
+    userDetails={
+      Object {
+        "count": 0,
+      }
+    }
+    users={Object {}}
+  />
+</div>
+`;

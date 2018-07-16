@@ -1,10 +1,6 @@
 import helpers from '../helpers';
 
-const {
-  isEmpty,
-  isAlphaNumeric,
-  isNumeric
-} = helpers;
+const { isEmpty, isAlphaNumeric, isNumeric } = helpers;
 
 /**
  * Class representing user validations
@@ -77,7 +73,7 @@ class CenterValidation {
     if (!isNumeric(req.body.capacity)) {
       return res.status(400).json({
         status: 'Error',
-        message: 'Center capacity is invalid'
+        message: 'Center capacity is invalid, please choose a number'
       });
     }
     // check if center name is alphanumeric

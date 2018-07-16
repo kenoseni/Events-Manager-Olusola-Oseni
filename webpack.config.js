@@ -19,10 +19,6 @@ module.exports = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-      'process.evn.PORT': JSON.stringify(process.env.PORT)
-    })
   ],
   devtool: 'eval-source-map',
   module: {

@@ -7,7 +7,7 @@ import * as centerActions from '.././actions/CenterActions'
 import { eventCenters } from '.././reducers/';
 import AdminCenterDetail from './AdminCenterDetail';
 
-class AdminCenterDetails extends Component {
+export class AdminCenterDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {

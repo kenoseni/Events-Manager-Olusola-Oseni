@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminPanelTableList /> should render a <AdminPanelTable /> component 1`] = `
+<tr
+  id="users"
+>
+  <th
+    scope="row"
+  />
+  <td />
+  <td />
+  <td />
+  <td>
+    true
+  </td>
+  <td />
+  <td />
+  <td
+    id="upgradeuser"
+  />
+</tr>
+`;

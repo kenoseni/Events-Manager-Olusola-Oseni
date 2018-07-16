@@ -90,9 +90,9 @@ class userController {
             message: error.message
           }));
       })
-      .catch(error => res.status(500).json({
+      .catch(() => res.status(500).json({
         status: 'Error',
-        message: error.message
+        message: 'Email or password incorrect'
       }));
   }
   /**

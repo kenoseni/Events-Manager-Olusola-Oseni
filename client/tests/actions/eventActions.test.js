@@ -77,7 +77,8 @@ describe('event actions', () => {
     });
     const expectedActions = [
       { type: 'ADD_EVENT' },
-      { type: 'ADD_EVENT_RESOLVED', payload: eventPayload }
+      { type: 'ADD_EVENT_RESOLVED', payload: eventPayload },
+      { type: 'CLEAR_ERROR_PROPS', payload: {} }
     ];
     // configure mock store
     const store = mockStore({ userEvents: {} });

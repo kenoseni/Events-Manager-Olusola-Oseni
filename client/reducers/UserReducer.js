@@ -40,7 +40,9 @@ class userReducer {
         const error = action.payload;
         return {
           ...state,
-          error
+          signupError: {
+            error
+          }
         };
       }
       case 'LOGIN_USER': {
@@ -62,7 +64,9 @@ class userReducer {
         const error = action.payload;
         return {
           ...state,
-          error
+          loginError: {
+            error
+          }
         };
       }
       case 'GET_USERS': {

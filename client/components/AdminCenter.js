@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DeleteModal from './DeleteModal';
 import jwtDecode from 'jwt-decode';
-import ModifyCenter from './ModifyCenter'
-
+import ModifyCenter from './ModifyCenter';
 
 class AdminCenter extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
   }
 
   componentWillMount() {
@@ -15,24 +14,26 @@ class AdminCenter extends Component {
     if (token) {
       let decodedToken = jwtDecode(token);
       let isAdmin = decodedToken.isadmin;
-      let role = decodedToken.userrole
+      let role = decodedToken.userrole;
 
-      if(isAdmin) {
-      this.isAdmin = true
+      if (isAdmin) {
+        this.isAdmin = true;
       }
-    }  
+    }
   }
-  render () {
-    const {center, i} = this.props
+  render() {
+    const { center, i } = this.props;
     return (
       <div className="col-md-4 mb-4">
         <div className="card w-40">
           <div className="view overlay hm-white-slight">
             <Link to={`/centers/${center.id}`}>
-              <img src={center.image} className="img-fluid" 
-                alt={center.name} 
-                id="img-preview" 
-                style={{width:'100%', height:'250px'}} 
+              <img
+                src={center.image}
+                className="img-fluid"
+                alt={center.name}
+                id="img-preview"
+                style={{ width: '100%', height: '250px' }}
               />
             </Link>
           </div>
@@ -46,9 +47,7 @@ class AdminCenter extends Component {
             <p className="card-text font-weight-bold">
               Location: {center.location}
             </p>
-            <p className="card-text font-weight-bold">
-              Price: {center.price}
-            </p>
+            <p className="card-text font-weight-bold">Price: {center.price}</p>
             <p className="card-text font-weight-bold">
               Facilities: {center.facilities}
             </p>
@@ -63,32 +62,51 @@ class AdminCenter extends Component {
               } 
             </p>*/}
           </div>
-          {this.isAdmin &&
+          {this.isAdmin && (
             <div className="card-footer bg-transparent">
               <ul className="nav">
-                <li>
-                  <button data-toggle="modal" data-target={`#${center.id}`}>
-                    <i className="fa fa-pencil-square-o fa-lg nav-link" aria-hidden="true"></i>
+                <li id="modify">
+                  <button
+                    id="modifycenter"
+                    data-toggle="modal"
+                    data-target={`#${center.id}`}
+                  >
+                    <i
+                      className="fa fa-pencil-square-o fa-lg nav-link"
+                      aria-hidden="true"
+                    />
                   </button>
                 </li>
-                <li>
-                  <button data-toggle="modal" data-target={`#${i}`}>
-                    <i className="fa fa-trash-o float-right fa-lg nav-link" aria-hidden="true"></i>
+                <li id="delete">
+                  <button
+                    id="deletecenter"
+                    data-toggle="modal"
+                    data-target={`#${i}`}
+                  >
+                    <i
+                      className="fa fa-trash-o float-right fa-lg nav-link"
+                      aria-hidden="true"
+                    />
                   </button>
                 </li>
               </ul>
             </div>
-          }
+          )}
         </div>
-        <ModifyCenter title='Modify Center' i={i} center={center} {...this.props} />
-        <DeleteModal 
-          title={`Are you sure you want to delete ${center.name} center?`} 
-          i={i} 
-          center={center} 
-          {...this.props} 
-        /> 
+        <ModifyCenter
+          title="MODIFY CENTER"
+          i={i}
+          center={center}
+          {...this.props}
+        />
+        <DeleteModal
+          title={`Are you sure you want to delete ${center.name} center?`}
+          i={i}
+          center={center}
+          {...this.props}
+        />
       </div>
-    )
+    );
   }
 }
 

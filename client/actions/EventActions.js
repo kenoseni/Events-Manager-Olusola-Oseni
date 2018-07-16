@@ -54,6 +54,10 @@ const addEvent = eventInfo => (dispatch) => {
         type: 'ADD_EVENT_RESOLVED',
         payload: res.data
       });
+      dispatch({
+        type: 'CLEAR_ERROR_PROPS',
+        payload: {}
+      });
     })
     .catch((err) => {
       dispatch({
@@ -117,6 +121,10 @@ const modifyEvent = (eventInfo, id) => (dispatch) => {
         type: 'MODIFY_EVENT_RESOLVED',
         payload: res.data,
         id
+      });
+      dispatch({
+        type: 'CLEAR_ERROR_PROPS',
+        payload: {}
       });
     })
     .catch((err) => {

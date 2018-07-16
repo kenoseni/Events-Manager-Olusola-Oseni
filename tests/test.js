@@ -97,10 +97,10 @@ const validSignupSeed = [{
     {
       name: 'Seminar',
       startDate: '2018-12-30',
-      endDate: '2017-12-31',
+      endDate: '2018-12-31',
       time: '4 pm',
       centerId: 2
-    }
+    },
   ],
   invalidEventSeed = [
     {
@@ -767,7 +767,7 @@ describe('Event Manager', () => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.status).to.equal('Error');
               expect(res.body.message).to
-                .equal('CenterId must be an integer');
+                .equal('Please choose a valid center');
               done();
             });
         });

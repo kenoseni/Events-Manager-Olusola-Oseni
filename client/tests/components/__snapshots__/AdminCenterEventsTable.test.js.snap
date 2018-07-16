@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminCenterEventsTable /> should render a <AdminCenterEventsTable /> component 1`] = `
+<tr>
+  <th
+    scope="row"
+  >
+    1
+  </th>
+  <td>
+    PYTHON QUIZ
+  </td>
+  <td>
+    2018-12-04
+  </td>
+  <td>
+    2018-12-05
+  </td>
+  <td>
+    4 pm
+  </td>
+</tr>
+`;

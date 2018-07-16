@@ -1,11 +1,156 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="0">
+            tests="11">
 
   <testsuite name="addCenter.test"
     errors="0" failures="0" hostname="" id="" package="addCenter.test" skipped="0"
-    tests="0" time="0.000" timestamp="Thu, 05 Jul 2018 18:32:44 GMT">
+    tests="11" time="78.53" timestamp="Mon, 16 Jul 2018 11:35:02 GMT">
+  
+    <testcase name="User should be able to see the landing page" classname="addCenter.test" time="6.377" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should see the navigation bar and the brand logo" classname="addCenter.test" time="0.1260" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to click the login button on the navbar" classname="addCenter.test" time="6.118" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to see the intro on the sign-in page" classname="addCenter.test" time="0.1260" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to see the elements of the sign-in form" classname="addCenter.test" time="9.752" assertions="11">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Users should see the buttons on the navigation bar" classname="addCenter.test" time="2.313" assertions="10">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to click the center button on the navbar" classname="addCenter.test" time="4.146" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to see add and click the center button" classname="addCenter.test" time="1.087" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to see the add center modal and title &#34;Add Center&#34;" classname="addCenter.test" time="0.1210" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to upload an image on Add Center modal" classname="addCenter.test" time="25.14" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to add the details of a center and create the center" classname="addCenter.test" time="23.22" assertions="15">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
   
 
   

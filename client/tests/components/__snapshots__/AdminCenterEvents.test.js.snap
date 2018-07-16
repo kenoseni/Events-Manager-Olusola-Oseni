@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminCenterDetails /> should render a <AdminCenterEvents /> component 1`] = `
+<div
+  className="col-xs-12 col-md-8"
+  id="etable"
+>
+  <div
+    className="card w-70"
+  >
+    <div
+      className="card-body"
+    >
+      <div
+        className="table-wrapper-2"
+      >
+        <table
+          className="table table-responsive"
+        >
+          <thead
+            className="mdb-color lighten-4"
+          >
+            <tr>
+              <th>
+                #
+              </th>
+              <th
+                className="th-lg"
+              >
+                Event Type
+              </th>
+              <th
+                className="th-lg"
+              >
+                Start Date
+              </th>
+              <th
+                className="th-lg"
+              >
+                End Date
+              </th>
+              <th
+                className="th-lg"
+              >
+                Time
+              </th>
+            </tr>
+          </thead>
+          <tbody />
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;

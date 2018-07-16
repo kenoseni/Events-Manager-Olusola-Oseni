@@ -54,9 +54,11 @@ describe('user Reducer', () => {
     const results = reducer.user(state, action);
     expect(results).toEqual({
       ...state,
-      error: {
-        status: 'Fail',
-        message: ''
+      signupError: {
+        error: {
+          status: 'Fail',
+          message: ''
+        }
       }
     });
   });
@@ -100,9 +102,11 @@ describe('user Reducer', () => {
     const results = reducer.user(state, action);
     expect(results).toEqual({
       ...state,
-      error: {
-        status: 'Fail',
-        message: ''
+      loginError: {
+        error: {
+          status: 'Fail',
+          message: ''
+        }
       }
     });
   });

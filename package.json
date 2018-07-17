@@ -8,7 +8,7 @@
     "npm": "5.4.2"
   },
   "scripts": {
-    "start": "npm run clean && npm run build && NODE_ENV=production node && node ./lib/app.js",
+    "start": " NODE_ENV=production node && node ./lib/app.js",
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js",
     "start:dev": "nodemon ./server/app --exec babel-node",
     "test": "npm run test:server && npm run test:client",
@@ -16,7 +16,7 @@
     "test:client": "jest --runInBand && codecov",
     "test:client:watch": "npm run test:client --watch",
     "build": "babel server -d lib --source-maps inline --copy-files",
-    "heroku-postbuild": "npm run compile && npm run build",
+    "heroku-postbuild": "npm run clean && npm run build && npm run compile",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "nyc": "nyc report",
     "compile-component": "babel client/components --presets es2015 --out-dir client/public --source-maps",

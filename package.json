@@ -16,7 +16,7 @@
     "test:client": "jest --runInBand && codecov",
     "test:client:watch": "npm run test:client --watch",
     "build": "babel server -d lib --source-maps inline --copy-files",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm run compile && npm run build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "nyc": "nyc report",
     "compile-component": "babel client/components --presets es2015 --out-dir client/public --source-maps",
@@ -26,8 +26,7 @@
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "unseed": "node_modules/.bin/sequelize db:seed:undo:all",
     "compile": "webpack --config ./webpack.config.prod.js",
-    "clean": "rm -rf ./client/dist/bundle.js",
-    "postinstall": "npm run compile "
+    "clean": "rm -rf ./client/dist/bundle.js"
   },
   "repository": {
     "type": "git",

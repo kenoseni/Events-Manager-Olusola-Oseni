@@ -84,7 +84,7 @@ module.exports = {
       .assert.visible('#deletemodalcontent')
       .assert.visible('#deleteButton')
       .click('#deleteButton')
-      .pause(2000)
+      .pause(1000)
       .end();
   }
 };

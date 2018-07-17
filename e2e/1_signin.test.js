@@ -1,9 +1,9 @@
 const APP_BASE_URL = 'http://localhost:8000';
 
 module.exports = {
-  // beforeEach(browser, done) {
-  //   browser.resizeWindow(1480, 1480, done);
-  // },
+  beforeEach(browser, done) {
+    browser.resizeWindow(1480, 1480, done);
+  },
   'User should be able to see the landing page': (browser) => {
     browser
       .url(APP_BASE_URL)
@@ -17,6 +17,16 @@ module.exports = {
       .assert.visible('.navbar')
       .assert.visible('.container-fluid')
       .assert.containsText('.navbar-brand', 'Encore');
+  },
+  'User should see the buttons on the navigation bar': (browser) => {
+    browser.assert
+      .visible('.container-fluid')
+      .assert.visible('.collapse.navbar-collapse')
+      .pause(2000)
+      .assert.visible('.nav-item')
+      .assert.containsText('.nav-link', 'Home')
+      .assert.visible('#signin')
+      .assert.containsText('#signin', 'Log In');
   },
   'User should be able to click the login button on the navbar': (browser) => {
     browser
@@ -54,44 +64,7 @@ module.exports = {
       .pause('1000')
       .assert.visible('#l-button')
       .click('#l-button')
-      .pause(2000);
-  },
-  'Admin should see the buttons on the navigation bar': (browser) => {
-    browser.assert
-      .visible('.container-fluid')
-      .assert.visible('.collapse.navbar-collapse')
-      .pause(2000)
-      .assert.visible('.nav-item')
-      .assert.containsText('.nav-link', 'Home')
-      .assert.visible('#center')
-      .assert.containsText('#center', 'Centers')
-      .assert.visible('#events')
-      .assert.containsText('#events', 'Events')
-      .assert.visible('#admin')
-      .assert.containsText('#admin', 'Admin');
-  },
-  'Admin should be able to click the center button on the navbar': (browser) => {
-    browser.assert
-      .visible('#center')
-      .pause(2000)
-      .click('#center')
-      .pause(2000);
-  },
-  'Admin should be able to delete a center': (browser) => {
-    browser.assert
-      .visible('.card-footer')
-      .assert.visible('.nav')
-      .assert.visible('#delete')
-      .pause(2000)
-      .assert.visible('#deletecenter')
-      .click('#deletecenter')
-      .pause(2000)
-      .assert.visible('.deletemodal')
-      .assert.visible('#deletemodal')
-      .assert.visible('#deletemodalcontent')
-      .assert.visible('#deleteButton')
-      .click('#deleteButton')
-      .pause(2000)
+      .pause(1000)
       .end();
   }
 };

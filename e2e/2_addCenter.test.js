@@ -141,6 +141,7 @@ module.exports = {
       .assert.visible('#addCenter button[name=submitButton]')
       .pause(2000)
       .click('#addCenter button[name=submitButton]')
-      .pause(20000);
+      .pause(1000)
+      .end();
   }
 };

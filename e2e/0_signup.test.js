@@ -73,7 +73,7 @@ module.exports = {
       .pause('1000')
       .assert.visible('.btn.btn-success')
       .click('.btn.btn-success')
-      .pause(2000)
+      .pause(1000)
       .end();
   }
 };

@@ -221,7 +221,7 @@ module.exports = {
       .assert.visible('button[name=modify]')
       .pause(2000)
       .click('button[name=modify]')
-      .pause(3000)
+      .pause(1000)
       .end();
   }
 };

@@ -8,7 +8,7 @@
     "npm": "5.4.2"
   },
   "scripts": {
-    "start": "npm run clean && npm run build && npm run compile && NODE_ENV=production node && node --optimize_for_size --max_old_space_size=920 --gc_interval=100 ./lib/app.js",
+    "start": "npm run clean && npm run build && NODE_ENV=production node && node ./lib/app.js",
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js",
     "start:dev": "nodemon ./server/app --exec babel-node",
     "test": "npm run test:server && npm run test:client",
@@ -26,7 +26,8 @@
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "unseed": "node_modules/.bin/sequelize db:seed:undo:all",
     "compile": "webpack --config ./webpack.config.prod.js",
-    "clean": "rm -rf ./client/dist/bundle.js"
+    "clean": "rm -rf ./client/dist/bundle.js",
+    "postinstall": "npm run compile "
   },
   "repository": {
     "type": "git",
